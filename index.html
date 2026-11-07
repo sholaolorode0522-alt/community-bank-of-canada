@@ -57,13 +57,13 @@
 <body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
 
     <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
     <!-- NAVBAR -->
     <header class="sticky top-0 z-40 bg-brand-900 text-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
-            <div id="nav-logo" class="flex items-center space-x-3 cursor-pointer">
+            <div onclick="app.switchView('landing')" class="flex items-center space-x-3 cursor-pointer select-none">
                 <div class="w-11 h-11 bg-white text-brand-700 rounded-xl flex items-center justify-center font-extrabold text-2xl shadow-inner">
                     <i class="fa-solid fa-building-columns"></i>
                 </div>
@@ -75,35 +75,35 @@
 
             <!-- Desktop Nav Items -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <button id="nav-btn-home" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
-                <button id="nav-btn-dashboard" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
-                <button id="nav-btn-profile" class="hover:text-brand-200 transition-colors py-2 hidden cursor-pointer">Profile & Info</button>
-                <button id="nav-btn-transfer" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
-                <button id="nav-btn-receive" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
-                <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
+                <button onclick="app.switchView('landing')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
+                <button onclick="app.switchView('dashboard')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
+                <button id="nav-btn-profile" onclick="app.switchView('profile')" class="hover:text-brand-200 transition-colors py-2 hidden cursor-pointer">Profile & Info</button>
+                <button onclick="app.switchView('transfer')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
+                <button onclick="app.switchView('receive')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
+                <button onclick="app.switchView('support')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
             </nav>
 
             <!-- Auth Buttons / User Profile -->
             <div class="flex items-center space-x-4">
                 <div id="nav-guest-actions" class="flex items-center space-x-3">
-                    <button id="btn-open-login" class="text-sm font-semibold hover:text-brand-200 px-3 py-2 transition-colors cursor-pointer">Sign In</button>
-                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer">Open Account</button>
+                    <button onclick="app.openModal('modal-login')" class="text-sm font-semibold hover:text-brand-200 px-3 py-2 transition-colors cursor-pointer">Sign In</button>
+                    <button onclick="app.openModal('modal-signup')" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer">Open Account</button>
                 </div>
                 
                 <div id="nav-user-actions" class="hidden flex items-center space-x-4">
-                    <div class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer hover:bg-brand-700 transition-colors" id="nav-profile-trigger" title="View Profile">
+                    <div onclick="app.switchView('profile')" class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer hover:bg-brand-700 transition-colors select-none" title="View Profile">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">
                             JD
                         </div>
                         <span class="text-xs font-semibold text-white hidden sm:inline" id="user-display-name">John Doe</span>
                     </div>
-                    <button id="btn-logout" class="text-xs text-brand-200 hover:text-white bg-brand-800 hover:bg-red-600 p-2.5 rounded-lg transition-colors cursor-pointer" title="Log Out">
+                    <button onclick="app.logout()" class="text-xs text-brand-200 hover:text-white bg-brand-800 hover:bg-red-600 p-2.5 rounded-lg transition-colors cursor-pointer" title="Log Out">
                         <i class="fa-solid fa-right-from-bracket text-base"></i>
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-200 focus:outline-none p-2 cursor-pointer">
+                <!-- Mobile Menu Button (Hamburger) -->
+                <button onclick="app.toggleMobileMenu()" class="md:hidden text-white hover:text-brand-200 focus:outline-none p-2 cursor-pointer">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
@@ -111,12 +111,12 @@
 
         <!-- Mobile Navigation Drawer -->
         <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-3 pb-5 space-y-2">
-            <button id="mob-nav-home" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
-            <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
-            <button id="mob-nav-profile" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Info</button>
-            <button id="mob-nav-transfer" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
-            <button id="mob-nav-receive" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
-            <button id="mob-nav-support" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
+            <button onclick="app.switchView('landing')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
+            <button onclick="app.switchView('dashboard')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
+            <button id="mob-nav-profile" onclick="app.switchView('profile')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Info</button>
+            <button onclick="app.switchView('transfer')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
+            <button onclick="app.switchView('receive')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
+            <button onclick="app.switchView('support')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
         </div>
     </header>
 
@@ -139,16 +139,16 @@
                             Experience zero-fee everyday chequing, high-interest savings, and instant Interac e-Transfers—backed by 24/7 Canadian customer care.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all text-center cursor-pointer">
+                            <button onclick="app.openModal('modal-signup')" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all text-center cursor-pointer">
                                 Open an Account Today
                             </button>
-                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all text-center cursor-pointer">
+                            <button onclick="app.openModal('modal-login')" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all text-center cursor-pointer">
                                 Sign In to Online Banking
                             </button>
                         </div>
                     </div>
 
-                    <!-- ADVERTISEMENT CARD VISUAL -->
+                    <!-- PROMOTIONAL ADVERTISEMENT CARD -->
                     <div class="relative flex justify-center">
                         <div class="w-full max-w-md card-gradient rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-400/30 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative overflow-hidden">
                             <div class="absolute -right-12 top-6 bg-amber-400 text-slate-900 font-extrabold text-[10px] tracking-widest uppercase py-1 px-12 rotate-45 shadow">
@@ -173,7 +173,7 @@
                                     <span class="block font-semibold text-white">$0 Everyday Monthly Fee</span>
                                     <span>Instant e-Transfers</span>
                                 </div>
-                                <button class="btn-ad-apply bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs px-4 py-2 rounded-xl transition-all shadow cursor-pointer">
+                                <button onclick="app.openModal('modal-signup')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs px-4 py-2 rounded-xl transition-all shadow cursor-pointer">
                                     Apply Offer <i class="fa-solid fa-arrow-right ml-1"></i>
                                 </button>
                             </div>
@@ -232,10 +232,10 @@
                     <p class="text-brand-100 text-sm">Account Status: <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span></p>
                 </div>
                 <div class="flex items-center gap-3 w-full md:w-auto">
-                    <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                    <button onclick="app.switchView('transfer')" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
                     </button>
-                    <button id="btn-dash-receive" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
+                    <button onclick="app.switchView('receive')" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-qrcode"></i> Receive
                     </button>
                 </div>
@@ -302,7 +302,7 @@
                         <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
                         <p class="text-xs text-slate-500">Live transaction history</p>
                     </div>
-                    <button id="btn-refresh-tx" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1 cursor-pointer">
+                    <button onclick="app.refreshTransactions()" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1 cursor-pointer">
                         <i class="fa-solid fa-rotate-right"></i> Refresh
                     </button>
                 </div>
@@ -375,7 +375,7 @@
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">Interac e-Transfer</h2>
                 <p class="text-slate-600 text-sm mb-6">Send funds securely to any Canadian bank account or email address.</p>
                 
-                <form id="transfer-form" class="space-y-4">
+                <form id="transfer-form" onsubmit="app.handleTransfer(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Recipient Name or Email</label>
                         <input type="text" id="transfer-recipient" required placeholder="e.g. recipient@bank.ca" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
@@ -407,7 +407,7 @@
                     <div class="flex justify-between"><span class="text-xs text-slate-500">Account Number:</span><span class="font-bold text-slate-800">•••• 4892</span></div>
                 </div>
 
-                <button id="btn-copy-info" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl transition-all text-sm cursor-pointer">
+                <button onclick="app.copyBankingInfo()" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl transition-all text-sm cursor-pointer">
                     <i class="fa-solid fa-copy mr-2"></i> Copy Banking Details
                 </button>
             </div>
@@ -455,11 +455,11 @@
     <!-- MODAL: SIGN IN -->
     <div id="modal-login" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
-            <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="app.closeModal('modal-login')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
             <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
             
-            <form id="form-login" class="space-y-4">
+            <form id="form-login" onsubmit="app.handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
                     <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
@@ -468,7 +468,7 @@
                     <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                     <div class="relative">
                         <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                        <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
+                        <button type="button" onclick="app.togglePassword('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
                             <i class="fa-solid fa-eye text-sm"></i>
                         </button>
                     </div>
@@ -483,11 +483,11 @@
     <!-- MODAL: SIGN UP / OPEN ACCOUNT -->
     <div id="modal-signup" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
-            <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="app.closeModal('modal-signup')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
             <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
             
-            <form id="form-signup" class="space-y-4">
+            <form id="form-signup" onsubmit="app.handleSignup(event)" class="space-y-4">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Legal Name</label>
@@ -521,7 +521,7 @@
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                         <div class="relative">
                             <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                            <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
+                            <button type="button" onclick="app.togglePassword('signup-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
                                 <i class="fa-solid fa-eye text-sm"></i>
                             </button>
                         </div>
@@ -534,349 +534,290 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT APP LOGIC -->
+    <!-- JAVASCRIPT APPLICATION OBJECT -->
     <script>
-        // Modal Open / Close Handlers (Locks background scroll)
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
-            }
-        }
+        const app = {
+            // Storage Access
+            getUsers: function() {
+                return JSON.parse(localStorage.getItem('cb_users') || '[]');
+            },
+            saveUsers: function(users) {
+                localStorage.setItem('cb_users', JSON.stringify(users));
+            },
+            getCurrentUser: function() {
+                return JSON.parse(localStorage.getItem('cb_current_user') || 'null');
+            },
+            setCurrentUser: function(user) {
+                localStorage.setItem('cb_current_user', JSON.stringify(user));
+            },
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            }
-        }
+            // Toast System
+            showToast: function(message, type = 'error') {
+                const container = document.getElementById('toast-container');
+                if (!container) return;
+                const toast = document.createElement('div');
+                const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
+                toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-xl text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
+                toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
+                container.appendChild(toast);
+                setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+                setTimeout(() => {
+                    toast.classList.add('translate-y-2', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 4000);
+            },
 
-        // Toast Helper
-        function showToast(message, type = 'error') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-            const toast = document.createElement('div');
-            const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
-            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
-            toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
-            setTimeout(() => {
-                toast.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
-        }
-
-        // App Data Management
-        function getUsers() {
-            return JSON.parse(localStorage.getItem('cb_users') || '[]');
-        }
-        function saveUsers(users) {
-            localStorage.setItem('cb_users', JSON.stringify(users));
-        }
-        function getCurrentUser() {
-            return JSON.parse(localStorage.getItem('cb_current_user') || 'null');
-        }
-        function setCurrentUser(user) {
-            localStorage.setItem('cb_current_user', JSON.stringify(user));
-        }
-
-        // Section View Switcher
-        function switchView(viewName) {
-            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
-            const target = document.getElementById(`section-${viewName}`);
-            if (target) {
-                target.classList.remove('hidden');
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu) mobileMenu.classList.add('hidden');
-        }
-
-        // Sync Nav Bar and Dashboard Balances
-        function updateNavAuthUI() {
-            const user = getCurrentUser();
-            const guestActions = document.getElementById('nav-guest-actions');
-            const userActions = document.getElementById('nav-user-actions');
-            const profileNavBtns = document.querySelectorAll('#nav-btn-profile, #mob-nav-profile');
-
-            if (user) {
-                if (guestActions) guestActions.classList.add('hidden');
-                if (userActions) userActions.classList.remove('hidden');
-                profileNavBtns.forEach(btn => btn.classList.remove('hidden'));
-                
-                // Initials & Username
-                const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'JD';
-                const avatarEl = document.getElementById('user-avatar-initials');
-                const displayNameEl = document.getElementById('user-display-name');
-                const welcomeEl = document.getElementById('dash-welcome-text');
-
-                if (avatarEl) avatarEl.textContent = initials;
-                if (displayNameEl) displayNameEl.textContent = user.name;
-                if (welcomeEl) welcomeEl.textContent = `Welcome back, ${user.name}!`;
-                
-                // Set Chequing Balance
-                const deposit = parseFloat(user.deposit || 500);
-                const chequingDisplay = document.getElementById('chequing-balance-display');
-                if (chequingDisplay) {
-                    chequingDisplay.textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
+            // Navigation Controller
+            switchView: function(viewName) {
+                const protectedViews = ['dashboard', 'profile', 'transfer', 'receive'];
+                if (protectedViews.includes(viewName) && !this.getCurrentUser()) {
+                    this.showToast('Please sign in or open an account to access banking features.');
+                    this.openModal('modal-login');
+                    return;
                 }
-                
-                // Profile Section Details
-                const setElText = (id, val) => {
-                    const el = document.getElementById(id);
-                    if (el) el.textContent = val;
-                };
-                setElText('profile-name', user.name);
-                setElText('profile-email', user.email);
-                setElText('profile-phone', user.phone);
-                setElText('profile-sin', user.sin);
-                setElText('profile-address', user.address);
-                setElText('profile-deposit', `$${deposit.toFixed(2)} CAD`);
-                setElText('profile-date', user.date || 'Today');
 
-                renderTransactions(user);
-            } else {
-                if (guestActions) guestActions.classList.remove('hidden');
-                if (userActions) userActions.classList.add('hidden');
-                profileNavBtns.forEach(btn => btn.classList.add('hidden'));
-            }
-        }
-
-        function renderTransactions(user) {
-            const tbody = document.getElementById('transaction-list');
-            if (!tbody) return;
-            const txs = user.transactions || [
-                { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(user.deposit || 500).toFixed(2)}` },
-                { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45' },
-                { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20' }
-            ];
-            tbody.innerHTML = txs.map(t => `
-                <tr class="hover:bg-slate-50/50">
-                    <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
-                    <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
-                    <td class="py-3.5 text-slate-500">${t.date}</td>
-                    <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
-                </tr>
-            `).join('');
-        }
-
-        // Show/Hide Password Eye Toggle
-        function setupPasswordToggle(inputId, toggleBtnId) {
-            const input = document.getElementById(inputId);
-            const btn = document.getElementById(toggleBtnId);
-            if (input && btn) {
-                btn.addEventListener('click', () => {
-                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                    input.setAttribute('type', type);
-                    btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
-                });
-            }
-        }
-
-        // Explicit Event Wiring on DOM Ready
-        document.addEventListener('DOMContentLoaded', () => {
-            updateNavAuthUI();
-            if (getCurrentUser()) {
-                switchView('dashboard');
-            } else {
-                switchView('landing');
-            }
-
-            setupPasswordToggle('login-password', 'toggle-login-password');
-            setupPasswordToggle('signup-password', 'toggle-signup-password');
-
-            // 1. Navigation Buttons (Explicit Listeners)
-            const bindNavClick = (id, viewName) => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.addEventListener('click', () => {
-                        if (['dashboard', 'profile', 'transfer', 'receive'].includes(viewName)) {
-                            if (!getCurrentUser()) {
-                                showToast('Please sign in or open an account to access banking services.');
-                                openModal('modal-login');
-                                return;
-                            }
-                        }
-                        switchView(viewName);
-                    });
+                document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+                const target = document.getElementById(`section-${viewName}`);
+                if (target) {
+                    target.classList.remove('hidden');
                 }
-            };
+                window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            bindNavClick('nav-logo', 'landing');
-            bindNavClick('nav-btn-home', 'landing');
-            bindNavClick('mob-nav-home', 'landing');
+                // Close mobile menu on view switch
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu) mobileMenu.classList.add('hidden');
+            },
 
-            bindNavClick('nav-btn-dashboard', 'dashboard');
-            bindNavClick('mob-nav-dashboard', 'dashboard');
-
-            bindNavClick('nav-btn-profile', 'profile');
-            bindNavClick('mob-nav-profile', 'profile');
-            bindNavClick('nav-profile-trigger', 'profile');
-
-            bindNavClick('nav-btn-transfer', 'transfer');
-            bindNavClick('mob-nav-transfer', 'transfer');
-            bindNavClick('btn-dash-transfer', 'transfer');
-
-            bindNavClick('nav-btn-receive', 'receive');
-            bindNavClick('mob-nav-receive', 'receive');
-            bindNavClick('btn-dash-receive', 'receive');
-
-            bindNavClick('nav-btn-support', 'support');
-            bindNavClick('mob-nav-support', 'support');
-
-            // 2. Mobile Hamburger Menu Toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
+            // Mobile Drawer Toggle
+            toggleMobileMenu: function() {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu) {
                     mobileMenu.classList.toggle('hidden');
-                });
-            }
+                }
+            },
 
-            // 3. Logout Button Handler
-            const btnLogout = document.getElementById('btn-logout');
-            if (btnLogout) {
-                btnLogout.addEventListener('click', () => {
-                    localStorage.removeItem('cb_current_user');
-                    updateNavAuthUI();
-                    switchView('landing');
-                    showToast('Successfully logged out.', 'success');
-                });
-            }
+            // Modal Controller
+            openModal: function(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu) mobileMenu.classList.add('hidden');
+            },
+            closeModal: function(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            },
 
-            // 4. Modal Triggers
-            const bindClick = (id, handler) => {
-                const el = document.getElementById(id);
-                if (el) el.addEventListener('click', handler);
-            };
+            // Password Toggle
+            togglePassword: function(inputId, btnEl) {
+                const input = document.getElementById(inputId);
+                if (input && btnEl) {
+                    const isPassword = input.type === 'password';
+                    input.type = isPassword ? 'text' : 'password';
+                    btnEl.innerHTML = isPassword ? '<i class="fa-solid fa-eye-slash text-sm"></i>' : '<i class="fa-solid fa-eye text-sm"></i>';
+                }
+            },
 
-            bindClick('btn-open-login', () => openModal('modal-login'));
-            bindClick('btn-hero-login', () => openModal('modal-login'));
-            bindClick('close-login', () => closeModal('modal-login'));
+            // Sync User Interface
+            updateNavAuthUI: function() {
+                const user = this.getCurrentUser();
+                const guestActions = document.getElementById('nav-guest-actions');
+                const userActions = document.getElementById('nav-user-actions');
+                const profileBtn = document.getElementById('nav-btn-profile');
+                const mobProfileBtn = document.getElementById('mob-nav-profile');
 
-            bindClick('btn-open-signup', () => openModal('modal-signup'));
-            bindClick('btn-hero-signup', () => openModal('modal-signup'));
-            bindClick('close-signup', () => closeModal('modal-signup'));
+                if (user) {
+                    if (guestActions) guestActions.classList.add('hidden');
+                    if (userActions) userActions.classList.remove('hidden');
+                    if (profileBtn) profileBtn.classList.remove('hidden');
+                    if (mobProfileBtn) mobProfileBtn.classList.remove('hidden');
 
-            // Promotion apply buttons
-            document.querySelectorAll('.btn-ad-apply').forEach(btn => {
-                btn.addEventListener('click', () => openModal('modal-signup'));
-            });
+                    const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'JD';
+                    const avatarEl = document.getElementById('user-avatar-initials');
+                    const displayNameEl = document.getElementById('user-display-name');
+                    const welcomeEl = document.getElementById('dash-welcome-text');
 
-            // 5. Login Form Submission
-            const loginForm = document.getElementById('form-login');
-            if (loginForm) {
-                loginForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const email = document.getElementById('login-email').value.trim();
-                    const password = document.getElementById('login-password').value;
+                    if (avatarEl) avatarEl.textContent = initials;
+                    if (displayNameEl) displayNameEl.textContent = user.name;
+                    if (welcomeEl) welcomeEl.textContent = `Welcome back, ${user.name}!`;
 
-                    const users = getUsers();
-                    const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-
-                    if (found) {
-                        setCurrentUser(found);
-                        closeModal('modal-login');
-                        updateNavAuthUI();
-                        switchView('dashboard');
-                        showToast(`Welcome back, ${found.name}!`, 'success');
-                        loginForm.reset();
-                    } else {
-                        showToast('Invalid email or password. Please check your credentials.');
-                    }
-                });
-            }
-
-            // 6. Sign Up Form Submission
-            const signupForm = document.getElementById('form-signup');
-            if (signupForm) {
-                signupForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const name = document.getElementById('signup-name').value.trim();
-                    const email = document.getElementById('signup-email').value.trim();
-                    const phone = document.getElementById('signup-phone').value.trim();
-                    const sin = document.getElementById('signup-sin').value.trim();
-                    const address = document.getElementById('signup-address').value.trim();
-                    const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
-                    const password = document.getElementById('signup-password').value;
-
-                    if (!name || !email || !password) {
-                        showToast('Please fill in all required fields.');
-                        return;
+                    const deposit = parseFloat(user.deposit || 500);
+                    const chequingDisplay = document.getElementById('chequing-balance-display');
+                    if (chequingDisplay) {
+                        chequingDisplay.textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
                     }
 
-                    let users = getUsers();
-                    if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
-                        showToast('An account with this email already exists. Please sign in.');
-                        return;
-                    }
-
-                    const newUser = {
-                        name, email, phone, sin, address, deposit, password,
-                        date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
-                        transactions: [
-                            { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}` },
-                            { desc: 'Welcome Bonus Offer', cat: 'Bonus', date: 'Today', amount: '+$250.00' }
-                        ]
+                    const setText = (id, val) => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = val || '-';
                     };
 
-                    users.push(newUser);
-                    saveUsers(users);
-                    setCurrentUser(newUser);
+                    setText('profile-name', user.name);
+                    setText('profile-email', user.email);
+                    setText('profile-phone', user.phone);
+                    setText('profile-sin', user.sin);
+                    setText('profile-address', user.address);
+                    setText('profile-deposit', `$${deposit.toFixed(2)} CAD`);
+                    setText('profile-date', user.date || 'Today');
 
-                    closeModal('modal-signup');
-                    updateNavAuthUI();
-                    switchView('dashboard');
-                    showToast('Account successfully created and verified!', 'success');
-                    signupForm.reset();
+                    this.renderTransactions(user);
+                } else {
+                    if (guestActions) guestActions.classList.remove('hidden');
+                    if (userActions) userActions.classList.add('hidden');
+                    if (profileBtn) profileBtn.classList.add('hidden');
+                    if (mobProfileBtn) mobProfileBtn.classList.add('hidden');
+                }
+            },
+
+            renderTransactions: function(user) {
+                const tbody = document.getElementById('transaction-list');
+                if (!tbody) return;
+                const txs = user.transactions || [
+                    { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(user.deposit || 500).toFixed(2)}` },
+                    { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45' },
+                    { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20' }
+                ];
+                tbody.innerHTML = txs.map(t => `
+                    <tr class="hover:bg-slate-50/50">
+                        <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
+                        <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
+                        <td class="py-3.5 text-slate-500">${t.date}</td>
+                        <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
+                    </tr>
+                `).join('');
+            },
+
+            refreshTransactions: function() {
+                const user = this.getCurrentUser();
+                if (user) {
+                    this.renderTransactions(user);
+                    this.showToast('Transactions updated.', 'success');
+                }
+            },
+
+            // Form Actions
+            handleLogin: function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+
+                const users = this.getUsers();
+                const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+
+                if (found) {
+                    this.setCurrentUser(found);
+                    this.closeModal('modal-login');
+                    this.updateNavAuthUI();
+                    this.switchView('dashboard');
+                    this.showToast(`Welcome back, ${found.name}!`, 'success');
+                    document.getElementById('form-login').reset();
+                } else {
+                    this.showToast('Invalid email or password. Please check your credentials.');
+                }
+            },
+
+            handleSignup: function(e) {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value.trim();
+                const email = document.getElementById('signup-email').value.trim();
+                const phone = document.getElementById('signup-phone').value.trim();
+                const sin = document.getElementById('signup-sin').value.trim();
+                const address = document.getElementById('signup-address').value.trim();
+                const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
+                const password = document.getElementById('signup-password').value;
+
+                if (!name || !email || !password) {
+                    this.showToast('Please fill in all required fields.');
+                    return;
+                }
+
+                let users = this.getUsers();
+                if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+                    this.showToast('An account with this email already exists. Please sign in.');
+                    return;
+                }
+
+                const newUser = {
+                    name, email, phone, sin, address, deposit, password,
+                    date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                    transactions: [
+                        { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}` },
+                        { desc: 'Welcome Bonus Offer', cat: 'Bonus', date: 'Today', amount: '+$250.00' }
+                    ]
+                };
+
+                users.push(newUser);
+                this.saveUsers(users);
+                this.setCurrentUser(newUser);
+
+                this.closeModal('modal-signup');
+                this.updateNavAuthUI();
+                this.switchView('dashboard');
+                this.showToast('Account successfully created and verified!', 'success');
+                document.getElementById('form-signup').reset();
+            },
+
+            handleTransfer: function(e) {
+                e.preventDefault();
+                const recipient = document.getElementById('transfer-recipient').value;
+                const amount = parseFloat(document.getElementById('transfer-amount').value);
+                const user = this.getCurrentUser();
+
+                if (!user || user.deposit < amount) {
+                    this.showToast('Insufficient available balance for this transfer.');
+                    return;
+                }
+
+                user.deposit -= amount;
+                user.transactions.unshift({
+                    desc: `e-Transfer to ${recipient}`,
+                    cat: 'Transfer',
+                    date: 'Today',
+                    amount: `-$${amount.toFixed(2)}`
                 });
-            }
 
-            // 7. Transfer Form Submission
-            const transferForm = document.getElementById('transfer-form');
-            if (transferForm) {
-                transferForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const recipient = document.getElementById('transfer-recipient').value;
-                    const amount = parseFloat(document.getElementById('transfer-amount').value);
-                    const user = getCurrentUser();
+                this.setCurrentUser(user);
+                
+                let users = this.getUsers();
+                users = users.map(u => u.email.toLowerCase() === user.email.toLowerCase() ? user : u);
+                this.saveUsers(users);
 
-                    if (!user || user.deposit < amount) {
-                        showToast('Insufficient available balance for this transfer.');
-                        return;
-                    }
+                this.updateNavAuthUI();
+                this.switchView('dashboard');
+                this.showToast(`Successfully transferred $${amount.toFixed(2)} CAD to ${recipient}!`, 'success');
+                document.getElementById('transfer-form').reset();
+            },
 
-                    user.deposit -= amount;
-                    user.transactions.unshift({
-                        desc: `e-Transfer to ${recipient}`,
-                        cat: 'Transfer',
-                        date: 'Today',
-                        amount: `-$${amount.toFixed(2)}`
-                    });
-
-                    setCurrentUser(user);
-                    
-                    let users = getUsers();
-                    users = users.map(u => u.email === user.email ? user : u);
-                    saveUsers(users);
-
-                    updateNavAuthUI();
-                    switchView('dashboard');
-                    showToast(`Successfully transferred $${amount.toFixed(2)} CAD to ${recipient}!`, 'success');
-                    transferForm.reset();
-                });
-            }
-
-            // 8. Copy banking details
-            bindClick('btn-copy-info', () => {
+            copyBankingInfo: function() {
                 navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
-                showToast('Banking details copied to clipboard!', 'success');
-            });
+                this.showToast('Banking details copied to clipboard!', 'success');
+            },
+
+            logout: function() {
+                localStorage.removeItem('cb_current_user');
+                this.updateNavAuthUI();
+                this.switchView('landing');
+                this.showToast('Successfully logged out.', 'success');
+            },
+
+            init: function() {
+                this.updateNavAuthUI();
+                if (this.getCurrentUser()) {
+                    this.switchView('dashboard');
+                } else {
+                    this.switchView('landing');
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
         });
     </script>
 </body>
