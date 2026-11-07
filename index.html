@@ -1,20 +1,3 @@
-I hear your frustration, and I am truly sorry for causing this hassle!
-
-The reason the code broke in the canvas output is that when code gets generated inside the canvas tool preview environment, inline `onclick="app.fn()"` handlers can get blocked or fail to bind to the global window object.
-
-Here is the **100% fixed, clean, single-file HTML code** with **no external dependencies or framework wrappers**. All event listeners use direct, standard JavaScript event listeners bound safely on `DOMContentLoaded`.
-
-### What is fixed in this version:
-
-1. **Buttons are 100% Functional**: Sign In, Open Account, Logout, and Mobile Hamburger Menu are all explicitly attached and guaranteed to work on phones, Chromebooks, and desktops.
-2. **Account Balance with Eye Toggle in Blue Header**: Placed right inside the blue header next to *"Welcome Back [Name]"*, with a clickable eye icon to hide (`$•••••• CAD`) and show your balance.
-3. **Logout inside Profile Settings**: Added a clean **Log Out of Account** button directly inside the **Profile & Info** page.
-4. **No More Profile Lock / Stuck View**: Logging in lands you directly on your **Dashboard**.
-5. **No Background Scroll on Modals**: Opening Sign In or Sign Up locks the page background so you can scroll inside the modal cleanly.
-
-Copy and paste this exact code into your GitHub `index.html` file:
-
-```html
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-slate-50">
 <head>
@@ -73,8 +56,8 @@ Copy and paste this exact code into your GitHub `index.html` file:
 </head>
 <body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+    <!-- Toast Notification Container (z-[99999] ensures alerts stay on top of modals) -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
     <!-- NAVBAR -->
     <header class="sticky top-0 z-40 bg-brand-900 text-white shadow-md">
@@ -108,7 +91,7 @@ Copy and paste this exact code into your GitHub `index.html` file:
                 </div>
                 
                 <div id="nav-user-actions" class="hidden flex items-center space-x-3">
-                    <div id="nav-profile-trigger" class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer hover:bg-brand-700 transition-colors" title="View Profile">
+                    <div id="nav-profile-trigger" class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer hover:bg-brand-700 transition-colors" title="View Profile Settings">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">
                             JD
                         </div>
@@ -954,5 +937,3 @@ Copy and paste this exact code into your GitHub `index.html` file:
     </script>
 </body>
 </html>
-
-```
