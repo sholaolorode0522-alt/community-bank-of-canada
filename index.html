@@ -56,7 +56,7 @@
 </head>
 <body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <!-- Toast Notification Container (Ensured high z-index so alerts appear on top) -->
+    <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
     <!-- NAVBAR -->
@@ -91,7 +91,7 @@
                 </div>
                 
                 <div id="nav-user-actions" class="hidden flex items-center space-x-4">
-                    <div class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700">
+                    <div class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer" id="nav-profile-trigger">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">
                             JD
                         </div>
@@ -148,26 +148,35 @@
                         </div>
                     </div>
 
-                    <!-- Credit Card Visual -->
+                    <!-- ADVERTISEMENT CARD VISUAL (Clear Commercial Promo Banner) -->
                     <div class="relative flex justify-center">
-                        <div class="w-full max-w-md card-gradient rounded-2xl p-6 text-white shadow-2xl border border-white/20 transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                            <div class="flex justify-between items-center mb-8">
-                                <span class="font-semibold text-xs tracking-wider text-slate-300">COMMUNITY PREMIER VISA</span>
-                                <i class="fa-brands fa-cc-visa text-3xl text-white"></i>
+                        <div class="w-full max-w-md card-gradient rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-400/30 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative overflow-hidden">
+                            <!-- Advert Tag Badge -->
+                            <div class="absolute -right-12 top-6 bg-amber-400 text-slate-900 font-extrabold text-[10px] tracking-widest uppercase py-1 px-12 rotate-45 shadow">
+                                PROMOTION
                             </div>
-                            <div class="space-y-4 mb-6">
-                                <div class="text-xs text-slate-400">Chequing Balance</div>
-                                <div class="text-3xl font-extrabold tracking-wide">$12,450.00 <span class="text-xs font-normal text-slate-300">CAD</span></div>
+
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="bg-amber-400 text-slate-900 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase">Limited Offer</span>
+                                <span class="text-xs text-slate-300">Community Premier Visa®</span>
                             </div>
-                            <div class="flex justify-between items-end text-xs text-slate-300">
-                                <div>
-                                    <div class="text-[10px] uppercase text-slate-400">Card Holder</div>
-                                    <div class="font-medium text-white text-sm" id="card-holder-name">ALEXANDER WALKER</div>
+
+                            <div class="space-y-2 mb-6">
+                                <div class="text-xs uppercase tracking-wider text-slate-300">Special Welcome Bonus</div>
+                                <div class="text-3xl font-extrabold text-amber-300">$250 CAD CASHBACK</div>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    Open a new Chequing Account today and earn 4.00% cash back on all grocery & transit purchases for your first 6 months.
+                                </p>
+                            </div>
+
+                            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                                <div class="text-[11px] text-slate-300">
+                                    <span class="block font-semibold text-white">$0 Annual Fee</span>
+                                    <span>No Minimum Deposit</span>
                                 </div>
-                                <div>
-                                    <div class="text-[10px] uppercase text-slate-400">Expires</div>
-                                    <div class="font-medium text-white text-sm">08/28</div>
-                                </div>
+                                <button class="btn-ad-apply bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs px-4 py-2 rounded-xl transition-all shadow">
+                                    Apply Offer <i class="fa-solid fa-arrow-right ml-1"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -217,41 +226,38 @@
 
         <!-- SECTION 2: BANKING DASHBOARD -->
         <section id="section-dashboard" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+            
+            <!-- MAIN DASHBOARD HEADER WITH INTEGRATED ACCOUNT BALANCE -->
             <div class="blue-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div class="space-y-2">
-                    <div class="text-xs uppercase tracking-wider font-semibold text-brand-200">Online Banking Overview</div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
-                    <p class="text-brand-100 text-sm">Account Status: <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span></p>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-brand-800/80 text-brand-200 text-xs font-semibold px-3 py-1 rounded-full border border-brand-700">Account Overview</span>
+                        <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
+                        <p class="text-brand-100 text-xs sm:text-sm mt-1">Everyday Chequing Account # •••• 4892</p>
+                    </div>
+                    
+                    <!-- REAL-TIME BALANCE PLACED RIGHT IN THE NAME/HEADER SECTION -->
+                    <div class="pt-2">
+                        <div class="text-xs uppercase font-medium text-brand-200">Total Chequing Balance</div>
+                        <div class="text-3xl sm:text-5xl font-black tracking-tight text-white mt-0.5" id="header-balance-display">$0.00 CAD</div>
+                    </div>
                 </div>
-                <div class="flex items-center gap-3 w-full md:w-auto">
-                    <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2">
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                    <button id="btn-dash-transfer" class="bg-white text-brand-900 hover:bg-brand-50 px-6 py-3 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
                     </button>
-                    <button id="btn-dash-receive" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2">
+                    <button id="btn-dash-receive" class="bg-brand-800 hover:bg-brand-700 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2">
                         <i class="fa-solid fa-qrcode"></i> Receive
                     </button>
                 </div>
             </div>
 
-            <!-- Balances -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <p class="text-xs font-semibold text-slate-500 uppercase">Everyday Chequing</p>
-                            <p class="text-xs text-slate-400">Acc # •••• 4892</p>
-                        </div>
-                        <span class="w-10 h-10 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-wallet"></i>
-                        </span>
-                    </div>
-                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight" id="chequing-balance-display">$12,450.00</div>
-                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-500">
-                        <span>Available Balance</span>
-                        <span class="font-semibold text-slate-700">CAD</span>
-                    </div>
-                </div>
-
+            <!-- Additional Account Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-start mb-4">
                         <div>
@@ -490,320 +496,4 @@
                         <input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
                     </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label>
-                        <input type="tel" id="signup-phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="(416) 555-0192">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Social Insurance No. (SIN)</label>
-                        <input type="text" id="signup-sin" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123-456-789">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Residential Address</label>
-                    <input type="text" id="signup-address" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123 Bay Street, Toronto, ON">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label>
-                        <input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
-                        <div class="relative">
-                            <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                            <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
-                                <i class="fa-solid fa-eye text-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">
-                    Create Account & Sign In
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT APP LOGIC -->
-    <script>
-        // Toast Helper
-        function showToast(message, type = 'error') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
-            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
-            toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
-            setTimeout(() => {
-                toast.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
-        }
-
-        // App State & Mock Database
-        function getUsers() {
-            return JSON.parse(localStorage.getItem('cb_users') || '[]');
-        }
-        function saveUsers(users) {
-            localStorage.setItem('cb_users', JSON.stringify(users));
-        }
-        function getCurrentUser() {
-            return JSON.parse(localStorage.getItem('cb_current_user') || 'null');
-        }
-        function setCurrentUser(user) {
-            localStorage.setItem('cb_current_user', JSON.stringify(user));
-        }
-
-        // Navigation View Switching
-        function switchView(viewName) {
-            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
-            const target = document.getElementById(`section-${viewName}`);
-            if (target) target.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Close mobile menu if open
-            document.getElementById('mobile-menu').classList.add('hidden');
-        }
-
-        // Auth UI sync
-        function updateNavAuthUI() {
-            const user = getCurrentUser();
-            const guestActions = document.getElementById('nav-guest-actions');
-            const userActions = document.getElementById('nav-user-actions');
-            const profileNavBtns = document.querySelectorAll('#nav-btn-profile, #mob-nav-profile');
-
-            if (user) {
-                guestActions.classList.add('hidden');
-                userActions.classList.remove('hidden');
-                profileNavBtns.forEach(btn => btn.classList.remove('hidden'));
-                
-                // Initials & name
-                const initials = user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-                document.getElementById('user-avatar-initials').textContent = initials;
-                document.getElementById('user-display-name').textContent = user.name;
-                document.getElementById('dash-welcome-text').textContent = `Welcome back, ${user.name}!`;
-                document.getElementById('card-holder-name').textContent = user.name.toUpperCase();
-                
-                // Balances
-                const deposit = parseFloat(user.deposit || 500);
-                document.getElementById('chequing-balance-display').textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
-                
-                // Profile view info
-                document.getElementById('profile-name').textContent = user.name;
-                document.getElementById('profile-email').textContent = user.email;
-                document.getElementById('profile-phone').textContent = user.phone;
-                document.getElementById('profile-sin').textContent = user.sin;
-                document.getElementById('profile-address').textContent = user.address;
-                document.getElementById('profile-deposit').textContent = `$${deposit.toFixed(2)} CAD`;
-                document.getElementById('profile-date').textContent = user.date || 'Today';
-
-                // Render transactions
-                renderTransactions(user);
-            } else {
-                guestActions.classList.remove('hidden');
-                userActions.classList.add('hidden');
-                profileNavBtns.forEach(btn => btn.classList.add('hidden'));
-            }
-        }
-
-        function renderTransactions(user) {
-            const tbody = document.getElementById('transaction-list');
-            const txs = user.transactions || [
-                { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(user.deposit || 500).toFixed(2)}` },
-                { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45' },
-                { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20' }
-            ];
-            tbody.innerHTML = txs.map(t => `
-                <tr class="hover:bg-slate-50/50">
-                    <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
-                    <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
-                    <td class="py-3.5 text-slate-500">${t.date}</td>
-                    <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
-                </tr>
-            `).join('');
-        }
-
-        // Password Show/Hide Toggle Helpers
-        function setupPasswordToggle(inputId, toggleBtnId) {
-            const input = document.getElementById(inputId);
-            const btn = document.getElementById(toggleBtnId);
-            if (input && btn) {
-                btn.addEventListener('click', () => {
-                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                    input.setAttribute('type', type);
-                    btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
-                });
-            }
-        }
-
-        // Event Listeners Initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            updateNavAuthUI();
-            if (getCurrentUser()) {
-                switchView('dashboard');
-            } else {
-                switchView('landing');
-            }
-
-            // Password toggles setup
-            setupPasswordToggle('login-password', 'toggle-login-password');
-            setupPasswordToggle('signup-password', 'toggle-signup-password');
-
-            // Navigation Buttons
-            const navMap = {
-                'home': 'landing', 'mob-nav-home': 'landing', 'nav-logo': 'landing',
-                'dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard',
-                'profile': 'profile', 'mob-nav-profile': 'profile',
-                'transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-dash-transfer': 'transfer',
-                'receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive',
-                'support': 'support', 'mob-nav-support': 'support'
-            };
-
-            Object.keys(navMap).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.addEventListener('click', () => {
-                        const view = navMap[id];
-                        if (view === 'dashboard' || view === 'profile' || view === 'transfer' || view === 'receive') {
-                            if (!getCurrentUser()) {
-                                showToast('Please sign in or open an account to access banking services.');
-                                document.getElementById('modal-login').classList.remove('hidden');
-                                return;
-                            }
-                        }
-                        switchView(view);
-                    });
-                }
-            });
-
-            // Modals Triggers
-            const modalLogin = document.getElementById('modal-login');
-            const modalSignup = document.getElementById('modal-signup');
-
-            document.getElementById('btn-open-login').addEventListener('click', () => modalLogin.classList.remove('hidden'));
-            document.getElementById('btn-hero-login').addEventListener('click', () => modalLogin.classList.remove('hidden'));
-            document.getElementById('close-login').addEventListener('click', () => modalLogin.classList.add('hidden'));
-
-            document.getElementById('btn-open-signup').addEventListener('click', () => modalSignup.classList.remove('hidden'));
-            document.getElementById('btn-hero-signup').addEventListener('click', () => modalSignup.classList.remove('hidden'));
-            document.getElementById('close-signup').addEventListener('click', () => modalSignup.classList.add('hidden'));
-
-            // Mobile menu toggle
-            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.toggle('hidden');
-            });
-
-            // Logout
-            document.getElementById('btn-logout').addEventListener('click', () => {
-                localStorage.removeItem('cb_current_user');
-                updateNavAuthUI();
-                switchView('landing');
-                showToast('Successfully logged out.', 'success');
-            });
-
-            // Sign In Form Submission
-            document.getElementById('form-login').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value;
-
-                const users = getUsers();
-                const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-
-                if (found) {
-                    setCurrentUser(found);
-                    modalLogin.classList.add('hidden');
-                    updateNavAuthUI();
-                    switchView('dashboard');
-                    showToast(`Welcome back, ${found.name}!`, 'success');
-                } else {
-                    showToast('Invalid email or password. Please check your credentials.');
-                }
-            });
-
-            // Sign Up Form Submission
-            document.getElementById('form-signup').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('signup-name').value.trim();
-                const email = document.getElementById('signup-email').value.trim();
-                const phone = document.getElementById('signup-phone').value.trim();
-                const sin = document.getElementById('signup-sin').value.trim();
-                const address = document.getElementById('signup-address').value.trim();
-                const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
-                const password = document.getElementById('signup-password').value;
-
-                if (!name || !email || !password) {
-                    showToast('Please fill in all required fields.');
-                    return;
-                }
-
-                let users = getUsers();
-                if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
-                    showToast('An account with this email already exists. Please sign in.');
-                    return;
-                }
-
-                const newUser = {
-                    name, email, phone, sin, address, deposit, password,
-                    date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
-                    transactions: [
-                        { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}` },
-                        { desc: 'Welcome Bonus Reward', cat: 'Bonus', date: 'Today', amount: '+$25.00' }
-                    ]
-                };
-
-                users.push(newUser);
-                saveUsers(users);
-                setCurrentUser(newUser);
-
-                modalSignup.classList.add('hidden');
-                updateNavAuthUI();
-                switchView('dashboard');
-                showToast('Account successfully created and verified!', 'success');
-            });
-
-            // Transfer Form Submission
-            document.getElementById('transfer-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const recipient = document.getElementById('transfer-recipient').value;
-                const amount = parseFloat(document.getElementById('transfer-amount').value);
-                const user = getCurrentUser();
-
-                if (!user || user.deposit < amount) {
-                    showToast('Insufficient available balance for this transfer.');
-                    return;
-                }
-
-                user.deposit -= amount;
-                user.transactions.unshift({
-                    desc: `e-Transfer to ${recipient}`,
-                    cat: 'Transfer',
-                    date: 'Today',
-                    amount: `-$${amount.toFixed(2)}`
-                });
-
-                setCurrentUser(user);
-                
-                // Update in users database as well
-                let users = getUsers();
-                users = users.map(u => u.email === user.email ? user : u);
-                saveUsers(users);
-
-                updateNavAuthUI();
-                switchView('dashboard');
-                showToast(`Successfully transferred $${amount.toFixed(2)} CAD to ${recipient}!`, 'success');
-                document.getElementById('transfer-form').reset();
-            });
-
-            // Copy banking details
-            document.getElementById('btn-copy-info').addEventListener('click', () => {
-                navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
-                showToast('Banking details copied to clipboard!', 'success');
-            });
-        });
-    </script>
-</body>
-</html>
+                <div class="grid grid-cols
