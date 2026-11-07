@@ -57,13 +57,13 @@
 <body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
 
     <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
     <!-- NAVBAR -->
     <header class="sticky top-0 z-40 bg-brand-900 text-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
-            <div onclick="app.switchView('landing')" class="flex items-center space-x-3 cursor-pointer select-none">
+            <div onclick="app.nav('landing')" class="flex items-center space-x-3 cursor-pointer">
                 <div class="w-11 h-11 bg-white text-brand-700 rounded-xl flex items-center justify-center font-extrabold text-2xl shadow-inner">
                     <i class="fa-solid fa-building-columns"></i>
                 </div>
@@ -75,12 +75,12 @@
 
             <!-- Desktop Nav Items -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <button onclick="app.switchView('landing')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
-                <button onclick="app.switchView('dashboard')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
-                <button id="nav-btn-profile" onclick="app.switchView('profile')" class="hover:text-brand-200 transition-colors py-2 hidden cursor-pointer">Profile & Info</button>
-                <button onclick="app.switchView('transfer')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
-                <button onclick="app.switchView('receive')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
-                <button onclick="app.switchView('support')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
+                <button onclick="app.nav('landing')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
+                <button onclick="app.nav('dashboard')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
+                <button id="nav-btn-profile" onclick="app.nav('profile')" class="hover:text-brand-200 transition-colors py-2 hidden cursor-pointer">Profile & Settings</button>
+                <button onclick="app.nav('transfer')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
+                <button onclick="app.nav('receive')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
+                <button onclick="app.nav('support')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
             </nav>
 
             <!-- Auth Buttons / User Profile -->
@@ -91,18 +91,15 @@
                 </div>
                 
                 <div id="nav-user-actions" class="hidden flex items-center space-x-4">
-                    <div onclick="app.switchView('profile')" class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer hover:bg-brand-700 transition-colors select-none" title="View Profile">
+                    <div onclick="app.nav('profile')" class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer hover:bg-brand-700 transition-colors" title="View Profile & Settings">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">
                             JD
                         </div>
                         <span class="text-xs font-semibold text-white hidden sm:inline" id="user-display-name">John Doe</span>
                     </div>
-                    <button onclick="app.logout()" class="text-xs text-brand-200 hover:text-white bg-brand-800 hover:bg-red-600 p-2.5 rounded-lg transition-colors cursor-pointer" title="Log Out">
-                        <i class="fa-solid fa-right-from-bracket text-base"></i>
-                    </button>
                 </div>
 
-                <!-- Mobile Menu Button (Hamburger) -->
+                <!-- Mobile Menu Button -->
                 <button onclick="app.toggleMobileMenu()" class="md:hidden text-white hover:text-brand-200 focus:outline-none p-2 cursor-pointer">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
@@ -111,12 +108,12 @@
 
         <!-- Mobile Navigation Drawer -->
         <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-3 pb-5 space-y-2">
-            <button onclick="app.switchView('landing')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
-            <button onclick="app.switchView('dashboard')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
-            <button id="mob-nav-profile" onclick="app.switchView('profile')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Info</button>
-            <button onclick="app.switchView('transfer')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
-            <button onclick="app.switchView('receive')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
-            <button onclick="app.switchView('support')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
+            <button onclick="app.nav('landing')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
+            <button onclick="app.nav('dashboard')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
+            <button id="mob-nav-profile" onclick="app.nav('profile')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Settings</button>
+            <button onclick="app.nav('transfer')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
+            <button onclick="app.nav('receive')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
+            <button onclick="app.nav('support')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
         </div>
     </header>
 
@@ -148,7 +145,7 @@
                         </div>
                     </div>
 
-                    <!-- PROMOTIONAL ADVERTISEMENT CARD -->
+                    <!-- ADVERTISEMENT CARD VISUAL -->
                     <div class="relative flex justify-center">
                         <div class="w-full max-w-md card-gradient rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-400/30 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative overflow-hidden">
                             <div class="absolute -right-12 top-6 bg-amber-400 text-slate-900 font-extrabold text-[10px] tracking-widest uppercase py-1 px-12 rotate-45 shadow">
@@ -225,23 +222,43 @@
 
         <!-- SECTION 2: BANKING DASHBOARD -->
         <section id="section-dashboard" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+            <!-- BLUE HEADER WITH WELCOME NAME & EYE TOGGLE BALANCE -->
             <div class="blue-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div class="space-y-2">
-                    <div class="text-xs uppercase tracking-wider font-semibold text-brand-200">Online Banking Overview</div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
-                    <p class="text-brand-100 text-sm">Account Status: <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span></p>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-brand-800/80 text-brand-200 text-xs font-semibold px-3 py-1 rounded-full border border-brand-700">Account Overview</span>
+                        <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
+                        <p class="text-brand-100 text-xs sm:text-sm mt-0.5">Everyday Chequing Account # •••• 4892</p>
+                    </div>
+
+                    <!-- BALANCE IN BLUE HEADER WITH EYE ICON TOGGLE -->
+                    <div class="pt-2">
+                        <div class="text-xs uppercase font-semibold tracking-wider text-brand-200 flex items-center gap-2">
+                            <span>Everyday Chequing Balance</span>
+                            <button onclick="app.toggleBalanceVisibility()" id="btn-toggle-eye" class="text-brand-200 hover:text-white transition-colors cursor-pointer focus:outline-none" title="Toggle Balance Visibility">
+                                <i class="fa-solid fa-eye text-sm" id="eye-icon-display"></i>
+                            </button>
+                        </div>
+                        <div class="text-3xl sm:text-5xl font-black tracking-tight text-white mt-1" id="header-balance-amount">
+                            $0.00 CAD
+                        </div>
+                    </div>
                 </div>
-                <div class="flex items-center gap-3 w-full md:w-auto">
-                    <button onclick="app.switchView('transfer')" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                    <button onclick="app.nav('transfer')" class="bg-white text-brand-900 hover:bg-brand-50 px-6 py-3 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
                     </button>
-                    <button onclick="app.switchView('receive')" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
+                    <button onclick="app.nav('receive')" class="bg-brand-800 hover:bg-brand-700 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-qrcode"></i> Receive
                     </button>
                 </div>
             </div>
 
-            <!-- Balances -->
+            <!-- Additional Balances Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-start mb-4">
@@ -302,7 +319,7 @@
                         <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
                         <p class="text-xs text-slate-500">Live transaction history</p>
                     </div>
-                    <button onclick="app.refreshTransactions()" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1 cursor-pointer">
+                    <button onclick="app.updateNavAuthUI()" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1 cursor-pointer">
                         <i class="fa-solid fa-rotate-right"></i> Refresh
                     </button>
                 </div>
@@ -325,15 +342,21 @@
             </div>
         </section>
 
-        <!-- SECTION 3: USER PROFILE & KYC DETAILS -->
+        <!-- SECTION 3: USER PROFILE & SETTINGS (WITH LOGOUT BUTTON) -->
         <section id="section-profile" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-                <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-100 gap-4">
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900">Account Profile & Verification Info</h2>
-                        <p class="text-xs text-slate-500 mt-1">All personal and security details used during account registration.</p>
+                        <h2 class="text-2xl font-bold text-slate-900">Account Profile & Settings</h2>
+                        <p class="text-xs text-slate-500 mt-1">All personal, contact, and security details registered with your account.</p>
                     </div>
-                    <span class="bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-xs font-bold border border-brand-200">KYC Verified</span>
+                    <div class="flex items-center gap-3">
+                        <span class="bg-brand-50 text-brand-700 px-3 py-1.5 rounded-full text-xs font-bold border border-brand-200">KYC Verified</span>
+                        <!-- LOGOUT BUTTON IN PROFILE -->
+                        <button onclick="app.logout()" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                        </button>
+                    </div>
                 </div>
 
                 <div class="grid sm:grid-cols-2 gap-6 pt-6">
@@ -366,6 +389,13 @@
                         <p class="text-base font-semibold text-slate-800 mt-1" id="profile-date">-</p>
                     </div>
                 </div>
+
+                <!-- FOOTER LOGOUT ACTION IN PROFILE -->
+                <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+                    <button onclick="app.logout()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all shadow cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-right-from-bracket"></i> Sign Out of Banking Session
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -375,7 +405,7 @@
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">Interac e-Transfer</h2>
                 <p class="text-slate-600 text-sm mb-6">Send funds securely to any Canadian bank account or email address.</p>
                 
-                <form id="transfer-form" onsubmit="app.handleTransfer(event)" class="space-y-4">
+                <form id="transfer-form" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Recipient Name or Email</label>
                         <input type="text" id="transfer-recipient" required placeholder="e.g. recipient@bank.ca" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
@@ -459,7 +489,7 @@
             <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
             <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
             
-            <form id="form-login" onsubmit="app.handleLogin(event)" class="space-y-4">
+            <form id="form-login" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
                     <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
@@ -468,8 +498,8 @@
                     <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                     <div class="relative">
                         <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                        <button type="button" onclick="app.togglePassword('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
-                            <i class="fa-solid fa-eye text-sm"></i>
+                        <button type="button" onclick="app.togglePassword('login-password', 'eye-login')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
+                            <i class="fa-solid fa-eye text-sm" id="eye-login"></i>
                         </button>
                     </div>
                 </div>
@@ -487,7 +517,7 @@
             <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
             <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
             
-            <form id="form-signup" onsubmit="app.handleSignup(event)" class="space-y-4">
+            <form id="form-signup" class="space-y-4">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Legal Name</label>
@@ -515,14 +545,14 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label>
-                        <input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        <input type="number" id="signup-deposit" min="50" value="12450" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                         <div class="relative">
                             <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                            <button type="button" onclick="app.togglePassword('signup-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
-                                <i class="fa-solid fa-eye text-sm"></i>
+                            <button type="button" onclick="app.togglePassword('signup-password', 'eye-signup')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
+                                <i class="fa-solid fa-eye text-sm" id="eye-signup"></i>
                             </button>
                         </div>
                     </div>
@@ -534,30 +564,18 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT APPLICATION OBJECT -->
+    <!-- GLOBAL APPLICATION LOGIC -->
     <script>
-        const app = {
-            // Storage Access
-            getUsers: function() {
-                return JSON.parse(localStorage.getItem('cb_users') || '[]');
-            },
-            saveUsers: function(users) {
-                localStorage.setItem('cb_users', JSON.stringify(users));
-            },
-            getCurrentUser: function() {
-                return JSON.parse(localStorage.getItem('cb_current_user') || 'null');
-            },
-            setCurrentUser: function(user) {
-                localStorage.setItem('cb_current_user', JSON.stringify(user));
-            },
+        window.app = {
+            isBalanceHidden: false,
 
-            // Toast System
-            showToast: function(message, type = 'error') {
+            // Toast Notifications
+            toast: function(message, type = 'error') {
                 const container = document.getElementById('toast-container');
                 if (!container) return;
                 const toast = document.createElement('div');
                 const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
-                toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-xl text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
+                toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
                 toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
                 container.appendChild(toast);
                 setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
@@ -567,258 +585,35 @@
                 }, 4000);
             },
 
-            // Navigation Controller
-            switchView: function(viewName) {
-                const protectedViews = ['dashboard', 'profile', 'transfer', 'receive'];
-                if (protectedViews.includes(viewName) && !this.getCurrentUser()) {
-                    this.showToast('Please sign in or open an account to access banking features.');
-                    this.openModal('modal-login');
-                    return;
-                }
+            // Storage Helpers
+            getUsers: function() { return JSON.parse(localStorage.getItem('cb_users') || '[]'); },
+            saveUsers: function(users) { localStorage.setItem('cb_users', JSON.stringify(users)); },
+            getUser: function() { return JSON.parse(localStorage.getItem('cb_current_user') || 'null'); },
+            setUser: function(user) { localStorage.setItem('cb_current_user', JSON.stringify(user)); },
 
-                document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
-                const target = document.getElementById(`section-${viewName}`);
-                if (target) {
-                    target.classList.remove('hidden');
+            // Modals
+            openModal: function(id) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
                 }
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                // Close mobile menu on view switch
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu) mobileMenu.classList.add('hidden');
+            },
+            closeModal: function(id) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
             },
 
-            // Mobile Drawer Toggle
+            // Mobile Menu
             toggleMobileMenu: function() {
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu) {
-                    mobileMenu.classList.toggle('hidden');
-                }
+                const menu = document.getElementById('mobile-menu');
+                if (menu) menu.classList.toggle('hidden');
             },
 
-            // Modal Controller
-            openModal: function(modalId) {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                }
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu) mobileMenu.classList.add('hidden');
-            },
-            closeModal: function(modalId) {
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }
-            },
-
-            // Password Toggle
-            togglePassword: function(inputId, btnEl) {
-                const input = document.getElementById(inputId);
-                if (input && btnEl) {
-                    const isPassword = input.type === 'password';
-                    input.type = isPassword ? 'text' : 'password';
-                    btnEl.innerHTML = isPassword ? '<i class="fa-solid fa-eye-slash text-sm"></i>' : '<i class="fa-solid fa-eye text-sm"></i>';
-                }
-            },
-
-            // Sync User Interface
-            updateNavAuthUI: function() {
-                const user = this.getCurrentUser();
-                const guestActions = document.getElementById('nav-guest-actions');
-                const userActions = document.getElementById('nav-user-actions');
-                const profileBtn = document.getElementById('nav-btn-profile');
-                const mobProfileBtn = document.getElementById('mob-nav-profile');
-
-                if (user) {
-                    if (guestActions) guestActions.classList.add('hidden');
-                    if (userActions) userActions.classList.remove('hidden');
-                    if (profileBtn) profileBtn.classList.remove('hidden');
-                    if (mobProfileBtn) mobProfileBtn.classList.remove('hidden');
-
-                    const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'JD';
-                    const avatarEl = document.getElementById('user-avatar-initials');
-                    const displayNameEl = document.getElementById('user-display-name');
-                    const welcomeEl = document.getElementById('dash-welcome-text');
-
-                    if (avatarEl) avatarEl.textContent = initials;
-                    if (displayNameEl) displayNameEl.textContent = user.name;
-                    if (welcomeEl) welcomeEl.textContent = `Welcome back, ${user.name}!`;
-
-                    const deposit = parseFloat(user.deposit || 500);
-                    const chequingDisplay = document.getElementById('chequing-balance-display');
-                    if (chequingDisplay) {
-                        chequingDisplay.textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
-                    }
-
-                    const setText = (id, val) => {
-                        const el = document.getElementById(id);
-                        if (el) el.textContent = val || '-';
-                    };
-
-                    setText('profile-name', user.name);
-                    setText('profile-email', user.email);
-                    setText('profile-phone', user.phone);
-                    setText('profile-sin', user.sin);
-                    setText('profile-address', user.address);
-                    setText('profile-deposit', `$${deposit.toFixed(2)} CAD`);
-                    setText('profile-date', user.date || 'Today');
-
-                    this.renderTransactions(user);
-                } else {
-                    if (guestActions) guestActions.classList.remove('hidden');
-                    if (userActions) userActions.classList.add('hidden');
-                    if (profileBtn) profileBtn.classList.add('hidden');
-                    if (mobProfileBtn) mobProfileBtn.classList.add('hidden');
-                }
-            },
-
-            renderTransactions: function(user) {
-                const tbody = document.getElementById('transaction-list');
-                if (!tbody) return;
-                const txs = user.transactions || [
-                    { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(user.deposit || 500).toFixed(2)}` },
-                    { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45' },
-                    { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20' }
-                ];
-                tbody.innerHTML = txs.map(t => `
-                    <tr class="hover:bg-slate-50/50">
-                        <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
-                        <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
-                        <td class="py-3.5 text-slate-500">${t.date}</td>
-                        <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
-                    </tr>
-                `).join('');
-            },
-
-            refreshTransactions: function() {
-                const user = this.getCurrentUser();
-                if (user) {
-                    this.renderTransactions(user);
-                    this.showToast('Transactions updated.', 'success');
-                }
-            },
-
-            // Form Actions
-            handleLogin: function(e) {
-                e.preventDefault();
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value;
-
-                const users = this.getUsers();
-                const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-
-                if (found) {
-                    this.setCurrentUser(found);
-                    this.closeModal('modal-login');
-                    this.updateNavAuthUI();
-                    this.switchView('dashboard');
-                    this.showToast(`Welcome back, ${found.name}!`, 'success');
-                    document.getElementById('form-login').reset();
-                } else {
-                    this.showToast('Invalid email or password. Please check your credentials.');
-                }
-            },
-
-            handleSignup: function(e) {
-                e.preventDefault();
-                const name = document.getElementById('signup-name').value.trim();
-                const email = document.getElementById('signup-email').value.trim();
-                const phone = document.getElementById('signup-phone').value.trim();
-                const sin = document.getElementById('signup-sin').value.trim();
-                const address = document.getElementById('signup-address').value.trim();
-                const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
-                const password = document.getElementById('signup-password').value;
-
-                if (!name || !email || !password) {
-                    this.showToast('Please fill in all required fields.');
-                    return;
-                }
-
-                let users = this.getUsers();
-                if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
-                    this.showToast('An account with this email already exists. Please sign in.');
-                    return;
-                }
-
-                const newUser = {
-                    name, email, phone, sin, address, deposit, password,
-                    date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
-                    transactions: [
-                        { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}` },
-                        { desc: 'Welcome Bonus Offer', cat: 'Bonus', date: 'Today', amount: '+$250.00' }
-                    ]
-                };
-
-                users.push(newUser);
-                this.saveUsers(users);
-                this.setCurrentUser(newUser);
-
-                this.closeModal('modal-signup');
-                this.updateNavAuthUI();
-                this.switchView('dashboard');
-                this.showToast('Account successfully created and verified!', 'success');
-                document.getElementById('form-signup').reset();
-            },
-
-            handleTransfer: function(e) {
-                e.preventDefault();
-                const recipient = document.getElementById('transfer-recipient').value;
-                const amount = parseFloat(document.getElementById('transfer-amount').value);
-                const user = this.getCurrentUser();
-
-                if (!user || user.deposit < amount) {
-                    this.showToast('Insufficient available balance for this transfer.');
-                    return;
-                }
-
-                user.deposit -= amount;
-                user.transactions.unshift({
-                    desc: `e-Transfer to ${recipient}`,
-                    cat: 'Transfer',
-                    date: 'Today',
-                    amount: `-$${amount.toFixed(2)}`
-                });
-
-                this.setCurrentUser(user);
-                
-                let users = this.getUsers();
-                users = users.map(u => u.email.toLowerCase() === user.email.toLowerCase() ? user : u);
-                this.saveUsers(users);
-
-                this.updateNavAuthUI();
-                this.switchView('dashboard');
-                this.showToast(`Successfully transferred $${amount.toFixed(2)} CAD to ${recipient}!`, 'success');
-                document.getElementById('transfer-form').reset();
-            },
-
-            copyBankingInfo: function() {
-                navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
-                this.showToast('Banking details copied to clipboard!', 'success');
-            },
-
-            logout: function() {
-                localStorage.removeItem('cb_current_user');
-                this.updateNavAuthUI();
-                this.switchView('landing');
-                this.showToast('Successfully logged out.', 'success');
-            },
-
-            init: function() {
-                this.updateNavAuthUI();
-                if (this.getCurrentUser()) {
-                    this.switchView('dashboard');
-                } else {
-                    this.switchView('landing');
-                }
-            }
-        };
-
-        document.addEventListener('DOMContentLoaded', () => {
-            app.init();
-        });
-    </script>
-</body>
-</html>
+            // Navigation
+            nav: function(viewName) {
+                const user = this.getUser();
+                if (['dashboard
