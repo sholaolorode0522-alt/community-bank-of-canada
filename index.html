@@ -54,104 +54,10 @@
         }
     </style>
 </head>
-<body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen">
+<body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
-
-    <!-- MODAL: SIGN IN -->
-    <div id="modal-signin" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl relative border border-slate-100 animate-in fade-in zoom-in duration-200">
-            <button id="close-signin-modal" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="mb-6">
-                <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-2xl flex items-center justify-center font-bold text-xl mb-3">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <h3 class="text-2xl font-extrabold text-slate-900">Welcome Back</h3>
-                <p class="text-sm text-slate-500 mt-1">Sign in to your Community Bank secure online banking portal.</p>
-            </div>
-            <form id="form-signin" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Email Address</label>
-                    <input type="email" id="signin-email" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all" placeholder="john.doe@example.com">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Password</label>
-                    <input type="password" id="signin-password" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all" placeholder="••••••••">
-                </div>
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-md mt-2">
-                    Sign In to Dashboard
-                </button>
-            </form>
-            <div class="mt-6 text-center text-sm text-slate-500">
-                Don't have an account? <button id="switch-to-signup" class="text-brand-600 font-semibold hover:underline">Open Account</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: SIGN UP / OPEN ACCOUNT -->
-    <div id="modal-signup" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl relative border border-slate-100 my-8">
-            <button id="close-signup-modal" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="mb-6">
-                <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-2xl flex items-center justify-center font-bold text-xl mb-3">
-                    <i class="fa-solid fa-building-columns"></i>
-                </div>
-                <h3 class="text-2xl font-extrabold text-slate-900">Open a Canadian Account</h3>
-                <p class="text-sm text-slate-500 mt-1">CDIC insured. Zero-fee everyday banking with instant verification.</p>
-            </div>
-            <form id="form-signup" class="space-y-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">First Name</label>
-                        <input type="text" id="signup-firstname" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="John">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Last Name</label>
-                        <input type="text" id="signup-lastname" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Doe">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Email Address</label>
-                    <input type="email" id="signup-email" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="john.doe@example.com">
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Phone Number</label>
-                        <input type="tel" id="signup-phone" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="(416) 555-0192">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">SIN (Optional / Mock)</label>
-                        <input type="text" id="signup-sin" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="123-456-789">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Canadian Street Address</label>
-                    <input type="text" id="signup-address" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="100 Bay Street, Toronto, ON">
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Initial Deposit ($ CAD)</label>
-                        <input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1.5">Password</label>
-                        <input type="password" id="signup-password" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="••••••••">
-                    </div>
-                </div>
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-md mt-4">
-                    Complete Account Setup
-                </button>
-            </form>
-            <div class="mt-4 text-center text-sm text-slate-500">
-                Already have an account? <button id="switch-to-signin" class="text-brand-600 font-semibold hover:underline">Sign In</button>
-            </div>
-        </div>
-    </div>
+    <!-- Toast Notification Container (Ensured high z-index so alerts appear on top) -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
     <!-- NAVBAR -->
     <header class="sticky top-0 z-40 bg-brand-900 text-white shadow-md">
@@ -171,7 +77,7 @@
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <button id="nav-btn-home" class="hover:text-brand-200 transition-colors py-2">Home</button>
                 <button id="nav-btn-dashboard" class="hover:text-brand-200 transition-colors py-2">Dashboard</button>
-                <button id="nav-btn-profile" class="hover:text-brand-200 transition-colors py-2">Profile & Info</button>
+                <button id="nav-btn-profile" class="hover:text-brand-200 transition-colors py-2 hidden">Profile & Info</button>
                 <button id="nav-btn-transfer" class="hover:text-brand-200 transition-colors py-2">Transfer</button>
                 <button id="nav-btn-receive" class="hover:text-brand-200 transition-colors py-2">Receive</button>
                 <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2">Customer Care</button>
@@ -207,7 +113,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-2">
             <button id="mob-nav-home" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
             <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
-            <button id="mob-nav-profile" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Profile & Info</button>
+            <button id="mob-nav-profile" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Info</button>
             <button id="mob-nav-transfer" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
             <button id="mob-nav-receive" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
             <button id="mob-nav-support" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
@@ -251,12 +157,12 @@
                             </div>
                             <div class="space-y-4 mb-6">
                                 <div class="text-xs text-slate-400">Chequing Balance</div>
-                                <div class="text-3xl font-extrabold tracking-wide" id="hero-card-balance">$12,450.00 <span class="text-xs font-normal text-slate-300">CAD</span></div>
+                                <div class="text-3xl font-extrabold tracking-wide">$12,450.00 <span class="text-xs font-normal text-slate-300">CAD</span></div>
                             </div>
                             <div class="flex justify-between items-end text-xs text-slate-300">
                                 <div>
                                     <div class="text-[10px] uppercase text-slate-400">Card Holder</div>
-                                    <div class="font-medium text-white text-sm" id="hero-card-holder">ALEXANDER WALKER</div>
+                                    <div class="font-medium text-white text-sm" id="card-holder-name">ALEXANDER WALKER</div>
                                 </div>
                                 <div>
                                     <div class="text-[10px] uppercase text-slate-400">Expires</div>
@@ -381,104 +287,101 @@
                 </div>
             </div>
 
-            <!-- Activity Table & Quick Send -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <div>
-                            <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
-                            <p class="text-xs text-slate-500">Live transaction history</p>
-                        </div>
-                        <button id="btn-refresh-tx" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1">
-                            <i class="fa-solid fa-rotate-right"></i> Refresh
-                        </button>
+            <!-- Activity Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
+                        <p class="text-xs text-slate-500">Live transaction history</p>
                     </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="border-b border-slate-100 text-xs font-semibold text-slate-400 uppercase">
-                                    <th class="pb-3">Description</th>
-                                    <th class="pb-3">Category</th>
-                                    <th class="pb-3">Date</th>
-                                    <th class="pb-3 text-right">Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transaction-list" class="divide-y divide-slate-100 text-sm">
-                                <!-- Dynamic transactions JS -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <button id="btn-refresh-tx" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                        <i class="fa-solid fa-rotate-right"></i> Refresh
+                    </button>
                 </div>
 
-                <div class="space-y-6">
-                    <div class="bg-brand-900 text-white rounded-2xl p-6 shadow-sm">
-                        <h3 class="text-base font-bold mb-1">Quick Send Money</h3>
-                        <p class="text-xs text-brand-200 mb-4">Send funds instantly via Interac e-Transfer</p>
-                        <form id="form-quick-transfer" class="space-y-3">
-                            <div>
-                                <label class="block text-[10px] uppercase font-semibold text-brand-200 mb-1">Recipient Email or Phone</label>
-                                <input type="text" id="quick-recipient" required class="w-full px-3 py-2 bg-brand-800 border border-brand-700 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="friend@example.com">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] uppercase font-semibold text-brand-200 mb-1">Amount ($ CAD)</label>
-                                <input type="number" id="quick-amount" min="1" required class="w-full px-3 py-2 bg-brand-800 border border-brand-700 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="100.00">
-                            </div>
-                            <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors shadow-sm">
-                                Transfer Now
-                            </button>
-                        </form>
-                    </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-100 text-xs font-semibold text-slate-400 uppercase">
+                                <th class="pb-3">Description</th>
+                                <th class="pb-3">Category</th>
+                                <th class="pb-3">Date</th>
+                                <th class="pb-3 text-right">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-list" class="divide-y divide-slate-100 text-sm">
+                            <!-- Dynamic transactions -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: PROFILE & ACCOUNT CREATION DETAILS -->
-        <section id="section-profile" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-6">
+        <!-- SECTION 3: USER PROFILE & KYC DETAILS -->
+        <section id="section-profile" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-                <div class="flex items-center justify-between pb-6 border-b border-slate-100 mb-6">
+                <div class="flex items-center justify-between pb-6 border-b border-slate-100">
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900">Your Account Profile</h2>
-                        <p class="text-sm text-slate-500">Information provided during your Community Bank account opening.</p>
+                        <h2 class="text-2xl font-bold text-slate-900">Account Profile & Verification Info</h2>
+                        <p class="text-xs text-slate-500 mt-1">All personal and security details used during account registration.</p>
                     </div>
-                    <span class="bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-xs font-semibold border border-brand-200">
-                        Verified Member
-                    </span>
+                    <span class="bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-xs font-bold border border-brand-200">KYC Verified</span>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="profile-details-grid">
-                    <!-- Populated via JS -->
+                <div class="grid sm:grid-cols-2 gap-6 pt-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Full Legal Name</label>
+                        <p class="text-base font-semibold text-slate-800 mt-1" id="profile-name">-</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Email Address</label>
+                        <p class="text-base font-semibold text-slate-800 mt-1" id="profile-email">-</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Phone Number</label>
+                        <p class="text-base font-semibold text-slate-800 mt-1" id="profile-phone">-</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Social Insurance Number (SIN)</label>
+                        <p class="text-base font-semibold text-slate-800 mt-1" id="profile-sin">-</p>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Residential Address</label>
+                        <p class="text-base font-semibold text-slate-800 mt-1" id="profile-address">-</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Initial Deposit Funding</label>
+                        <p class="text-base font-semibold text-emerald-600 mt-1" id="profile-deposit">-</p>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase">Account Creation Date</label>
+                        <p class="text-base font-semibold text-slate-800 mt-1" id="profile-date">-</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- SECTION 4: TRANSFER FUNDS -->
-        <section id="section-transfer" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-2xl mx-auto">
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">Interac e-Transfer & Wire</h2>
-                <p class="text-sm text-slate-500 mb-6">Transfer funds securely to any Canadian bank account.</p>
-                <form id="form-full-transfer" class="space-y-4">
+        <section id="section-transfer" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Interac e-Transfer</h2>
+                <p class="text-slate-600 text-sm mb-6">Send funds securely to any Canadian bank account or email address.</p>
+                
+                <form id="transfer-form" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">From Account</label>
-                        <select id="transfer-from" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                            <option value="chequing">Everyday Chequing (•••• 4892)</option>
-                            <option value="savings">High-Interest Savings (•••• 9104)</option>
-                        </select>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Recipient Name or Email</label>
+                        <input type="text" id="transfer-recipient" required placeholder="e.g. recipient@bank.ca" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Recipient Name</label>
-                        <input type="text" id="transfer-name" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Jane Smith">
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label>
+                        <input type="number" id="transfer-amount" step="0.01" min="1" required placeholder="0.00" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Recipient Email / Institution</label>
-                        <input type="text" id="transfer-dest" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="jane@bankofcanada.ca or Transit/Institution">
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Security Question (Optional)</label>
+                        <input type="text" placeholder="e.g. What city are we in?" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Amount ($ CAD)</label>
-                        <input type="number" id="transfer-amount" min="1" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="250.00">
-                    </div>
-                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-md mt-2">
-                        Send Funds Securely
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">
+                        Send Funds Instantly
                     </button>
                 </form>
             </div>
@@ -487,318 +390,344 @@
         <!-- SECTION 5: RECEIVE MONEY -->
         <section id="section-receive" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto text-center">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 space-y-6">
-                <div>
-                    <h2 class="text-2xl font-bold text-slate-900 mb-1">Receive Money</h2>
-                    <p class="text-sm text-slate-500">Share your direct deposit details or QR code with anyone in Canada.</p>
+                <h2 class="text-2xl font-bold text-slate-900">Receive Canadian Funds</h2>
+                <p class="text-slate-600 text-sm">Share your Community Bank routing and account info to receive direct deposits or e-Transfers.</p>
+                
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-left space-y-3">
+                    <div class="flex justify-between"><span class="text-xs text-slate-500">Institution Number:</span><span class="font-bold text-slate-800">839 (Community Bank Canada)</span></div>
+                    <div class="flex justify-between"><span class="text-xs text-slate-500">Transit Number:</span><span class="font-bold text-slate-800">10294</span></div>
+                    <div class="flex justify-between"><span class="text-xs text-slate-500">Account Number:</span><span class="font-bold text-slate-800">•••• 4892</span></div>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 inline-block w-full text-left space-y-3">
-                    <div class="flex justify-between text-xs"><span class="text-slate-500">Institution Number:</span><span class="font-bold text-slate-900">003 (Community Bank)</span></div>
-                    <div class="flex justify-between text-xs"><span class="text-slate-500">Transit Number:</span><span class="font-bold text-slate-900">10294</span></div>
-                    <div class="flex justify-between text-xs"><span class="text-slate-500">Account Number:</span><span class="font-bold text-slate-900" id="receive-acc-num">•••• 4892</span></div>
-                </div>
-                <button onclick="showToast('Deposit details copied to clipboard!', 'success')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl border border-brand-200 transition-colors">
-                    <i class="fa-solid fa-copy mr-2"></i> Copy Direct Deposit Info
+
+                <button id="btn-copy-info" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl transition-all text-sm">
+                    <i class="fa-solid fa-copy mr-2"></i> Copy Banking Details
                 </button>
             </div>
         </section>
 
-        <!-- SECTION 6: CUSTOMER CARE -->
-        <section id="section-support" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 space-y-6">
-                <h2 class="text-2xl font-bold text-slate-900">24/7 Canadian Customer Care</h2>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                        <i class="fa-solid fa-phone text-brand-600 text-xl mb-2"></i>
-                        <h3 class="font-bold text-slate-900 text-sm">Toll-Free Support</h3>
-                        <p class="text-xs text-slate-500 mt-1">1-800-555-COMM (24/7 Available)</p>
+        <!-- SECTION 6: SUPPORT -->
+        <section id="section-support" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
+                <h2 class="text-2xl font-bold text-slate-900">Canadian Customer Care</h2>
+                <p class="text-slate-600 text-sm">Our support specialists are available 24/7 across all Canadian time zones.</p>
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <i class="fa-solid fa-phone text-brand-600 text-lg"></i>
+                        <div>
+                            <div class="text-xs text-slate-400">Toll-Free Hotline</div>
+                            <div class="font-bold text-slate-800 text-sm">1-800-555-BANK (2265)</div>
+                        </div>
                     </div>
-                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                        <i class="fa-solid fa-envelope text-brand-600 text-xl mb-2"></i>
-                        <h3 class="font-bold text-slate-900 text-sm">Secure Email Assistance</h3>
-                        <p class="text-xs text-slate-500 mt-1">support@communitybankcanada.ca</p>
+                    <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <i class="fa-solid fa-envelope text-brand-600 text-lg"></i>
+                        <div>
+                            <div class="text-xs text-slate-400">Secure Support Email</div>
+                            <div class="font-bold text-slate-800 text-sm">support@communitybankcanada.ca</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-4">
-            <p>&copy; 2026 Community Bank of Canada. All rights reserved. Member CDIC.</p>
-            <p class="text-slate-500">Simulated Canadian digital banking web application.</p>
+    <footer class="bg-brand-950 text-slate-400 py-12 px-4 sm:px-6 lg:px-8 mt-auto border-t border-brand-900">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 text-xs">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-brand-800 text-white rounded-lg flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-building-columns text-sm"></i>
+                </div>
+                <span class="font-semibold text-white">Community Bank of Canada</span>
+            </div>
+            <div>&copy; 2026 Community Bank of Canada. All rights reserved. Member CDIC.</div>
         </div>
     </footer>
 
+    <!-- MODAL: SIGN IN -->
+    <div id="modal-login" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
+            <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
+            
+            <form id="form-login" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
+                    <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                    <div class="relative">
+                        <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                        <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                            <i class="fa-solid fa-eye text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm">
+                    Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: SIGN UP / OPEN ACCOUNT -->
+    <div id="modal-signup" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
+            <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
+            <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
+            
+            <form id="form-signup" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Legal Name</label>
+                        <input type="text" id="signup-name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
+                        <input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label>
+                        <input type="tel" id="signup-phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="(416) 555-0192">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Social Insurance No. (SIN)</label>
+                        <input type="text" id="signup-sin" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123-456-789">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Residential Address</label>
+                    <input type="text" id="signup-address" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123 Bay Street, Toronto, ON">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label>
+                        <input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                            <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                                <i class="fa-solid fa-eye text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">
+                    Create Account & Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
-        // Default Mock User for Demo if none created
-        const DEFAULT_USER = {
-            firstName: "Alexander",
-            lastName: "Walker",
-            email: "alex@example.com",
-            phone: "(416) 555-0182",
-            sin: "•••-•••-482",
-            address: "100 Bay Street, Toronto, ON",
-            password: "password123",
-            chequingBalance: 12450.00,
-            savingsBalance: 8300.50,
-            transactions: [
-                { desc: "Interac e-Transfer from Sarah M.", category: "Transfer", date: "Today, 2:15 PM", amount: 150.00, type: "credit" },
-                { desc: "Tim Hortons Toronto", category: "Food & Drink", date: "Yesterday", amount: 4.85, type: "debit" },
-                { desc: "Metro Grocery Store", category: "Groceries", date: "Nov 4, 2026", amount: 84.20, type: "debit" },
-                { desc: "Payroll Deposit - ACME Corp", category: "Deposit", date: "Nov 1, 2026", amount: 2400.00, type: "credit" }
-            ]
-        };
-
-        // App State
-        let currentUser = null;
-
-        // Initialize LocalStorage with default user if empty
-        function initStorage() {
-            if (!localStorage.getItem('cb_users')) {
-                localStorage.setItem('cb_users', JSON.stringify([DEFAULT_USER]));
-            }
-        }
-
-        function getUsers() {
-            return JSON.parse(localStorage.getItem('cb_users')) || [];
-        }
-
-        function saveUsers(users) {
-            localStorage.setItem('cb_users', JSON.stringify(users));
-        }
-
-        function getActiveUserSession() {
-            const email = sessionStorage.getItem('cb_active_email');
-            if (!email) return null;
-            const users = getUsers();
-            return users.find(u => u.email === email) || null;
-        }
-
-        function setActiveUserSession(email) {
-            sessionStorage.setItem('cb_active_email', email);
-        }
-
-        function clearActiveUserSession() {
-            sessionStorage.removeItem('cb_active_email');
-        }
-
-        // Toast notification system
-        function showToast(message, type = 'success') {
+        // Toast Helper
+        function showToast(message, type = 'error') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = `p-4 rounded-xl shadow-lg text-sm font-semibold text-white pointer-events-auto transition-all transform translate-y-2 opacity-0 flex items-center gap-3 ${type === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`;
-            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'} text-lg"></i><span>${message}</span>`;
+            const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
+            toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
             setTimeout(() => {
                 toast.classList.add('translate-y-2', 'opacity-0');
                 setTimeout(() => toast.remove(), 300);
-            }, 3500);
+            }, 4000);
         }
 
-        // Navigation Controller
-        const sections = ['landing', 'dashboard', 'profile', 'transfer', 'receive', 'support'];
+        // App State & Mock Database
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('cb_users') || '[]');
+        }
+        function saveUsers(users) {
+            localStorage.setItem('cb_users', JSON.stringify(users));
+        }
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('cb_current_user') || 'null');
+        }
+        function setCurrentUser(user) {
+            localStorage.setItem('cb_current_user', JSON.stringify(user));
+        }
 
-        function showSection(name) {
-            sections.forEach(s => {
-                const el = document.getElementById(`section-${s}`);
-                if (el) el.classList.add('hidden');
-            });
-
-            // Restrict Dashboard/Profile/Transfer to authenticated users
-            const authRequired = ['dashboard', 'profile', 'transfer', 'receive'];
-            if (authRequired.includes(name) && !currentUser) {
-                showToast('Please sign in to access online banking.', 'error');
-                openModal('signin');
-                document.getElementById('section-landing').classList.remove('hidden');
-                return;
-            }
-
-            const target = document.getElementById(`section-${name}`);
-            if (target) {
-                target.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-
+        // Navigation View Switching
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById(`section-${viewName}`);
+            if (target) target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
             // Close mobile menu if open
             document.getElementById('mobile-menu').classList.add('hidden');
-
-            if (name === 'dashboard') renderDashboard();
-            if (name === 'profile') renderProfile();
         }
 
-        // Modal Controller
-        function openModal(modalId) {
-            document.getElementById(`modal-${modalId}`).classList.remove('hidden');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(`modal-${modalId}`).classList.add('hidden');
-        }
-
-        // Render UI based on auth state
+        // Auth UI sync
         function updateNavAuthUI() {
-            currentUser = getActiveUserSession();
+            const user = getCurrentUser();
             const guestActions = document.getElementById('nav-guest-actions');
             const userActions = document.getElementById('nav-user-actions');
+            const profileNavBtns = document.querySelectorAll('#nav-btn-profile, #mob-nav-profile');
 
-            if (currentUser) {
+            if (user) {
                 guestActions.classList.add('hidden');
                 userActions.classList.remove('hidden');
-                document.getElementById('user-display-name').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
-                document.getElementById('user-avatar-initials').textContent = `${currentUser.firstName[0]}${currentUser.lastName[0]}`.toUpperCase();
+                profileNavBtns.forEach(btn => btn.classList.remove('hidden'));
                 
-                // Update hero card display
-                if (document.getElementById('hero-card-balance')) {
-                    document.getElementById('hero-card-balance').innerHTML = `$${currentUser.chequingBalance.toLocaleString('en-CA', {minimumFractionDigits: 2})} <span class="text-xs font-normal text-slate-300">CAD</span>`;
-                    document.getElementById('hero-card-holder').textContent = `${currentUser.firstName} ${currentUser.lastName}`.toUpperCase();
-                }
+                // Initials & name
+                const initials = user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                document.getElementById('user-avatar-initials').textContent = initials;
+                document.getElementById('user-display-name').textContent = user.name;
+                document.getElementById('dash-welcome-text').textContent = `Welcome back, ${user.name}!`;
+                document.getElementById('card-holder-name').textContent = user.name.toUpperCase();
+                
+                // Balances
+                const deposit = parseFloat(user.deposit || 500);
+                document.getElementById('chequing-balance-display').textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
+                
+                // Profile view info
+                document.getElementById('profile-name').textContent = user.name;
+                document.getElementById('profile-email').textContent = user.email;
+                document.getElementById('profile-phone').textContent = user.phone;
+                document.getElementById('profile-sin').textContent = user.sin;
+                document.getElementById('profile-address').textContent = user.address;
+                document.getElementById('profile-deposit').textContent = `$${deposit.toFixed(2)} CAD`;
+                document.getElementById('profile-date').textContent = user.date || 'Today';
+
+                // Render transactions
+                renderTransactions(user);
             } else {
                 guestActions.classList.remove('hidden');
                 userActions.classList.add('hidden');
+                profileNavBtns.forEach(btn => btn.classList.add('hidden'));
             }
         }
 
-        function renderDashboard() {
-            if (!currentUser) return;
-            document.getElementById('dash-welcome-text').textContent = `Welcome Back, ${currentUser.firstName}!`;
-            document.getElementById('chequing-balance-display').textContent = `$${currentUser.chequingBalance.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
-            document.getElementById('savings-balance-display').textContent = `$${currentUser.savingsBalance.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
-            
-            const txList = document.getElementById('transaction-list');
-            txList.innerHTML = '';
-            currentUser.transactions.forEach(tx => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-slate-50 transition-colors';
-                tr.innerHTML = `
-                    <td class="py-3.5 font-medium text-slate-900">${tx.desc}</td>
-                    <td class="py-3.5 text-slate-500">${tx.category}</td>
-                    <td class="py-3.5 text-slate-400 text-xs">${tx.date}</td>
-                    <td class="py-3.5 text-right font-bold ${tx.type === 'credit' ? 'text-emerald-600' : 'text-slate-900'}">
-                        ${tx.type === 'credit' ? '+' : '-'}$${tx.amount.toFixed(2)}
-                    </td>
-                `;
-                txList.appendChild(tr);
-            });
+        function renderTransactions(user) {
+            const tbody = document.getElementById('transaction-list');
+            const txs = user.transactions || [
+                { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(user.deposit || 500).toFixed(2)}` },
+                { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45' },
+                { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20' }
+            ];
+            tbody.innerHTML = txs.map(t => `
+                <tr class="hover:bg-slate-50/50">
+                    <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
+                    <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
+                    <td class="py-3.5 text-slate-500">${t.date}</td>
+                    <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
+                </tr>
+            `).join('');
         }
 
-        function renderProfile() {
-            if (!currentUser) return;
-            const grid = document.getElementById('profile-details-grid');
-            grid.innerHTML = `
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <span class="text-xs text-slate-400 block uppercase font-semibold">Full Legal Name</span>
-                    <span class="text-sm font-bold text-slate-900">${currentUser.firstName} ${currentUser.lastName}</span>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <span class="text-xs text-slate-400 block uppercase font-semibold">Email Address</span>
-                    <span class="text-sm font-bold text-slate-900">${currentUser.email}</span>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <span class="text-xs text-slate-400 block uppercase font-semibold">Phone Number</span>
-                    <span class="text-sm font-bold text-slate-900">${currentUser.phone}</span>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <span class="text-xs text-slate-400 block uppercase font-semibold">Social Insurance Number (SIN)</span>
-                    <span class="text-sm font-bold text-slate-900">${currentUser.sin || '••••-•••-•••'}</span>
-                </div>
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 md:col-span-2">
-                    <span class="text-xs text-slate-400 block uppercase font-semibold">Residential Address</span>
-                    <span class="text-sm font-bold text-slate-900">${currentUser.address}</span>
-                </div>
-            `;
+        // Password Show/Hide Toggle Helpers
+        function setupPasswordToggle(inputId, toggleBtnId) {
+            const input = document.getElementById(inputId);
+            const btn = document.getElementById(toggleBtnId);
+            if (input && btn) {
+                btn.addEventListener('click', () => {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
+                });
+            }
         }
 
-        // Event Listeners Setup
+        // Event Listeners Initialization
         document.addEventListener('DOMContentLoaded', () => {
-            initStorage();
             updateNavAuthUI();
+            if (getCurrentUser()) {
+                switchView('dashboard');
+            } else {
+                switchView('landing');
+            }
 
-            // Nav Clicks
-            document.getElementById('nav-logo').addEventListener('click', () => showSection('landing'));
-            document.getElementById('nav-btn-home').addEventListener('click', () => showSection('landing'));
-            document.getElementById('nav-btn-dashboard').addEventListener('click', () => showSection('dashboard'));
-            document.getElementById('nav-btn-profile').addEventListener('click', () => showSection('profile'));
-            document.getElementById('nav-btn-transfer').addEventListener('click', () => showSection('transfer'));
-            document.getElementById('nav-btn-receive').addEventListener('click', () => showSection('receive'));
-            document.getElementById('nav-btn-support').addEventListener('click', () => showSection('support'));
+            // Password toggles setup
+            setupPasswordToggle('login-password', 'toggle-login-password');
+            setupPasswordToggle('signup-password', 'toggle-signup-password');
 
-            // Mobile Nav Clicks
-            document.getElementById('mob-nav-home').addEventListener('click', () => showSection('landing'));
-            document.getElementById('mob-nav-dashboard').addEventListener('click', () => showSection('dashboard'));
-            document.getElementById('mob-nav-profile').addEventListener('click', () => showSection('profile'));
-            document.getElementById('mob-nav-transfer').addEventListener('click', () => showSection('transfer'));
-            document.getElementById('mob-nav-receive').addEventListener('click', () => showSection('receive'));
-            document.getElementById('mob-nav-support').addEventListener('click', () => showSection('support'));
+            // Navigation Buttons
+            const navMap = {
+                'home': 'landing', 'mob-nav-home': 'landing', 'nav-logo': 'landing',
+                'dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard',
+                'profile': 'profile', 'mob-nav-profile': 'profile',
+                'transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-dash-transfer': 'transfer',
+                'receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive',
+                'support': 'support', 'mob-nav-support': 'support'
+            };
 
-            // Hero & Header Open Buttons
-            document.getElementById('btn-open-login').addEventListener('click', () => openModal('signin'));
-            document.getElementById('btn-hero-login').addEventListener('click', () => openModal('signin'));
-            document.getElementById('close-signin-modal').addEventListener('click', () => closeModal('signin'));
-            
-            document.getElementById('btn-open-signup').addEventListener('click', () => openModal('signup'));
-            document.getElementById('btn-hero-signup').addEventListener('click', () => openModal('signup'));
-            document.getElementById('close-signup-modal').addEventListener('click', () => closeModal('signup'));
-
-            // Switch between modals
-            document.getElementById('switch-to-signup').addEventListener('click', () => {
-                closeModal('signin');
-                openModal('signup');
+            Object.keys(navMap).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('click', () => {
+                        const view = navMap[id];
+                        if (view === 'dashboard' || view === 'profile' || view === 'transfer' || view === 'receive') {
+                            if (!getCurrentUser()) {
+                                showToast('Please sign in or open an account to access banking services.');
+                                document.getElementById('modal-login').classList.remove('hidden');
+                                return;
+                            }
+                        }
+                        switchView(view);
+                    });
+                }
             });
-            document.getElementById('switch-to-signin').addEventListener('click', () => {
-                closeModal('signup');
-                openModal('signin');
+
+            // Modals Triggers
+            const modalLogin = document.getElementById('modal-login');
+            const modalSignup = document.getElementById('modal-signup');
+
+            document.getElementById('btn-open-login').addEventListener('click', () => modalLogin.classList.remove('hidden'));
+            document.getElementById('btn-hero-login').addEventListener('click', () => modalLogin.classList.remove('hidden'));
+            document.getElementById('close-login').addEventListener('click', () => modalLogin.classList.add('hidden'));
+
+            document.getElementById('btn-open-signup').addEventListener('click', () => modalSignup.classList.remove('hidden'));
+            document.getElementById('btn-hero-signup').addEventListener('click', () => modalSignup.classList.remove('hidden'));
+            document.getElementById('close-signup').addEventListener('click', () => modalSignup.classList.add('hidden'));
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
             });
 
             // Logout
             document.getElementById('btn-logout').addEventListener('click', () => {
-                clearActiveUserSession();
+                localStorage.removeItem('cb_current_user');
                 updateNavAuthUI();
-                showSection('landing');
-                showToast('Successfully signed out.', 'success');
-            });
-
-            // Mobile menu toggle
-            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-                const menu = document.getElementById('mobile-menu');
-                menu.classList.toggle('hidden');
-            });
-
-            // Dashboard internal buttons
-            document.getElementById('btn-dash-transfer').addEventListener('click', () => showSection('transfer'));
-            document.getElementById('btn-dash-receive').addEventListener('click', () => showSection('receive'));
-            document.getElementById('btn-refresh-tx').addEventListener('click', () => {
-                renderDashboard();
-                showToast('Transactions refreshed.', 'success');
+                switchView('landing');
+                showToast('Successfully logged out.', 'success');
             });
 
             // Sign In Form Submission
-            document.getElementById('form-signin').addEventListener('submit', (e) => {
+            document.getElementById('form-login').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const email = document.getElementById('signin-email').value.trim();
-                const pass = document.getElementById('signin-password').value;
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
 
                 const users = getUsers();
-                const user = users.find(u => u.email === email && u.password === pass);
+                const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
 
-                if (user) {
-                    setActiveUserSession(user.email);
+                if (found) {
+                    setCurrentUser(found);
+                    modalLogin.classList.add('hidden');
                     updateNavAuthUI();
-                    closeModal('signin');
-                    showSection('dashboard');
-                    showToast(`Welcome back, ${user.firstName}!`, 'success');
+                    switchView('dashboard');
+                    showToast(`Welcome back, ${found.name}!`, 'success');
                 } else {
-                    showToast('Invalid email or password.', 'error');
+                    showToast('Invalid email or password. Please check your credentials.');
                 }
             });
 
             // Sign Up Form Submission
             document.getElementById('form-signup').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const firstName = document.getElementById('signup-firstname').value.trim();
-                const lastName = document.getElementById('signup-lastname').value.trim();
+                const name = document.getElementById('signup-name').value.trim();
                 const email = document.getElementById('signup-email').value.trim();
                 const phone = document.getElementById('signup-phone').value.trim();
                 const sin = document.getElementById('signup-sin').value.trim();
@@ -806,103 +735,73 @@
                 const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
                 const password = document.getElementById('signup-password').value;
 
+                if (!name || !email || !password) {
+                    showToast('Please fill in all required fields.');
+                    return;
+                }
+
                 let users = getUsers();
-                if (users.some(u => u.email === email)) {
-                    showToast('An account with this email already exists.', 'error');
+                if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+                    showToast('An account with this email already exists. Please sign in.');
                     return;
                 }
 
                 const newUser = {
-                    firstName,
-                    lastName,
-                    email,
-                    phone,
-                    sin: sin || '•••-•••-192',
-                    address,
-                    password,
-                    chequingBalance: deposit,
-                    savingsBalance: 100.00,
+                    name, email, phone, sin, address, deposit, password,
+                    date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
                     transactions: [
-                        { desc: "Initial Account Opening Deposit", category: "Deposit", date: "Today", amount: deposit, type: "credit" }
+                        { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}` },
+                        { desc: 'Welcome Bonus Reward', cat: 'Bonus', date: 'Today', amount: '+$25.00' }
                     ]
                 };
 
                 users.push(newUser);
                 saveUsers(users);
-                setActiveUserSession(email);
+                setCurrentUser(newUser);
+
+                modalSignup.classList.add('hidden');
                 updateNavAuthUI();
-                closeModal('signup');
-                showSection('dashboard');
+                switchView('dashboard');
                 showToast('Account successfully created and verified!', 'success');
             });
 
-            // Quick Transfer
-            document.getElementById('form-quick-transfer').addEventListener('submit', (e) => {
+            // Transfer Form Submission
+            document.getElementById('transfer-form').addEventListener('submit', (e) => {
                 e.preventDefault();
-                if (!currentUser) return;
-                const amount = parseFloat(document.getElementById('quick-amount').value);
-                const recipient = document.getElementById('quick-recipient').value;
+                const recipient = document.getElementById('transfer-recipient').value;
+                const amount = parseFloat(document.getElementById('transfer-amount').value);
+                const user = getCurrentUser();
 
-                if (amount > currentUser.chequingBalance) {
-                    showToast('Insufficient funds in everyday chequing.', 'error');
+                if (!user || user.deposit < amount) {
+                    showToast('Insufficient available balance for this transfer.');
                     return;
                 }
 
-                currentUser.chequingBalance -= amount;
-                currentUser.transactions.unshift({
-                    desc: `Interac e-Transfer to ${recipient}`,
-                    category: "Transfer",
-                    date: "Just now",
-                    amount: amount,
-                    type: "debit"
+                user.deposit -= amount;
+                user.transactions.unshift({
+                    desc: `e-Transfer to ${recipient}`,
+                    cat: 'Transfer',
+                    date: 'Today',
+                    amount: `-$${amount.toFixed(2)}`
                 });
 
-                // Update users in storage
+                setCurrentUser(user);
+                
+                // Update in users database as well
                 let users = getUsers();
-                users = users.map(u => u.email === currentUser.email ? currentUser : u);
+                users = users.map(u => u.email === user.email ? user : u);
                 saveUsers(users);
 
-                renderDashboard();
                 updateNavAuthUI();
-                document.getElementById('form-quick-transfer').reset();
-                showToast(`Successfully transferred $${amount.toFixed(2)} CAD!`, 'success');
+                switchView('dashboard');
+                showToast(`Successfully transferred $${amount.toFixed(2)} CAD to ${recipient}!`, 'success');
+                document.getElementById('transfer-form').reset();
             });
 
-            // Full Transfer Form
-            document.getElementById('form-full-transfer').addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (!currentUser) return;
-                const fromAcc = document.getElementById('transfer-from').value;
-                const amount = parseFloat(document.getElementById('transfer-amount').value);
-                const name = document.getElementById('transfer-name').value;
-
-                if (fromAcc === 'chequing' && amount > currentUser.chequingBalance) {
-                    showToast('Insufficient funds in chequing account.', 'error');
-                    return;
-                }
-                if (fromAcc === 'savings' && amount > currentUser.savingsBalance) {
-                    showToast('Insufficient funds in savings account.', 'error');
-                    return;
-                }
-
-                if (fromAcc === 'chequing') currentUser.chequingBalance -= amount;
-                else currentUser.savingsBalance -= amount;
-
-                currentUser.transactions.unshift({
-                    desc: `Transfer to ${name}`,
-                    category: "Transfer",
-                    date: "Just now",
-                    amount: amount,
-                    type: "debit"
-                });
-
-                let users = getUsers();
-                users = users.map(u => u.email === currentUser.email ? currentUser : u);
-                saveUsers(users);
-
-                showSection('dashboard');
-                document.getElementById('form-full-transfer').reset();
-                showToast(`Sent $${amount.toFixed(2)} CAD to ${name}!`, 'success');
+            // Copy banking details
+            document.getElementById('btn-copy-info').addEventListener('click', () => {
+                navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
+                showToast('Banking details copied to clipboard!', 'success');
             });
         });
     </script>
