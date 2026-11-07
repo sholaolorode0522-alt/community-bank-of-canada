@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Bank - Canada's Trusted Local Banking</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -16,50 +13,28 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                            950: '#172554',
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe',
+                            500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+                            800: '#1e40af', 900: '#1e3a8a', 950: '#172554',
                         }
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
     </script>
     <style>
-        .blue-gradient {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
-        }
-        .card-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-        }
-        /* Prevent background scroll when modal is open */
-        body.modal-open {
-            overflow: hidden;
-        }
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #94a3b8;
-            border-radius: 4px;
-        }
+        .blue-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%); }
+        .card-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+        body.modal-open { overflow: hidden; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
     </style>
 </head>
 <body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
-    <!-- Toast Notification Container -->
+
+    <!-- Toast -->
     <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
     <!-- NAVBAR -->
@@ -74,50 +49,65 @@
                     <span class="text-xs text-brand-200 font-medium tracking-wide">CANADA</span>
                 </div>
             </div>
+
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <button id="nav-btn-home" class="hover:text-brand-200 transition-colors py-2">Home</button>
                 <button id="nav-btn-dashboard" class="hover:text-brand-200 transition-colors py-2">Dashboard</button>
-                <button id="nav-btn-profile" class="hover:text-brand-200 transition-colors py-2 hidden">Profile & Info</button>
                 <button id="nav-btn-transfer" class="hover:text-brand-200 transition-colors py-2">Transfer</button>
                 <button id="nav-btn-receive" class="hover:text-brand-200 transition-colors py-2">Receive</button>
                 <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2">Customer Care</button>
             </nav>
+
             <div class="flex items-center space-x-4">
+                <!-- Guest buttons -->
                 <div id="nav-guest-actions" class="flex items-center space-x-3">
                     <button id="btn-open-login" class="text-sm font-semibold hover:text-brand-200 px-3 py-2 transition-colors">Sign In</button>
-                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all transform hover:-translate-y-0.5">Open Account</button>
+                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all">Open Account</button>
                 </div>
-                
-                <div id="nav-user-actions" class="hidden flex items-center space-x-4">
-                    <div class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700">
-                        <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">
-                            JD
-                        </div>
+
+                <!-- Logged-in user (Profile dropdown) -->
+                <div id="nav-user-actions" class="hidden relative">
+                    <button id="profile-menu-btn" class="flex items-center space-x-3 bg-brand-800 hover:bg-brand-700 px-3 py-1.5 rounded-full border border-brand-700 transition-colors">
+                        <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">JD</div>
                         <span class="text-xs font-semibold text-white hidden sm:inline" id="user-display-name">John Doe</span>
-                    </div>
-                    <button id="btn-logout" class="text-xs text-brand-200 hover:text-white bg-brand-800 hover:bg-red-600 p-2.5 rounded-lg transition-colors" title="Log Out">
-                        <i class="fa-solid fa-right-from-bracket text-base"></i>
+                        <i class="fa-solid fa-chevron-down text-xs text-brand-200"></i>
                     </button>
+
+                    <!-- Dropdown -->
+                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50">
+                        <div class="px-4 py-3 border-b border-slate-100">
+                            <p class="text-sm font-semibold text-slate-800" id="dropdown-name">John Doe</p>
+                            <p class="text-xs text-slate-500" id="dropdown-email">john@example.com</p>
+                        </div>
+                        <button id="btn-go-profile" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3">
+                            <i class="fa-solid fa-user text-brand-600 w-4"></i> Profile & Settings
+                        </button>
+                        <button id="btn-logout" class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3">
+                            <i class="fa-solid fa-right-from-bracket w-4"></i> Log Out
+                        </button>
+                    </div>
                 </div>
-                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-200 focus:outline-none p-2">
+
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-200 p-2">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
+
+        <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-2">
             <button id="mob-nav-home" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
             <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
-            <button id="mob-nav-profile" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Info</button>
+            <button id="mob-nav-profile" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Settings</button>
             <button id="mob-nav-transfer" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
             <button id="mob-nav-receive" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
             <button id="mob-nav-support" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
         </div>
     </header>
 
-    <!-- MAIN CONTENT AREA -->
     <main class="flex-grow">
-        
-        <!-- SECTION 1: LANDING PAGE -->
+
+        <!-- LANDING -->
         <section id="section-landing" class="view-section">
             <div class="blue-gradient text-white py-20 lg:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
                 <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
@@ -133,19 +123,18 @@
                             Experience zero-fee everyday chequing, high-interest savings, and instant Interac e-Transfers—backed by 24/7 Canadian customer care.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all text-center">
+                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all">
                                 Open an Account Today
                             </button>
-                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all text-center">
+                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all">
                                 Sign In to Online Banking
                             </button>
                         </div>
                     </div>
 
-                    <!-- ADVERTISEMENT / DEMO CARD -->
+                    <!-- Advert Card -->
                     <div class="relative flex justify-center">
                         <div class="w-full max-w-md card-gradient rounded-2xl p-6 text-white shadow-2xl border border-white/20 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative overflow-hidden">
-                            <!-- Advert badge -->
                             <div class="absolute top-3 right-3 bg-amber-400 text-amber-950 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">
                                 Advertisement
                             </div>
@@ -173,7 +162,6 @@
                 </div>
             </div>
 
-            <!-- Features Grid -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">Everything You Need to Manage Your Money</h2>
@@ -181,15 +169,88 @@
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
-                        <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl mb-6">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </div>
+                        <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-paper-plane"></i></div>
                         <h3 class="text-xl font-bold text-slate-900 mb-2">Instant Transfers</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Send money instantly across Canada using Interac e-Transfer or direct account transfers with zero hidden fees.
-                        </p>
+                        <p class="text-slate-600 text-sm leading-relaxed">Send money instantly across Canada using Interac e-Transfer or direct account transfers with zero hidden fees.</p>
                     </div>
                     <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
-                        <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl mb-6">
-                            <i class="fa-solid fa-shield-halved"></i>
+                        <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Canadian Protection</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Deposits are protected under CDIC insurance up to $100,000, guarded by bank-grade encryption.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-headset"></i></div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">24/7 Local Support</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Connect directly with our Canadian customer care hotline in Toronto, Montreal, or Vancouver anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section id="section-dashboard" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+            <div class="blue-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="space-y-1">
+                        <div class="text-xs uppercase tracking-wider font-semibold text-brand-200">Online Banking Overview</div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
+                        <p class="text-brand-100 text-sm">Account Status: <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span></p>
+                    </div>
+
+                    <!-- Total Balance + Eye toggle -->
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 min-w-[220px]">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="text-xs text-brand-200 font-medium uppercase tracking-wider">Total Available Balance</div>
+                            <button id="toggle-balance-btn" class="text-brand-200 hover:text-white transition-colors" title="Show / Hide balance">
+                                <i class="fa-solid fa-eye text-sm" id="balance-eye-icon"></i>
+                            </button>
                         </div>
+                        <div class="text-3xl font-extrabold tracking-tight mt-1" id="dash-main-balance">$0.00</div>
+                        <div class="text-xs text-brand-200 mt-1">CAD • All Accounts</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 mt-6">
+                    <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
+                    </button>
+                    <button id="btn-dash-receive" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-qrcode"></i> Receive
+                    </button>
+                </div>
+            </div>
+
+            <!-- Account cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">Everyday Chequing</p>
+                            <p class="text-xs text-slate-400">Acc # •••• 4892</p>
+                        </div>
+                        <span class="w-10 h-10 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-wallet"></i></span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight balance-value" id="chequing-balance-display">$0.00</div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+                        <span>Available Balance</span>
+                        <span class="font-semibold text-slate-700">CAD</span>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">High-Interest Savings</p>
+                            <p class="text-xs text-slate-400">Acc # •••• 9104</p>
+                        </div>
+                        <span class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-piggy-bank"></i></span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight balance-value" id="savings-balance-display">$8,300.50</div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+                        <span>Earn 3.50% APY</span>
+                        <span class="font-semibold text-slate-700">CAD</span>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">Rewards Visa Card</p>
