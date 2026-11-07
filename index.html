@@ -57,7 +57,7 @@
 <body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
 
     <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
     <!-- NAVBAR -->
     <header class="sticky top-0 z-40 bg-brand-900 text-white shadow-md">
@@ -75,12 +75,12 @@
 
             <!-- Desktop Nav Items -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <button id="nav-btn-home" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
-                <button id="nav-btn-dashboard" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
-                <button id="nav-btn-profile" class="hover:text-brand-200 transition-colors py-2 hidden cursor-pointer">Profile & Info</button>
-                <button id="nav-btn-transfer" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
-                <button id="nav-btn-receive" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
-                <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
+                <button data-target="landing" class="nav-link hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
+                <button data-target="dashboard" class="nav-link hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
+                <button data-target="profile" class="nav-link nav-auth-dependent hover:text-brand-200 transition-colors py-2 hidden cursor-pointer">Profile & Info</button>
+                <button data-target="transfer" class="nav-link hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
+                <button data-target="receive" class="nav-link hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
+                <button data-target="support" class="nav-link hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
             </nav>
 
             <!-- Auth Buttons / User Profile -->
@@ -91,7 +91,7 @@
                 </div>
                 
                 <div id="nav-user-actions" class="hidden flex items-center space-x-4">
-                    <div class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer" id="nav-profile-trigger">
+                    <div class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer nav-link" data-target="profile">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">
                             JD
                         </div>
@@ -111,12 +111,12 @@
 
         <!-- Mobile Navigation Drawer -->
         <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-2">
-            <button id="mob-nav-home" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
-            <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
-            <button id="mob-nav-profile" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Info</button>
-            <button id="mob-nav-transfer" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
-            <button id="mob-nav-receive" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
-            <button id="mob-nav-support" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
+            <button data-target="landing" class="nav-link block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
+            <button data-target="dashboard" class="nav-link block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
+            <button data-target="profile" class="nav-link nav-auth-dependent block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Info</button>
+            <button data-target="transfer" class="nav-link block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
+            <button data-target="receive" class="nav-link block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
+            <button data-target="support" class="nav-link block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
         </div>
     </header>
 
@@ -148,7 +148,7 @@
                         </div>
                     </div>
 
-                    <!-- ADVERTISEMENT CARD VISUAL -->
+                    <!-- PROMOTIONAL ADVERTISEMENT CARD -->
                     <div class="relative flex justify-center">
                         <div class="w-full max-w-md card-gradient rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-400/30 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative overflow-hidden">
                             <div class="absolute -right-12 top-6 bg-amber-400 text-slate-900 font-extrabold text-[10px] tracking-widest uppercase py-1 px-12 rotate-45 shadow">
@@ -232,10 +232,10 @@
                     <p class="text-brand-100 text-sm">Account Status: <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span></p>
                 </div>
                 <div class="flex items-center gap-3 w-full md:w-auto">
-                    <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                    <button data-target="transfer" class="nav-link flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
                     </button>
-                    <button id="btn-dash-receive" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
+                    <button data-target="receive" class="nav-link flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-qrcode"></i> Receive
                     </button>
                 </div>
@@ -536,7 +536,7 @@
 
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
-        // Modal Open / Close Handlers (Locks background scroll)
+        // Modal Handlers with background scroll locking
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
@@ -553,13 +553,13 @@
             }
         }
 
-        // Toast Helper
+        // Toast Notification System
         function showToast(message, type = 'error') {
             const container = document.getElementById('toast-container');
             if (!container) return;
             const toast = document.createElement('div');
             const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
-            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-xl text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
             toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
@@ -569,7 +569,7 @@
             }, 4000);
         }
 
-        // App Data Management
+        // Database Helpers
         function getUsers() {
             return JSON.parse(localStorage.getItem('cb_users') || '[]');
         }
@@ -583,7 +583,7 @@
             localStorage.setItem('cb_current_user', JSON.stringify(user));
         }
 
-        // Section View Switcher
+        // View Controller
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
             const target = document.getElementById(`section-${viewName}`);
@@ -596,19 +596,18 @@
             if (mobileMenu) mobileMenu.classList.add('hidden');
         }
 
-        // Sync Nav Bar and Dashboard Balances
+        // Auth UI State Sync
         function updateNavAuthUI() {
             const user = getCurrentUser();
             const guestActions = document.getElementById('nav-guest-actions');
             const userActions = document.getElementById('nav-user-actions');
-            const profileNavBtns = document.querySelectorAll('#nav-btn-profile, #mob-nav-profile');
+            const authDependentNavs = document.querySelectorAll('.nav-auth-dependent');
 
             if (user) {
                 if (guestActions) guestActions.classList.add('hidden');
                 if (userActions) userActions.classList.remove('hidden');
-                profileNavBtns.forEach(btn => btn.classList.remove('hidden'));
-                
-                // Initials & Username
+                authDependentNavs.forEach(el => el.classList.remove('hidden'));
+
                 const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'JD';
                 const avatarEl = document.getElementById('user-avatar-initials');
                 const displayNameEl = document.getElementById('user-display-name');
@@ -617,15 +616,13 @@
                 if (avatarEl) avatarEl.textContent = initials;
                 if (displayNameEl) displayNameEl.textContent = user.name;
                 if (welcomeEl) welcomeEl.textContent = `Welcome back, ${user.name}!`;
-                
-                // Set Chequing Balance
+
                 const deposit = parseFloat(user.deposit || 500);
                 const chequingDisplay = document.getElementById('chequing-balance-display');
                 if (chequingDisplay) {
                     chequingDisplay.textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
                 }
-                
-                // Profile Section Details
+
                 const setElText = (id, val) => {
                     const el = document.getElementById(id);
                     if (el) el.textContent = val;
@@ -642,7 +639,7 @@
             } else {
                 if (guestActions) guestActions.classList.remove('hidden');
                 if (userActions) userActions.classList.add('hidden');
-                profileNavBtns.forEach(btn => btn.classList.add('hidden'));
+                authDependentNavs.forEach(el => el.classList.add('hidden'));
             }
         }
 
@@ -664,7 +661,7 @@
             `).join('');
         }
 
-        // Show/Hide Password Eye Toggle
+        // Password Show/Hide Toggle
         function setupPasswordToggle(inputId, toggleBtnId) {
             const input = document.getElementById(inputId);
             const btn = document.getElementById(toggleBtnId);
@@ -677,7 +674,7 @@
             }
         }
 
-        // Event Setup on DOM Ready
+        // Main Initialization on DOM Content Loaded
         document.addEventListener('DOMContentLoaded', () => {
             updateNavAuthUI();
             if (getCurrentUser()) {
@@ -689,39 +686,31 @@
             setupPasswordToggle('login-password', 'toggle-login-password');
             setupPasswordToggle('signup-password', 'toggle-signup-password');
 
-            // Navigation Map with Safe Element Checks
-            const navMap = {
-                'nav-btn-home': 'landing', 'mob-nav-home': 'landing', 'nav-logo': 'landing',
-                'nav-btn-dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard',
-                'nav-btn-profile': 'profile', 'mob-nav-profile': 'profile', 'nav-profile-trigger': 'profile',
-                'nav-btn-transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-dash-transfer': 'transfer',
-                'nav-btn-receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive',
-                'nav-btn-support': 'support', 'mob-nav-support': 'support'
-            };
-
-            Object.keys(navMap).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.addEventListener('click', () => {
-                        const view = navMap[id];
-                        if (['dashboard', 'profile', 'transfer', 'receive'].includes(view)) {
-                            if (!getCurrentUser()) {
-                                showToast('Please sign in or open an account to access banking services.');
-                                openModal('modal-login');
-                                return;
-                            }
+            // Unified Nav Link Handlers
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const view = btn.getAttribute('data-target');
+                    if (['dashboard', 'profile', 'transfer', 'receive'].includes(view)) {
+                        if (!getCurrentUser()) {
+                            showToast('Please sign in or open an account to access banking services.');
+                            openModal('modal-login');
+                            return;
                         }
-                        switchView(view);
-                    });
-                }
+                    }
+                    switchView(view);
+                });
             });
 
-            // Promotion apply buttons
+            // Logo Click
+            const logo = document.getElementById('nav-logo');
+            if (logo) logo.addEventListener('click', () => switchView('landing'));
+
+            // Ad Apply Buttons
             document.querySelectorAll('.btn-ad-apply').forEach(btn => {
                 btn.addEventListener('click', () => openModal('modal-signup'));
             });
 
-            // Modal Listeners
+            // Modals Triggers
             const attachClick = (id, handler) => {
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('click', handler);
@@ -749,7 +738,7 @@
                 showToast('Successfully logged out.', 'success');
             });
 
-            // Login Handler
+            // Login Form Submit
             const loginForm = document.getElementById('form-login');
             if (loginForm) {
                 loginForm.addEventListener('submit', (e) => {
@@ -772,7 +761,7 @@
                 });
             }
 
-            // Sign Up Handler
+            // Signup Form Submit
             const signupForm = document.getElementById('form-signup');
             if (signupForm) {
                 signupForm.addEventListener('submit', (e) => {
@@ -816,7 +805,7 @@
                 });
             }
 
-            // Transfer Handler
+            // Transfer Form Submit
             const transferForm = document.getElementById('transfer-form');
             if (transferForm) {
                 transferForm.addEventListener('submit', (e) => {
