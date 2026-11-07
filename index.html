@@ -496,4 +496,334 @@
                         <input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
                     </div>
                 </div>
-                <div class="grid grid-cols
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label>
+                        <input type="tel" id="signup-phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="(416) 555-0192">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Social Insurance No. (SIN)</label>
+                        <input type="text" id="signup-sin" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123-456-789">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Residential Address</label>
+                    <input type="text" id="signup-address" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123 Bay Street, Toronto, ON">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label>
+                        <input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                            <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                                <i class="fa-solid fa-eye text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">
+                    Create Account & Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // Modal Open / Close Scroll Locker Helpers
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.classList.add('overflow-hidden'); // Lock background scrolling
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.classList.remove('overflow-hidden'); // Restore background scrolling
+        }
+
+        // Toast Helper
+        function showToast(message, type = 'error') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
+            toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // App State & Database
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('cb_users') || '[]');
+        }
+        function saveUsers(users) {
+            localStorage.setItem('cb_users', JSON.stringify(users));
+        }
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('cb_current_user') || 'null');
+        }
+        function setCurrentUser(user) {
+            localStorage.setItem('cb_current_user', JSON.stringify(user));
+        }
+
+        // Navigation View Switching
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById(`section-${viewName}`);
+            if (target) target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Sync Nav & Display user details across app
+        function updateNavAuthUI() {
+            const user = getCurrentUser();
+            const guestActions = document.getElementById('nav-guest-actions');
+            const userActions = document.getElementById('nav-user-actions');
+            const profileNavBtns = document.querySelectorAll('#nav-btn-profile, #mob-nav-profile');
+
+            if (user) {
+                guestActions.classList.add('hidden');
+                userActions.classList.remove('hidden');
+                profileNavBtns.forEach(btn => btn.classList.remove('hidden'));
+                
+                // Initials & name
+                const initials = user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                document.getElementById('user-avatar-initials').textContent = initials;
+                document.getElementById('user-display-name').textContent = user.name;
+                document.getElementById('dash-welcome-text').textContent = `Welcome back, ${user.name}!`;
+                
+                // Set Header Balance right next to name
+                const deposit = parseFloat(user.deposit || 500);
+                const formattedBalance = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})} CAD`;
+                document.getElementById('header-balance-display').textContent = formattedBalance;
+                
+                // Profile view info
+                document.getElementById('profile-name').textContent = user.name;
+                document.getElementById('profile-email').textContent = user.email;
+                document.getElementById('profile-phone').textContent = user.phone;
+                document.getElementById('profile-sin').textContent = user.sin;
+                document.getElementById('profile-address').textContent = user.address;
+                document.getElementById('profile-deposit').textContent = `$${deposit.toFixed(2)} CAD`;
+                document.getElementById('profile-date').textContent = user.date || 'Today';
+
+                // Render transactions
+                renderTransactions(user);
+            } else {
+                guestActions.classList.remove('hidden');
+                userActions.classList.add('hidden');
+                profileNavBtns.forEach(btn => btn.classList.add('hidden'));
+            }
+        }
+
+        function renderTransactions(user) {
+            const tbody = document.getElementById('transaction-list');
+            const txs = user.transactions || [
+                { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(user.deposit || 500).toFixed(2)}` },
+                { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45' },
+                { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20' }
+            ];
+            tbody.innerHTML = txs.map(t => `
+                <tr class="hover:bg-slate-50/50">
+                    <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
+                    <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
+                    <td class="py-3.5 text-slate-500">${t.date}</td>
+                    <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
+                </tr>
+            `).join('');
+        }
+
+        // Password Show/Hide Toggle
+        function setupPasswordToggle(inputId, toggleBtnId) {
+            const input = document.getElementById(inputId);
+            const btn = document.getElementById(toggleBtnId);
+            if (input && btn) {
+                btn.addEventListener('click', () => {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
+                });
+            }
+        }
+
+        // Application Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            updateNavAuthUI();
+            if (getCurrentUser()) {
+                switchView('dashboard');
+            } else {
+                switchView('landing');
+            }
+
+            // Password toggles setup
+            setupPasswordToggle('login-password', 'toggle-login-password');
+            setupPasswordToggle('signup-password', 'toggle-signup-password');
+
+            // Navigation Buttons Mapping
+            const navMap = {
+                'home': 'landing', 'mob-nav-home': 'landing', 'nav-logo': 'landing',
+                'dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard',
+                'profile': 'profile', 'mob-nav-profile': 'profile', 'nav-profile-trigger': 'profile',
+                'transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-dash-transfer': 'transfer',
+                'receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive',
+                'support': 'support', 'mob-nav-support': 'support'
+            };
+
+            Object.keys(navMap).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('click', () => {
+                        const view = navMap[id];
+                        if (view === 'dashboard' || view === 'profile' || view === 'transfer' || view === 'receive') {
+                            if (!getCurrentUser()) {
+                                showToast('Please sign in or open an account to access banking services.');
+                                openModal('modal-login');
+                                return;
+                            }
+                        }
+                        switchView(view);
+                    });
+                }
+            });
+
+            // Advert Apply Button Trigger
+            document.querySelectorAll('.btn-ad-apply').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    openModal('modal-signup');
+                });
+            });
+
+            // Modal Trigger Event Listeners
+            document.getElementById('btn-open-login').addEventListener('click', () => openModal('modal-login'));
+            document.getElementById('btn-hero-login').addEventListener('click', () => openModal('modal-login'));
+            document.getElementById('close-login').addEventListener('click', () => closeModal('modal-login'));
+
+            document.getElementById('btn-open-signup').addEventListener('click', () => openModal('modal-signup'));
+            document.getElementById('btn-hero-signup').addEventListener('click', () => openModal('modal-signup'));
+            document.getElementById('close-signup').addEventListener('click', () => closeModal('modal-signup'));
+
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+
+            // Logout Handler
+            document.getElementById('btn-logout').addEventListener('click', () => {
+                localStorage.removeItem('cb_current_user');
+                updateNavAuthUI();
+                switchView('landing');
+                showToast('Successfully logged out.', 'success');
+            });
+
+            // Sign In Form Submit
+            document.getElementById('form-login').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+
+                const users = getUsers();
+                const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+
+                if (found) {
+                    setCurrentUser(found);
+                    closeModal('modal-login');
+                    updateNavAuthUI();
+                    switchView('dashboard');
+                    showToast(`Welcome back, ${found.name}!`, 'success');
+                } else {
+                    showToast('Invalid email or password. Please check your credentials.');
+                }
+            });
+
+            // Sign Up Form Submit
+            document.getElementById('form-signup').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value.trim();
+                const email = document.getElementById('signup-email').value.trim();
+                const phone = document.getElementById('signup-phone').value.trim();
+                const sin = document.getElementById('signup-sin').value.trim();
+                const address = document.getElementById('signup-address').value.trim();
+                const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
+                const password = document.getElementById('signup-password').value;
+
+                if (!name || !email || !password) {
+                    showToast('Please fill in all required fields.');
+                    return;
+                }
+
+                let users = getUsers();
+                if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+                    showToast('An account with this email already exists. Please sign in.');
+                    return;
+                }
+
+                const newUser = {
+                    name, email, phone, sin, address, deposit, password,
+                    date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                    transactions: [
+                        { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}` },
+                        { desc: 'Welcome Bonus Offer', cat: 'Bonus', date: 'Today', amount: '+$250.00' }
+                    ]
+                };
+
+                users.push(newUser);
+                saveUsers(users);
+                setCurrentUser(newUser);
+
+                closeModal('modal-signup');
+                updateNavAuthUI();
+                switchView('dashboard');
+                showToast('Account successfully created and verified!', 'success');
+            });
+
+            // Transfer Form Submit
+            document.getElementById('transfer-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const recipient = document.getElementById('transfer-recipient').value;
+                const amount = parseFloat(document.getElementById('transfer-amount').value);
+                const user = getCurrentUser();
+
+                if (!user || user.deposit < amount) {
+                    showToast('Insufficient available balance for this transfer.');
+                    return;
+                }
+
+                user.deposit -= amount;
+                user.transactions.unshift({
+                    desc: `e-Transfer to ${recipient}`,
+                    cat: 'Transfer',
+                    date: 'Today',
+                    amount: `-$${amount.toFixed(2)}`
+                });
+
+                setCurrentUser(user);
+                
+                let users = getUsers();
+                users = users.map(u => u.email === user.email ? user : u);
+                saveUsers(users);
+
+                updateNavAuthUI();
+                switchView('dashboard');
+                showToast(`Successfully transferred $${amount.toFixed(2)} CAD to ${recipient}!`, 'success');
+                document.getElementById('transfer-form').reset();
+            });
+
+            // Copy banking details
+            document.getElementById('btn-copy-info').addEventListener('click', () => {
+                navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
+                showToast('Banking details copied to clipboard!', 'success');
+            });
+        });
+    </script>
+</body>
+</html>
