@@ -148,10 +148,9 @@
                         </div>
                     </div>
 
-                    <!-- ADVERTISEMENT CARD VISUAL (Clear Commercial Promo Banner) -->
+                    <!-- ADVERTISEMENT CARD VISUAL -->
                     <div class="relative flex justify-center">
                         <div class="w-full max-w-md card-gradient rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-amber-400/30 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative overflow-hidden">
-                            <!-- Advert Tag Badge -->
                             <div class="absolute -right-12 top-6 bg-amber-400 text-slate-900 font-extrabold text-[10px] tracking-widest uppercase py-1 px-12 rotate-45 shadow">
                                 PROMOTION
                             </div>
@@ -162,17 +161,17 @@
                             </div>
 
                             <div class="space-y-2 mb-6">
-                                <div class="text-xs uppercase tracking-wider text-slate-300">Special Welcome Bonus</div>
-                                <div class="text-3xl font-extrabold text-amber-300">$250 CAD CASHBACK</div>
+                                <div class="text-xs uppercase tracking-wider text-slate-300">Special Welcome Offer</div>
+                                <div class="text-3xl font-extrabold text-amber-300">$250 CAD BONUS</div>
                                 <p class="text-xs text-slate-300 leading-relaxed">
-                                    Open a new Chequing Account today and earn 4.00% cash back on all grocery & transit purchases for your first 6 months.
+                                    Open a new Chequing Account today and earn up to $250 CAD cashback on all eligible grocery & transit purchases.
                                 </p>
                             </div>
 
                             <div class="pt-4 border-t border-white/10 flex items-center justify-between">
                                 <div class="text-[11px] text-slate-300">
-                                    <span class="block font-semibold text-white">$0 Annual Fee</span>
-                                    <span>No Minimum Deposit</span>
+                                    <span class="block font-semibold text-white">$0 Everyday Monthly Fee</span>
+                                    <span>Instant e-Transfers</span>
                                 </div>
                                 <button class="btn-ad-apply bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs px-4 py-2 rounded-xl transition-all shadow">
                                     Apply Offer <i class="fa-solid fa-arrow-right ml-1"></i>
@@ -226,38 +225,41 @@
 
         <!-- SECTION 2: BANKING DASHBOARD -->
         <section id="section-dashboard" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
-            
-            <!-- MAIN DASHBOARD HEADER WITH INTEGRATED ACCOUNT BALANCE -->
             <div class="blue-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div class="space-y-3">
-                    <div class="flex items-center gap-3">
-                        <span class="bg-brand-800/80 text-brand-200 text-xs font-semibold px-3 py-1 rounded-full border border-brand-700">Account Overview</span>
-                        <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl sm:text-4xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
-                        <p class="text-brand-100 text-xs sm:text-sm mt-1">Everyday Chequing Account # •••• 4892</p>
-                    </div>
-                    
-                    <!-- REAL-TIME BALANCE PLACED RIGHT IN THE NAME/HEADER SECTION -->
-                    <div class="pt-2">
-                        <div class="text-xs uppercase font-medium text-brand-200">Total Chequing Balance</div>
-                        <div class="text-3xl sm:text-5xl font-black tracking-tight text-white mt-0.5" id="header-balance-display">$0.00 CAD</div>
-                    </div>
+                <div class="space-y-2">
+                    <div class="text-xs uppercase tracking-wider font-semibold text-brand-200">Online Banking Overview</div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
+                    <p class="text-brand-100 text-sm">Account Status: <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span></p>
                 </div>
-
-                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
-                    <button id="btn-dash-transfer" class="bg-white text-brand-900 hover:bg-brand-50 px-6 py-3 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2">
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
                     </button>
-                    <button id="btn-dash-receive" class="bg-brand-800 hover:bg-brand-700 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2">
+                    <button id="btn-dash-receive" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2">
                         <i class="fa-solid fa-qrcode"></i> Receive
                     </button>
                 </div>
             </div>
 
-            <!-- Additional Account Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Balances -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">Everyday Chequing</p>
+                            <p class="text-xs text-slate-400">Acc # •••• 4892</p>
+                        </div>
+                        <span class="w-10 h-10 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-wallet"></i>
+                        </span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight" id="chequing-balance-display">$0.00</div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-500">
+                        <span>Available Balance</span>
+                        <span class="font-semibold text-slate-700">CAD</span>
+                    </div>
+                </div>
+
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-start mb-4">
                         <div>
@@ -534,15 +536,15 @@
 
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
-        // Modal Open / Close Scroll Locker Helpers
+        // Modal Open / Close Handlers (Prevents background scrolling)
         function openModal(modalId) {
             document.getElementById(modalId).classList.remove('hidden');
-            document.body.classList.add('overflow-hidden'); // Lock background scrolling
+            document.body.classList.add('overflow-hidden');
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
-            document.body.classList.remove('overflow-hidden'); // Restore background scrolling
+            document.body.classList.remove('overflow-hidden');
         }
 
         // Toast Helper
@@ -560,7 +562,7 @@
             }, 4000);
         }
 
-        // App State & Database
+        // App Data Management
         function getUsers() {
             return JSON.parse(localStorage.getItem('cb_users') || '[]');
         }
@@ -574,18 +576,17 @@
             localStorage.setItem('cb_current_user', JSON.stringify(user));
         }
 
-        // Navigation View Switching
+        // Section View Switcher
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
             const target = document.getElementById(`section-${viewName}`);
             if (target) target.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            // Close mobile menu if open
             document.getElementById('mobile-menu').classList.add('hidden');
         }
 
-        // Sync Nav & Display user details across app
+        // Sync Nav Bar and Dashboard Balances
         function updateNavAuthUI() {
             const user = getCurrentUser();
             const guestActions = document.getElementById('nav-guest-actions');
@@ -597,18 +598,17 @@
                 userActions.classList.remove('hidden');
                 profileNavBtns.forEach(btn => btn.classList.remove('hidden'));
                 
-                // Initials & name
+                // Initials & Username
                 const initials = user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
                 document.getElementById('user-avatar-initials').textContent = initials;
                 document.getElementById('user-display-name').textContent = user.name;
                 document.getElementById('dash-welcome-text').textContent = `Welcome back, ${user.name}!`;
                 
-                // Set Header Balance right next to name
+                // Set Chequing Balance
                 const deposit = parseFloat(user.deposit || 500);
-                const formattedBalance = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})} CAD`;
-                document.getElementById('header-balance-display').textContent = formattedBalance;
+                document.getElementById('chequing-balance-display').textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
                 
-                // Profile view info
+                // Profile Section Details
                 document.getElementById('profile-name').textContent = user.name;
                 document.getElementById('profile-email').textContent = user.email;
                 document.getElementById('profile-phone').textContent = user.phone;
@@ -617,7 +617,6 @@
                 document.getElementById('profile-deposit').textContent = `$${deposit.toFixed(2)} CAD`;
                 document.getElementById('profile-date').textContent = user.date || 'Today';
 
-                // Render transactions
                 renderTransactions(user);
             } else {
                 guestActions.classList.remove('hidden');
@@ -643,7 +642,7 @@
             `).join('');
         }
 
-        // Password Show/Hide Toggle
+        // Show/Hide Password Eye Toggle
         function setupPasswordToggle(inputId, toggleBtnId) {
             const input = document.getElementById(inputId);
             const btn = document.getElementById(toggleBtnId);
@@ -656,7 +655,7 @@
             }
         }
 
-        // Application Event Listeners
+        // Event Setup
         document.addEventListener('DOMContentLoaded', () => {
             updateNavAuthUI();
             if (getCurrentUser()) {
@@ -665,18 +664,17 @@
                 switchView('landing');
             }
 
-            // Password toggles setup
             setupPasswordToggle('login-password', 'toggle-login-password');
             setupPasswordToggle('signup-password', 'toggle-signup-password');
 
-            // Navigation Buttons Mapping
+            // Navigation Map
             const navMap = {
-                'home': 'landing', 'mob-nav-home': 'landing', 'nav-logo': 'landing',
-                'dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard',
-                'profile': 'profile', 'mob-nav-profile': 'profile', 'nav-profile-trigger': 'profile',
-                'transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-dash-transfer': 'transfer',
-                'receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive',
-                'support': 'support', 'mob-nav-support': 'support'
+                'nav-btn-home': 'landing', 'mob-nav-home': 'landing', 'nav-logo': 'landing',
+                'nav-btn-dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard',
+                'nav-btn-profile': 'profile', 'mob-nav-profile': 'profile', 'nav-profile-trigger': 'profile',
+                'nav-btn-transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-dash-transfer': 'transfer',
+                'nav-btn-receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive',
+                'nav-btn-support': 'support', 'mob-nav-support': 'support'
             };
 
             Object.keys(navMap).forEach(id => {
@@ -696,14 +694,12 @@
                 }
             });
 
-            // Advert Apply Button Trigger
+            // Promotion apply button
             document.querySelectorAll('.btn-ad-apply').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    openModal('modal-signup');
-                });
+                btn.addEventListener('click', () => openModal('modal-signup'));
             });
 
-            // Modal Trigger Event Listeners
+            // Modal Listeners
             document.getElementById('btn-open-login').addEventListener('click', () => openModal('modal-login'));
             document.getElementById('btn-hero-login').addEventListener('click', () => openModal('modal-login'));
             document.getElementById('close-login').addEventListener('click', () => closeModal('modal-login'));
@@ -717,7 +713,7 @@
                 document.getElementById('mobile-menu').classList.toggle('hidden');
             });
 
-            // Logout Handler
+            // Logout
             document.getElementById('btn-logout').addEventListener('click', () => {
                 localStorage.removeItem('cb_current_user');
                 updateNavAuthUI();
@@ -725,7 +721,7 @@
                 showToast('Successfully logged out.', 'success');
             });
 
-            // Sign In Form Submit
+            // Login Handler
             document.getElementById('form-login').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const email = document.getElementById('login-email').value.trim();
@@ -745,7 +741,7 @@
                 }
             });
 
-            // Sign Up Form Submit
+            // Sign Up Handler
             document.getElementById('form-signup').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const name = document.getElementById('signup-name').value.trim();
@@ -786,7 +782,7 @@
                 showToast('Account successfully created and verified!', 'success');
             });
 
-            // Transfer Form Submit
+            // Transfer Handler
             document.getElementById('transfer-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const recipient = document.getElementById('transfer-recipient').value;
