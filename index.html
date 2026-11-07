@@ -63,7 +63,7 @@
     <header class="sticky top-0 z-40 bg-brand-900 text-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
-            <div onclick="app.nav('landing')" class="flex items-center space-x-3 cursor-pointer">
+            <div id="nav-logo" class="flex items-center space-x-3 cursor-pointer">
                 <div class="w-11 h-11 bg-white text-brand-700 rounded-xl flex items-center justify-center font-extrabold text-2xl shadow-inner">
                     <i class="fa-solid fa-building-columns"></i>
                 </div>
@@ -75,32 +75,35 @@
 
             <!-- Desktop Nav Items -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <button onclick="app.nav('landing')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
-                <button onclick="app.nav('dashboard')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
-                <button id="nav-btn-profile" onclick="app.nav('profile')" class="hover:text-brand-200 transition-colors py-2 hidden cursor-pointer">Profile & Settings</button>
-                <button onclick="app.nav('transfer')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
-                <button onclick="app.nav('receive')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
-                <button onclick="app.nav('support')" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
+                <button id="nav-btn-home" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
+                <button id="nav-btn-dashboard" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
+                <button id="nav-btn-profile" class="hover:text-brand-200 transition-colors py-2 hidden cursor-pointer">Profile & Info</button>
+                <button id="nav-btn-transfer" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
+                <button id="nav-btn-receive" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
+                <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
             </nav>
 
-            <!-- Auth Buttons / User Profile -->
+            <!-- Auth Buttons / User Profile Badge -->
             <div class="flex items-center space-x-4">
                 <div id="nav-guest-actions" class="flex items-center space-x-3">
-                    <button onclick="app.openModal('modal-login')" class="text-sm font-semibold hover:text-brand-200 px-3 py-2 transition-colors cursor-pointer">Sign In</button>
-                    <button onclick="app.openModal('modal-signup')" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer">Open Account</button>
+                    <button id="btn-open-login" class="text-sm font-semibold hover:text-brand-200 px-3 py-2 transition-colors cursor-pointer">Sign In</button>
+                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all cursor-pointer">Open Account</button>
                 </div>
                 
-                <div id="nav-user-actions" class="hidden flex items-center space-x-4">
-                    <div onclick="app.nav('profile')" class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer hover:bg-brand-700 transition-colors" title="View Profile & Settings">
+                <div id="nav-user-actions" class="hidden flex items-center space-x-3">
+                    <div id="nav-profile-trigger" class="flex items-center space-x-3 bg-brand-800 px-3 py-1.5 rounded-full border border-brand-700 cursor-pointer hover:bg-brand-700 transition-colors" title="View Profile">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">
                             JD
                         </div>
                         <span class="text-xs font-semibold text-white hidden sm:inline" id="user-display-name">John Doe</span>
                     </div>
+                    <button id="btn-header-logout" class="text-xs text-brand-200 hover:text-white bg-brand-800 hover:bg-red-600 p-2.5 rounded-lg transition-colors cursor-pointer" title="Log Out">
+                        <i class="fa-solid fa-right-from-bracket text-base"></i>
+                    </button>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button onclick="app.toggleMobileMenu()" class="md:hidden text-white hover:text-brand-200 focus:outline-none p-2 cursor-pointer">
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-200 focus:outline-none p-2 cursor-pointer">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
@@ -108,12 +111,12 @@
 
         <!-- Mobile Navigation Drawer -->
         <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-3 pb-5 space-y-2">
-            <button onclick="app.nav('landing')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
-            <button onclick="app.nav('dashboard')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
-            <button id="mob-nav-profile" onclick="app.nav('profile')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Settings</button>
-            <button onclick="app.nav('transfer')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
-            <button onclick="app.nav('receive')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
-            <button onclick="app.nav('support')" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
+            <button id="mob-nav-home" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
+            <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
+            <button id="mob-nav-profile" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Info</button>
+            <button id="mob-nav-transfer" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
+            <button id="mob-nav-receive" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
+            <button id="mob-nav-support" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
         </div>
     </header>
 
@@ -136,10 +139,10 @@
                             Experience zero-fee everyday chequing, high-interest savings, and instant Interac e-Transfers—backed by 24/7 Canadian customer care.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button onclick="app.openModal('modal-signup')" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all text-center cursor-pointer">
+                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all text-center cursor-pointer">
                                 Open an Account Today
                             </button>
-                            <button onclick="app.openModal('modal-login')" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all text-center cursor-pointer">
+                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all text-center cursor-pointer">
                                 Sign In to Online Banking
                             </button>
                         </div>
@@ -170,7 +173,7 @@
                                     <span class="block font-semibold text-white">$0 Everyday Monthly Fee</span>
                                     <span>Instant e-Transfers</span>
                                 </div>
-                                <button onclick="app.openModal('modal-signup')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs px-4 py-2 rounded-xl transition-all shadow cursor-pointer">
+                                <button class="btn-ad-apply bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs px-4 py-2 rounded-xl transition-all shadow cursor-pointer">
                                     Apply Offer <i class="fa-solid fa-arrow-right ml-1"></i>
                                 </button>
                             </div>
@@ -222,7 +225,7 @@
 
         <!-- SECTION 2: BANKING DASHBOARD -->
         <section id="section-dashboard" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
-            <!-- BLUE HEADER WITH WELCOME NAME & EYE TOGGLE BALANCE -->
+            <!-- HEADER WITH BALANCE & EYE TOGGLE -->
             <div class="blue-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div class="space-y-3">
                     <div class="flex items-center gap-3">
@@ -231,34 +234,32 @@
                     </div>
                     <div>
                         <h2 class="text-2xl sm:text-4xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
-                        <p class="text-brand-100 text-xs sm:text-sm mt-0.5">Everyday Chequing Account # •••• 4892</p>
+                        <p class="text-brand-100 text-xs sm:text-sm mt-1">Everyday Chequing Account # •••• 4892</p>
                     </div>
-
-                    <!-- BALANCE IN BLUE HEADER WITH EYE ICON TOGGLE -->
+                    
+                    <!-- BALANCE WITH EYE SHOW/HIDE BUTTON -->
                     <div class="pt-2">
-                        <div class="text-xs uppercase font-semibold tracking-wider text-brand-200 flex items-center gap-2">
+                        <div class="text-xs uppercase font-medium text-brand-200 flex items-center gap-2">
                             <span>Everyday Chequing Balance</span>
-                            <button onclick="app.toggleBalanceVisibility()" id="btn-toggle-eye" class="text-brand-200 hover:text-white transition-colors cursor-pointer focus:outline-none" title="Toggle Balance Visibility">
-                                <i class="fa-solid fa-eye text-sm" id="eye-icon-display"></i>
+                            <button id="toggle-balance-eye" class="text-brand-200 hover:text-white focus:outline-none cursor-pointer">
+                                <i id="balance-eye-icon" class="fa-solid fa-eye text-sm"></i>
                             </button>
                         </div>
-                        <div class="text-3xl sm:text-5xl font-black tracking-tight text-white mt-1" id="header-balance-amount">
-                            $0.00 CAD
-                        </div>
+                        <div class="text-3xl sm:text-5xl font-black tracking-tight text-white mt-1" id="dash-header-balance">$0.00 CAD</div>
                     </div>
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
-                    <button onclick="app.nav('transfer')" class="bg-white text-brand-900 hover:bg-brand-50 px-6 py-3 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                    <button id="btn-dash-transfer" class="bg-white text-brand-900 hover:bg-brand-50 px-6 py-3 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
                     </button>
-                    <button onclick="app.nav('receive')" class="bg-brand-800 hover:bg-brand-700 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
+                    <button id="btn-dash-receive" class="bg-brand-800 hover:bg-brand-700 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-qrcode"></i> Receive
                     </button>
                 </div>
             </div>
 
-            <!-- Additional Balances Cards -->
+            <!-- Balances Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-start mb-4">
@@ -270,7 +271,7 @@
                             <i class="fa-solid fa-wallet"></i>
                         </span>
                     </div>
-                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight" id="chequing-balance-display">$0.00</div>
+                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight" id="chequing-card-balance">$0.00</div>
                     <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-500">
                         <span>Available Balance</span>
                         <span class="font-semibold text-slate-700">CAD</span>
@@ -319,7 +320,7 @@
                         <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
                         <p class="text-xs text-slate-500">Live transaction history</p>
                     </div>
-                    <button onclick="app.updateNavAuthUI()" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1 cursor-pointer">
+                    <button id="btn-refresh-tx" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1 cursor-pointer">
                         <i class="fa-solid fa-rotate-right"></i> Refresh
                     </button>
                 </div>
@@ -342,21 +343,15 @@
             </div>
         </section>
 
-        <!-- SECTION 3: USER PROFILE & SETTINGS (WITH LOGOUT BUTTON) -->
+        <!-- SECTION 3: USER PROFILE & KYC DETAILS -->
         <section id="section-profile" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-100 gap-4">
+                <div class="flex items-center justify-between pb-6 border-b border-slate-100">
                     <div>
-                        <h2 class="text-2xl font-bold text-slate-900">Account Profile & Settings</h2>
-                        <p class="text-xs text-slate-500 mt-1">All personal, contact, and security details registered with your account.</p>
+                        <h2 class="text-2xl font-bold text-slate-900">Account Profile & Verification Info</h2>
+                        <p class="text-xs text-slate-500 mt-1">All personal and security details used during account registration.</p>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span class="bg-brand-50 text-brand-700 px-3 py-1.5 rounded-full text-xs font-bold border border-brand-200">KYC Verified</span>
-                        <!-- LOGOUT BUTTON IN PROFILE -->
-                        <button onclick="app.logout()" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer">
-                            <i class="fa-solid fa-right-from-bracket"></i> Log Out
-                        </button>
-                    </div>
+                    <span class="bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-xs font-bold border border-brand-200">KYC Verified</span>
                 </div>
 
                 <div class="grid sm:grid-cols-2 gap-6 pt-6">
@@ -390,10 +385,10 @@
                     </div>
                 </div>
 
-                <!-- FOOTER LOGOUT ACTION IN PROFILE -->
+                <!-- LOGOUT BUTTON INSIDE PROFILE SETTINGS -->
                 <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
-                    <button onclick="app.logout()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all shadow cursor-pointer flex items-center gap-2">
-                        <i class="fa-solid fa-right-from-bracket"></i> Sign Out of Banking Session
+                    <button id="btn-profile-logout" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold text-sm shadow transition-colors flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket"></i> Log Out of Account
                     </button>
                 </div>
             </div>
@@ -437,7 +432,7 @@
                     <div class="flex justify-between"><span class="text-xs text-slate-500">Account Number:</span><span class="font-bold text-slate-800">•••• 4892</span></div>
                 </div>
 
-                <button onclick="app.copyBankingInfo()" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl transition-all text-sm cursor-pointer">
+                <button id="btn-copy-info" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl transition-all text-sm cursor-pointer">
                     <i class="fa-solid fa-copy mr-2"></i> Copy Banking Details
                 </button>
             </div>
@@ -485,7 +480,7 @@
     <!-- MODAL: SIGN IN -->
     <div id="modal-login" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
-            <button onclick="app.closeModal('modal-login')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
             <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
             
@@ -498,8 +493,8 @@
                     <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                     <div class="relative">
                         <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                        <button type="button" onclick="app.togglePassword('login-password', 'eye-login')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
-                            <i class="fa-solid fa-eye text-sm" id="eye-login"></i>
+                        <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
+                            <i class="fa-solid fa-eye text-sm"></i>
                         </button>
                     </div>
                 </div>
@@ -513,7 +508,7 @@
     <!-- MODAL: SIGN UP / OPEN ACCOUNT -->
     <div id="modal-signup" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
-            <button onclick="app.closeModal('modal-signup')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
             <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
             
@@ -545,14 +540,14 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label>
-                        <input type="number" id="signup-deposit" min="50" value="12450" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        <input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                         <div class="relative">
                             <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                            <button type="button" onclick="app.togglePassword('signup-password', 'eye-signup')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
-                                <i class="fa-solid fa-eye text-sm" id="eye-signup"></i>
+                            <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer">
+                                <i class="fa-solid fa-eye text-sm"></i>
                             </button>
                         </div>
                     </div>
@@ -564,56 +559,381 @@
         </div>
     </div>
 
-    <!-- GLOBAL APPLICATION LOGIC -->
+    <!-- JAVASCRIPT APP LOGIC -->
     <script>
-        window.app = {
-            isBalanceHidden: false,
+        // Balance visibility state
+        let isBalanceHidden = false;
 
-            // Toast Notifications
-            toast: function(message, type = 'error') {
-                const container = document.getElementById('toast-container');
-                if (!container) return;
-                const toast = document.createElement('div');
-                const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
-                toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
-                toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
-                container.appendChild(toast);
-                setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
-                setTimeout(() => {
-                    toast.classList.add('translate-y-2', 'opacity-0');
-                    setTimeout(() => toast.remove(), 300);
-                }, 4000);
-            },
+        // Modal Open / Close Handlers (Locks background scroll)
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        }
 
-            // Storage Helpers
-            getUsers: function() { return JSON.parse(localStorage.getItem('cb_users') || '[]'); },
-            saveUsers: function(users) { localStorage.setItem('cb_users', JSON.stringify(users)); },
-            getUser: function() { return JSON.parse(localStorage.getItem('cb_current_user') || 'null'); },
-            setUser: function(user) { localStorage.setItem('cb_current_user', JSON.stringify(user)); },
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
 
-            // Modals
-            openModal: function(id) {
+        // Toast Helper
+        function showToast(message, type = 'error') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
+            toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // App Data Management
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('cb_users') || '[]');
+        }
+        function saveUsers(users) {
+            localStorage.setItem('cb_users', JSON.stringify(users));
+        }
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('cb_current_user') || 'null');
+        }
+        function setCurrentUser(user) {
+            localStorage.setItem('cb_current_user', JSON.stringify(user));
+        }
+
+        // Section View Switcher
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById(`section-${viewName}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+        }
+
+        // Sync Nav Bar and Dashboard Balances
+        function updateNavAuthUI() {
+            const user = getCurrentUser();
+            const guestActions = document.getElementById('nav-guest-actions');
+            const userActions = document.getElementById('nav-user-actions');
+            const profileNavBtns = document.querySelectorAll('#nav-btn-profile, #mob-nav-profile');
+
+            if (user) {
+                if (guestActions) guestActions.classList.add('hidden');
+                if (userActions) userActions.classList.remove('hidden');
+                profileNavBtns.forEach(btn => btn.classList.remove('hidden'));
+                
+                // Initials & Username
+                const initials = user.name ? user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'JD';
+                const avatarEl = document.getElementById('user-avatar-initials');
+                const displayNameEl = document.getElementById('user-display-name');
+                const welcomeEl = document.getElementById('dash-welcome-text');
+
+                if (avatarEl) avatarEl.textContent = initials;
+                if (displayNameEl) displayNameEl.textContent = user.name;
+                if (welcomeEl) welcomeEl.textContent = `Welcome back, ${user.name}!`;
+                
+                // Set Chequing Balances
+                updateBalanceDisplays(user);
+                
+                // Profile Section Details
+                const setElText = (id, val) => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = val;
+                };
+                setElText('profile-name', user.name);
+                setElText('profile-email', user.email);
+                setElText('profile-phone', user.phone);
+                setElText('profile-sin', user.sin);
+                setElText('profile-address', user.address);
+                setElText('profile-deposit', `$${parseFloat(user.deposit || 500).toFixed(2)} CAD`);
+                setElText('profile-date', user.date || 'Today');
+
+                renderTransactions(user);
+            } else {
+                if (guestActions) guestActions.classList.remove('hidden');
+                if (userActions) userActions.classList.add('hidden');
+                profileNavBtns.forEach(btn => btn.classList.add('hidden'));
+            }
+        }
+
+        function updateBalanceDisplays(user) {
+            const deposit = parseFloat(user.deposit || 500);
+            const headerBalEl = document.getElementById('dash-header-balance');
+            const cardBalEl = document.getElementById('chequing-card-balance');
+            const eyeIcon = document.getElementById('balance-eye-icon');
+
+            if (isBalanceHidden) {
+                if (headerBalEl) headerBalEl.textContent = '$•••••• CAD';
+                if (cardBalEl) cardBalEl.textContent = '$••••••';
+                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye-slash text-sm';
+            } else {
+                const formatted = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
+                if (headerBalEl) headerBalEl.textContent = `${formatted} CAD`;
+                if (cardBalEl) cardBalEl.textContent = formatted;
+                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye text-sm';
+            }
+        }
+
+        function renderTransactions(user) {
+            const tbody = document.getElementById('transaction-list');
+            if (!tbody) return;
+            const txs = user.transactions || [
+                { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(user.deposit || 500).toFixed(2)}` },
+                { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45' },
+                { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20' }
+            ];
+            tbody.innerHTML = txs.map(t => `
+                <tr class="hover:bg-slate-50/50">
+                    <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
+                    <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
+                    <td class="py-3.5 text-slate-500">${t.date}</td>
+                    <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
+                </tr>
+            `).join('');
+        }
+
+        // Show/Hide Password Eye Toggle
+        function setupPasswordToggle(inputId, toggleBtnId) {
+            const input = document.getElementById(inputId);
+            const btn = document.getElementById(toggleBtnId);
+            if (input && btn) {
+                btn.addEventListener('click', () => {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
+                });
+            }
+        }
+
+        // Logout Action Routine
+        function performLogout() {
+            localStorage.removeItem('cb_current_user');
+            updateNavAuthUI();
+            switchView('landing');
+            showToast('Successfully logged out.', 'success');
+        }
+
+        // Explicit Event Wiring on DOM Ready
+        document.addEventListener('DOMContentLoaded', () => {
+            updateNavAuthUI();
+            if (getCurrentUser()) {
+                switchView('dashboard');
+            } else {
+                switchView('landing');
+            }
+
+            setupPasswordToggle('login-password', 'toggle-login-password');
+            setupPasswordToggle('signup-password', 'toggle-signup-password');
+
+            // Balance Eye Toggle Listener
+            const eyeBtn = document.getElementById('toggle-balance-eye');
+            if (eyeBtn) {
+                eyeBtn.addEventListener('click', () => {
+                    isBalanceHidden = !isBalanceHidden;
+                    const user = getCurrentUser();
+                    if (user) updateBalanceDisplays(user);
+                });
+            }
+
+            // 1. Navigation Buttons (Explicit Listeners)
+            const bindNavClick = (id, viewName) => {
                 const el = document.getElementById(id);
                 if (el) {
-                    el.classList.remove('hidden');
-                    document.body.classList.add('overflow-hidden');
+                    el.addEventListener('click', () => {
+                        if (['dashboard', 'profile', 'transfer', 'receive'].includes(viewName)) {
+                            if (!getCurrentUser()) {
+                                showToast('Please sign in or open an account to access banking services.');
+                                openModal('modal-login');
+                                return;
+                            }
+                        }
+                        switchView(viewName);
+                    });
                 }
-            },
-            closeModal: function(id) {
+            };
+
+            bindNavClick('nav-logo', 'landing');
+            bindNavClick('nav-btn-home', 'landing');
+            bindNavClick('mob-nav-home', 'landing');
+
+            bindNavClick('nav-btn-dashboard', 'dashboard');
+            bindNavClick('mob-nav-dashboard', 'dashboard');
+
+            bindNavClick('nav-btn-profile', 'profile');
+            bindNavClick('mob-nav-profile', 'profile');
+            bindNavClick('nav-profile-trigger', 'profile');
+
+            bindNavClick('nav-btn-transfer', 'transfer');
+            bindNavClick('mob-nav-transfer', 'transfer');
+            bindNavClick('btn-dash-transfer', 'transfer');
+
+            bindNavClick('nav-btn-receive', 'receive');
+            bindNavClick('mob-nav-receive', 'receive');
+            bindNavClick('btn-dash-receive', 'receive');
+
+            bindNavClick('nav-btn-support', 'support');
+            bindNavClick('mob-nav-support', 'support');
+
+            // 2. Mobile Hamburger Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // 3. Logout Handlers (Header & Profile Page)
+            const btnHeaderLogout = document.getElementById('btn-header-logout');
+            if (btnHeaderLogout) btnHeaderLogout.addEventListener('click', performLogout);
+
+            const btnProfileLogout = document.getElementById('btn-profile-logout');
+            if (btnProfileLogout) btnProfileLogout.addEventListener('click', performLogout);
+
+            // 4. Modal Triggers
+            const bindClick = (id, handler) => {
                 const el = document.getElementById(id);
-                if (el) {
-                    el.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
-                }
-            },
+                if (el) el.addEventListener('click', handler);
+            };
 
-            // Mobile Menu
-            toggleMobileMenu: function() {
-                const menu = document.getElementById('mobile-menu');
-                if (menu) menu.classList.toggle('hidden');
-            },
+            bindClick('btn-open-login', () => openModal('modal-login'));
+            bindClick('btn-hero-login', () => openModal('modal-login'));
+            bindClick('close-login', () => closeModal('modal-login'));
 
-            // Navigation
-            nav: function(viewName) {
-                const user = this.getUser();
-                if (['dashboard
+            bindClick('btn-open-signup', () => openModal('modal-signup'));
+            bindClick('btn-hero-signup', () => openModal('modal-signup'));
+            bindClick('close-signup', () => closeModal('modal-signup'));
+
+            // Promotion apply buttons
+            document.querySelectorAll('.btn-ad-apply').forEach(btn => {
+                btn.addEventListener('click', () => openModal('modal-signup'));
+            });
+
+            // 5. Login Form Submission
+            const loginForm = document.getElementById('form-login');
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('login-email').value.trim();
+                    const password = document.getElementById('login-password').value;
+
+                    const users = getUsers();
+                    const found = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+
+                    if (found) {
+                        setCurrentUser(found);
+                        closeModal('modal-login');
+                        updateNavAuthUI();
+                        switchView('dashboard');
+                        showToast(`Welcome back, ${found.name}!`, 'success');
+                        loginForm.reset();
+                    } else {
+                        showToast('Invalid email or password. Please check your credentials.');
+                    }
+                });
+            }
+
+            // 6. Sign Up Form Submission
+            const signupForm = document.getElementById('form-signup');
+            if (signupForm) {
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('signup-name').value.trim();
+                    const email = document.getElementById('signup-email').value.trim();
+                    const phone = document.getElementById('signup-phone').value.trim();
+                    const sin = document.getElementById('signup-sin').value.trim();
+                    const address = document.getElementById('signup-address').value.trim();
+                    const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
+                    const password = document.getElementById('signup-password').value;
+
+                    if (!name || !email || !password) {
+                        showToast('Please fill in all required fields.');
+                        return;
+                    }
+
+                    let users = getUsers();
+                    if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+                        showToast('An account with this email already exists. Please sign in.');
+                        return;
+                    }
+
+                    const newUser = {
+                        name, email, phone, sin, address, deposit, password,
+                        date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                        transactions: [
+                            { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}` },
+                            { desc: 'Welcome Bonus Offer', cat: 'Bonus', date: 'Today', amount: '+$250.00' }
+                        ]
+                    };
+
+                    users.push(newUser);
+                    saveUsers(users);
+                    setCurrentUser(newUser);
+
+                    closeModal('modal-signup');
+                    updateNavAuthUI();
+                    switchView('dashboard');
+                    showToast('Account successfully created and verified!', 'success');
+                    signupForm.reset();
+                });
+            }
+
+            // 7. Transfer Form Submission
+            const transferForm = document.getElementById('transfer-form');
+            if (transferForm) {
+                transferForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const recipient = document.getElementById('transfer-recipient').value;
+                    const amount = parseFloat(document.getElementById('transfer-amount').value);
+                    const user = getCurrentUser();
+
+                    if (!user || user.deposit < amount) {
+                        showToast('Insufficient available balance for this transfer.');
+                        return;
+                    }
+
+                    user.deposit -= amount;
+                    user.transactions.unshift({
+                        desc: `e-Transfer to ${recipient}`,
+                        cat: 'Transfer',
+                        date: 'Today',
+                        amount: `-$${amount.toFixed(2)}`
+                    });
+
+                    setCurrentUser(user);
+                    
+                    let users = getUsers();
+                    users = users.map(u => u.email === user.email ? user : u);
+                    saveUsers(users);
+
+                    updateNavAuthUI();
+                    switchView('dashboard');
+                    showToast(`Successfully transferred $${amount.toFixed(2)} CAD to ${recipient}!`, 'success');
+                    transferForm.reset();
+                });
+            }
+
+            // 8. Copy banking details
+            bindClick('btn-copy-info', () => {
+                navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
+                showToast('Banking details copied to clipboard!', 'success');
+            });
+        });
+    </script>
+</body>
+</html>
