@@ -36,7 +36,7 @@
 </head>
 <body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm pointer-events-none"></div>
 
     <!-- NAVBAR -->
     <header class="sticky top-0 z-[100] bg-brand-900 text-white shadow-md">
@@ -59,14 +59,14 @@
                 <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2">Customer Care</button>
             </nav>
 
-            <div class="flex items-center space-x-4">
-                <div id="nav-guest-actions" class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3">
+                <div id="nav-guest-actions" class="flex items-center space-x-2">
                     <button id="btn-open-login" class="text-sm font-semibold hover:text-brand-200 px-3 py-2 transition-colors">Sign In</button>
-                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all">Open Account</button>
+                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all">Open Account</button>
                 </div>
 
                 <div id="nav-user-actions" class="hidden relative">
-                    <button id="profile-menu-btn" class="flex items-center space-x-3 bg-brand-800 hover:bg-brand-700 px-3 py-1.5 rounded-full border border-brand-700 transition-colors">
+                    <button id="profile-menu-btn" class="flex items-center space-x-2 bg-brand-800 hover:bg-brand-700 px-3 py-1.5 rounded-full border border-brand-700 transition-colors">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">JD</div>
                         <span class="text-xs font-semibold text-white hidden sm:inline" id="user-display-name">John Doe</span>
                         <i class="fa-solid fa-chevron-down text-xs text-brand-200"></i>
@@ -189,11 +189,10 @@
                         <h2 class="text-2xl sm:text-3xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
                         <p class="text-brand-100 text-sm">Account Status: <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span></p>
                     </div>
-
                     <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 min-w-[220px]">
                         <div class="flex items-center justify-between gap-3">
                             <div class="text-xs text-brand-200 font-medium uppercase tracking-wider">Total Available Balance</div>
-                            <button id="toggle-balance-btn" class="text-brand-200 hover:text-white transition-colors" title="Show / Hide balance">
+                            <button id="toggle-balance-btn" class="text-brand-200 hover:text-white transition-colors">
                                 <i class="fa-solid fa-eye text-sm" id="balance-eye-icon"></i>
                             </button>
                         </div>
@@ -201,7 +200,6 @@
                         <div class="text-xs text-brand-200 mt-1">CAD • Chequing + Savings</div>
                     </div>
                 </div>
-
                 <div class="flex items-center gap-3 mt-6">
                     <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow transition-colors flex items-center justify-center gap-2">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
@@ -263,9 +261,6 @@
                         <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
                         <p class="text-xs text-slate-500">Tap any transaction to view full details</p>
                     </div>
-                    <button id="btn-refresh-tx" class="text-xs font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1">
-                        <i class="fa-solid fa-rotate-right"></i> Refresh
-                    </button>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -285,11 +280,9 @@
 
         <!-- PROFILE -->
         <section id="section-profile" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6">
-            <div class="flex items-center gap-3 mb-2">
-                <button id="btn-back-from-profile" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold">
-                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
-                </button>
-            </div>
+            <button id="btn-back-from-profile" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-2">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
                 <div class="flex items-center justify-between pb-6 border-b border-slate-100">
                     <div>
@@ -338,11 +331,9 @@
 
         <!-- TRANSFER -->
         <section id="section-transfer" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
-            <div class="flex items-center gap-3 mb-4">
-                <button id="btn-back-from-transfer" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold">
-                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
-                </button>
-            </div>
+            <button id="btn-back-from-transfer" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">Interac e-Transfer</h2>
                 <p class="text-slate-600 text-sm mb-6">Send funds securely to any Canadian bank account or email address.</p>
@@ -359,20 +350,16 @@
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Security Question (Optional)</label>
                         <input type="text" id="transfer-security" placeholder="e.g. What city are we in?" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
                     </div>
-                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">
-                        Send Funds Instantly
-                    </button>
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">Send Funds Instantly</button>
                 </form>
             </div>
         </section>
 
         <!-- RECEIVE -->
         <section id="section-receive" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto text-center">
-            <div class="flex items-center gap-3 mb-4">
-                <button id="btn-back-from-receive" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold">
-                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
-                </button>
-            </div>
+            <button id="btn-back-from-receive" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 space-y-6">
                 <h2 class="text-2xl font-bold text-slate-900">Receive Canadian Funds</h2>
                 <p class="text-slate-600 text-sm">Share your Community Bank routing and account info to receive direct deposits or e-Transfers.</p>
@@ -389,11 +376,9 @@
 
         <!-- SUPPORT -->
         <section id="section-support" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
-            <div class="flex items-center gap-3 mb-4">
-                <button id="btn-back-from-support" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold">
-                    <i class="fa-solid fa-arrow-left"></i> Back
-                </button>
-            </div>
+            <button id="btn-back-from-support" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
                 <h2 class="text-2xl font-bold text-slate-900">Canadian Customer Care</h2>
                 <p class="text-slate-600 text-sm">Our support specialists are available 24/7 across all Canadian time zones.</p>
@@ -430,115 +415,124 @@
     </footer>
 
     <!-- LOGIN MODAL -->
-    <div id="modal-login" class="fixed inset-0 z-200 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-            <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
-            <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
-            <form id="form-login" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
-                    <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
-                    <div class="relative">
-                        <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                        <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                            <i class="fa-solid fa-eye text-sm"></i>
-                        </button>
-                    </div>
-                </div>
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm">Sign In</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- SIGNUP MODAL -->
-    <div id="modal-signup" class="fixed inset-0 z-200 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
-            <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
-            <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
-            <form id="form-signup" class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Legal Name</label>
-                        <input type="text" id="signup-name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="John Doe">
-                    </div>
+    <div id="modal-login" class="fixed inset-0 z-[200] hidden">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+        <div class="relative flex min-h-full items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+                <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
+                <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
+                <form id="form-login" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
-                        <input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label>
-                        <input type="tel" id="signup-phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="(416) 555-0192">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Social Insurance No. (SIN)</label>
-                        <input type="text" id="signup-sin" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123-456-789">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Residential Address</label>
-                    <input type="text" id="signup-address" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123 Bay Street, Toronto, ON">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label>
-                        <input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                         <div class="relative">
-                            <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                            <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                            <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                            <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
                                 <i class="fa-solid fa-eye text-sm"></i>
                             </button>
                         </div>
                     </div>
-                </div>
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">Create Account & Sign In</button>
-            </form>
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div id="modal-signup" class="fixed inset-0 z-[200] hidden overflow-y-auto">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+        <div class="relative flex min-h-full items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
+                <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
+                <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
+                <form id="form-signup" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Legal Name</label>
+                            <input type="text" id="signup-name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
+                            <input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label>
+                            <input type="tel" id="signup-phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="(416) 555-0192">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Social Insurance No. (SIN)</label>
+                            <input type="text" id="signup-sin" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123-456-789">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Residential Address</label>
+                        <input type="text" id="signup-address" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123 Bay Street, Toronto, ON">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label>
+                            <input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                            <div class="relative">
+                                <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                                <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                                    <i class="fa-solid fa-eye text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">Create Account & Sign In</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- TRANSACTION DETAIL MODAL -->
-    <div id="modal-tx-detail" class="fixed inset-0 z-200 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-            <button id="close-tx-detail" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 class="text-xl font-bold text-slate-900 mb-1">Transaction Details</h3>
-            <p class="text-xs text-slate-500 mb-6">Full information for this transaction</p>
-            <div class="space-y-4 text-sm">
-                <div class="flex justify-between border-b border-slate-100 pb-3">
-                    <span class="text-slate-500">Transaction ID</span>
-                    <span class="font-semibold text-slate-800" id="tx-detail-id">-</span>
-                </div>
-                <div class="flex justify-between border-b border-slate-100 pb-3">
-                    <span class="text-slate-500">Description</span>
-                    <span class="font-semibold text-slate-800 text-right" id="tx-detail-desc">-</span>
-                </div>
-                <div class="flex justify-between border-b border-slate-100 pb-3">
-                    <span class="text-slate-500">Category</span>
-                    <span class="font-semibold text-slate-800" id="tx-detail-cat">-</span>
-                </div>
-                <div class="flex justify-between border-b border-slate-100 pb-3">
-                    <span class="text-slate-500">Date & Time</span>
-                    <span class="font-semibold text-slate-800" id="tx-detail-datetime">-</span>
-                </div>
-                <div class="flex justify-between border-b border-slate-100 pb-3">
-                    <span class="text-slate-500">From (Sender)</span>
-                    <span class="font-semibold text-slate-800 text-right" id="tx-detail-sender">-</span>
-                </div>
-                <div class="flex justify-between border-b border-slate-100 pb-3">
-                    <span class="text-slate-500">To (Receiver)</span>
-                    <span class="font-semibold text-slate-800 text-right" id="tx-detail-receiver">-</span>
-                </div>
-                <div class="flex justify-between pt-1">
-                    <span class="text-slate-500">Amount</span>
-                    <span class="font-bold text-lg" id="tx-detail-amount">-</span>
+    <div id="modal-tx-detail" class="fixed inset-0 z-[200] hidden">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+        <div class="relative flex min-h-full items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+                <button id="close-tx-detail" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="text-xl font-bold text-slate-900 mb-1">Transaction Details</h3>
+                <p class="text-xs text-slate-500 mb-6">Full information for this transaction</p>
+                <div class="space-y-4 text-sm">
+                    <div class="flex justify-between border-b border-slate-100 pb-3">
+                        <span class="text-slate-500">Transaction ID</span>
+                        <span class="font-semibold text-slate-800" id="tx-detail-id">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3">
+                        <span class="text-slate-500">Description</span>
+                        <span class="font-semibold text-slate-800 text-right" id="tx-detail-desc">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3">
+                        <span class="text-slate-500">Category</span>
+                        <span class="font-semibold text-slate-800" id="tx-detail-cat">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3">
+                        <span class="text-slate-500">Date & Time</span>
+                        <span class="font-semibold text-slate-800" id="tx-detail-datetime">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3">
+                        <span class="text-slate-500">From (Sender)</span>
+                        <span class="font-semibold text-slate-800 text-right" id="tx-detail-sender">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3">
+                        <span class="text-slate-500">To (Receiver)</span>
+                        <span class="font-semibold text-slate-800 text-right" id="tx-detail-receiver">-</span>
+                    </div>
+                    <div class="flex justify-between pt-1">
+                        <span class="text-slate-500">Amount</span>
+                        <span class="font-bold text-lg" id="tx-detail-amount">-</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -554,7 +548,7 @@
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
-            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
             toast.innerHTML = `<span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
@@ -592,7 +586,6 @@
             const chequingEl = document.getElementById('chequing-balance-display');
             const savingsEl = document.getElementById('savings-balance-display');
             const eyeIcon = document.getElementById('balance-eye-icon');
-
             if (balanceVisible) {
                 mainEl.textContent = `$${currentTotalBalance.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
                 if (chequingEl) chequingEl.textContent = `$${currentChequing.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
@@ -640,7 +633,6 @@
                 document.getElementById('profile-address').textContent = user.address;
                 document.getElementById('profile-deposit').textContent = `$${currentChequing.toFixed(2)} CAD`;
                 document.getElementById('profile-date').textContent = user.date || 'Today';
-
                 renderTransactions(user);
             } else {
                 guestActions.classList.remove('hidden');
@@ -652,9 +644,7 @@
         function renderTransactions(user) {
             const tbody = document.getElementById('transaction-list');
             let txs = user.transactions || [];
-
-            // Ensure older txs have full details
-            txs = txs.map((t, idx) => {
+            txs = txs.map(t => {
                 if (!t.id) {
                     t.id = generateTxId();
                     t.time = t.time || '10:24 AM';
@@ -663,7 +653,6 @@
                 }
                 return t;
             });
-
             tbody.innerHTML = txs.map((t, index) => `
                 <tr class="tx-row" data-index="${index}">
                     <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
@@ -672,8 +661,6 @@
                     <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
                 </tr>
             `).join('');
-
-            // Click handlers
             tbody.querySelectorAll('.tx-row').forEach(row => {
                 row.addEventListener('click', () => {
                     const idx = parseInt(row.getAttribute('data-index'));
@@ -712,13 +699,11 @@
             setupPasswordToggle('login-password', 'toggle-login-password');
             setupPasswordToggle('signup-password', 'toggle-signup-password');
 
-            // Balance eye
             document.getElementById('toggle-balance-btn').addEventListener('click', () => {
                 balanceVisible = !balanceVisible;
                 updateBalanceDisplay();
             });
 
-            // Profile dropdown
             const profileBtn = document.getElementById('profile-menu-btn');
             const profileDropdown = document.getElementById('profile-dropdown');
             profileBtn.addEventListener('click', (e) => {
@@ -726,30 +711,19 @@
                 profileDropdown.classList.toggle('hidden');
             });
             document.addEventListener('click', () => profileDropdown.classList.add('hidden'));
-
             document.getElementById('btn-go-profile').addEventListener('click', () => {
                 switchView('profile');
                 profileDropdown.classList.add('hidden');
             });
 
-            // FIXED NAV MAP (this was the main bug)
             const navMap = {
-                'nav-btn-home': 'landing',
-                'mob-nav-home': 'landing',
-                'nav-logo': 'landing',
-                'nav-btn-dashboard': 'dashboard',
-                'mob-nav-dashboard': 'dashboard',
-                'nav-btn-transfer': 'transfer',
-                'mob-nav-transfer': 'transfer',
-                'btn-dash-transfer': 'transfer',
-                'nav-btn-receive': 'receive',
-                'mob-nav-receive': 'receive',
-                'btn-dash-receive': 'receive',
-                'nav-btn-support': 'support',
-                'mob-nav-support': 'support',
+                'nav-btn-home': 'landing', 'mob-nav-home': 'landing', 'nav-logo': 'landing',
+                'nav-btn-dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard',
+                'nav-btn-transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-dash-transfer': 'transfer',
+                'nav-btn-receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive',
+                'nav-btn-support': 'support', 'mob-nav-support': 'support',
                 'mob-nav-profile': 'profile'
             };
-
             Object.keys(navMap).forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
@@ -765,7 +739,6 @@
                 }
             });
 
-            // Back buttons
             document.getElementById('btn-back-from-profile').addEventListener('click', () => switchView('dashboard'));
             document.getElementById('btn-back-from-transfer').addEventListener('click', () => switchView('dashboard'));
             document.getElementById('btn-back-from-receive').addEventListener('click', () => switchView('dashboard'));
@@ -774,7 +747,6 @@
                 else switchView('landing');
             });
 
-            // Modals
             const modalLogin = document.getElementById('modal-login');
             const modalSignup = document.getElementById('modal-signup');
             const modalTx = document.getElementById('modal-tx-detail');
@@ -782,16 +754,14 @@
             document.getElementById('btn-open-login').addEventListener('click', () => openModal(modalLogin));
             document.getElementById('btn-hero-login').addEventListener('click', () => openModal(modalLogin));
             document.getElementById('close-login').addEventListener('click', () => closeModal(modalLogin));
-
             document.getElementById('btn-open-signup').addEventListener('click', () => openModal(modalSignup));
             document.getElementById('btn-hero-signup').addEventListener('click', () => openModal(modalSignup));
             document.getElementById('close-signup').addEventListener('click', () => closeModal(modalSignup));
-
             document.getElementById('close-tx-detail').addEventListener('click', () => closeModal(modalTx));
 
-            modalLogin.addEventListener('click', (e) => { if (e.target === modalLogin) closeModal(modalLogin); });
-            modalSignup.addEventListener('click', (e) => { if (e.target === modalSignup) closeModal(modalSignup); });
-            modalTx.addEventListener('click', (e) => { if (e.target === modalTx) closeModal(modalTx); });
+            modalLogin.addEventListener('click', (e) => { if (e.target === modalLogin || e.target.classList.contains('absolute')) closeModal(modalLogin); });
+            modalSignup.addEventListener('click', (e) => { if (e.target === modalSignup || e.target.classList.contains('absolute')) closeModal(modalSignup); });
+            modalTx.addEventListener('click', (e) => { if (e.target === modalTx || e.target.classList.contains('absolute')) closeModal(modalTx); });
 
             document.getElementById('mobile-menu-btn').addEventListener('click', () => {
                 document.getElementById('mobile-menu').classList.toggle('hidden');
@@ -806,7 +776,6 @@
             document.getElementById('btn-logout').addEventListener('click', doLogout);
             document.getElementById('btn-logout-profile').addEventListener('click', doLogout);
 
-            // Login
             document.getElementById('form-login').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const email = document.getElementById('login-email').value.trim();
@@ -823,7 +792,6 @@
                 }
             });
 
-            // Signup
             document.getElementById('form-signup').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const name = document.getElementById('signup-name').value.trim();
@@ -833,7 +801,6 @@
                 const address = document.getElementById('signup-address').value.trim();
                 const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
                 const password = document.getElementById('signup-password').value;
-
                 if (!name || !email || !password) {
                     showToast('Please fill in all required fields.');
                     return;
@@ -848,26 +815,8 @@
                     name, email, phone, sin, address, deposit, password,
                     date: now.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
                     transactions: [
-                        {
-                            id: generateTxId(),
-                            desc: 'Initial Account Deposit',
-                            cat: 'Deposit',
-                            date: 'Today',
-                            time: now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }),
-                            amount: `+$${deposit.toFixed(2)}`,
-                            sender: 'Community Bank Funding',
-                            receiver: name
-                        },
-                        {
-                            id: generateTxId(),
-                            desc: 'Welcome Bonus Reward',
-                            cat: 'Bonus',
-                            date: 'Today',
-                            time: now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }),
-                            amount: '+$25.00',
-                            sender: 'Community Bank',
-                            receiver: name
-                        }
+                        { id: generateTxId(), desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', time: now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }), amount: `+$${deposit.toFixed(2)}`, sender: 'Community Bank Funding', receiver: name },
+                        { id: generateTxId(), desc: 'Welcome Bonus Reward', cat: 'Bonus', date: 'Today', time: now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }), amount: '+$25.00', sender: 'Community Bank', receiver: name }
                     ]
                 };
                 users.push(newUser);
@@ -879,7 +828,6 @@
                 showToast('Account successfully created!', 'success');
             });
 
-            // Transfer
             document.getElementById('transfer-form').addEventListener('submit', (e) => {
                 e.preventDefault();
                 const recipient = document.getElementById('transfer-recipient').value.trim();
