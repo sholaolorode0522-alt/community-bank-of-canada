@@ -578,6 +578,7 @@
             if (target) target.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             document.getElementById('mobile-menu').classList.add('hidden');
+            document.body.classList.remove('modal-open');
             document.getElementById('profile-dropdown').classList.add('hidden');
         }
 
