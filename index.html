@@ -40,14 +40,14 @@
 
     <!-- NAVBAR -->
     <header class="sticky top-0 z-[100] bg-brand-900 text-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div id="nav-logo" class="flex items-center space-x-3 cursor-pointer">
-                <div class="w-11 h-11 bg-white text-brand-700 rounded-xl flex items-center justify-center font-extrabold text-2xl shadow-inner">
+        <div class="max-w-7xl mx-auto pl-3 pr-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
+            <div id="nav-logo" class="flex items-center space-x-2 sm:space-x-3 cursor-pointer min-w-0">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 bg-white text-brand-700 rounded-xl flex items-center justify-center font-extrabold text-xl sm:text-2xl shadow-inner flex-shrink-0">
                     <i class="fa-solid fa-building-columns"></i>
                 </div>
-                <div>
-                    <span class="text-xl font-bold tracking-tight text-white block leading-none">Community Bank</span>
-                    <span class="text-xs text-brand-200 font-medium tracking-wide">CANADA</span>
+                <div class="min-w-0">
+                    <span class="text-base sm:text-xl font-bold tracking-tight text-white block leading-none truncate">Community Bank</span>
+                    <span class="text-[10px] sm:text-xs text-brand-200 font-medium tracking-wide">CANADA</span>
                 </div>
             </div>
 
@@ -59,14 +59,14 @@
                 <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2">Customer Care</button>
             </nav>
 
-            <div class="flex items-center space-x-3">
-                <div id="nav-guest-actions" class="flex items-center space-x-2">
-                    <button id="btn-open-login" class="text-sm font-semibold hover:text-brand-200 px-3 py-2 transition-colors">Sign In</button>
-                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-all">Open Account</button>
+            <div class="flex items-center gap-1 sm:gap-3 flex-shrink-0">
+                <div id="nav-guest-actions" class="flex items-center gap-1">
+                    <button id="btn-open-login" class="text-xs sm:text-sm font-semibold hover:text-brand-200 px-1.5 sm:px-3 py-2 transition-colors">Sign In</button>
+                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-2 sm:px-4 py-2 rounded-lg font-semibold text-[11px] sm:text-sm shadow-sm transition-all whitespace-nowrap">Open Account</button>
                 </div>
 
                 <div id="nav-user-actions" class="hidden relative">
-                    <button id="profile-menu-btn" class="flex items-center space-x-2 bg-brand-800 hover:bg-brand-700 px-3 py-1.5 rounded-full border border-brand-700 transition-colors">
+                    <button id="profile-menu-btn" class="flex items-center space-x-2 bg-brand-800 hover:bg-brand-700 px-2 sm:px-3 py-1.5 rounded-full border border-brand-700 transition-colors">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">JD</div>
                         <span class="text-xs font-semibold text-white hidden sm:inline" id="user-display-name">John Doe</span>
                         <i class="fa-solid fa-chevron-down text-xs text-brand-200"></i>
@@ -85,19 +85,19 @@
                     </div>
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-200 p-2">
-                    <i class="fa-solid fa-bars text-xl"></i>
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-200 p-2 mr-0.5 flex-shrink-0" aria-label="Menu">
+                    <span class="text-2xl leading-none block">☰</span>
                 </button>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-2">
-            <button id="mob-nav-home" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
-            <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
-            <button id="mob-nav-profile" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Settings</button>
-            <button id="mob-nav-transfer" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
-            <button id="mob-nav-receive" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
-            <button id="mob-nav-support" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-1">
+            <button id="mob-nav-home" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
+            <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
+            <button id="mob-nav-profile" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Settings</button>
+            <button id="mob-nav-transfer" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
+            <button id="mob-nav-receive" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
+            <button id="mob-nav-support" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
         </div>
     </header>
 
@@ -419,7 +419,7 @@
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
             <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-                <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><span class="text-xl leading-none">×</span></button>
                 <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
                 <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
                 <form id="form-login" class="space-y-4">
@@ -431,9 +431,7 @@
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                         <div class="relative">
                             <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                            <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                                <i class="fa-solid fa-eye text-sm"></i>
-                            </button>
+                            <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 text-sm font-bold px-1">👁</button>
                         </div>
                     </div>
                     <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm">Sign In</button>
@@ -447,7 +445,7 @@
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
             <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
-                <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><span class="text-xl leading-none">×</span></button>
                 <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
                 <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
                 <form id="form-signup" class="space-y-4">
@@ -484,9 +482,7 @@
                             <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                             <div class="relative">
                                 <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                                <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                                    <i class="fa-solid fa-eye text-sm"></i>
-                                </button>
+                                <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 text-sm font-bold px-1">👁</button>
                             </div>
                         </div>
                     </div>
@@ -501,7 +497,7 @@
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
             <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-                <button id="close-tx-detail" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button id="close-tx-detail" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><span class="text-xl leading-none">×</span></button>
                 <h3 class="text-xl font-bold text-slate-900 mb-1">Transaction Details</h3>
                 <p class="text-xs text-slate-500 mb-6">Full information for this transaction</p>
                 <div class="space-y-4 text-sm">
@@ -591,12 +587,12 @@
                 mainEl.textContent = `$${currentTotalBalance.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
                 if (chequingEl) chequingEl.textContent = `$${currentChequing.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
                 if (savingsEl) savingsEl.textContent = `$${currentSavings.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
-                eyeIcon.className = 'fa-solid fa-eye text-sm';
+                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye text-sm';
             } else {
                 mainEl.textContent = '••••••';
                 if (chequingEl) chequingEl.textContent = '••••••';
                 if (savingsEl) savingsEl.textContent = '••••••';
-                eyeIcon.className = 'fa-solid fa-eye-slash text-sm';
+                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye-slash text-sm';
             }
         }
 
@@ -683,13 +679,12 @@
         function setupPasswordToggle(inputId, toggleBtnId) {
             const input = document.getElementById(inputId);
             const btn = document.getElementById(toggleBtnId);
-            if (input && btn) {
-                btn.addEventListener('click', () => {
-                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                    input.setAttribute('type', type);
-                    btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
-                });
-            }
+            if (!input || !btn) return;
+            btn.addEventListener('click', () => {
+                const isPassword = input.getAttribute('type') === 'password';
+                input.setAttribute('type', isPassword ? 'text' : 'password');
+                btn.textContent = isPassword ? '🙈' : '👁';
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -764,15 +759,15 @@
             modalSignup.addEventListener('click', (e) => { if (e.target === modalSignup || e.target.classList.contains('absolute')) closeModal(modalSignup); });
             modalTx.addEventListener('click', (e) => { if (e.target === modalTx || e.target.classList.contains('absolute')) closeModal(modalTx); });
 
-           document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-    const menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
-    if (menu.classList.contains('hidden')) {
-        document.body.classList.remove('modal-open');
-    } else {
-        document.body.classList.add('modal-open');
-    }
-});
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+                if (menu.classList.contains('hidden')) {
+                    document.body.classList.remove('modal-open');
+                } else {
+                    document.body.classList.add('modal-open');
+                }
+            });
 
             function doLogout() {
                 localStorage.removeItem('cb_current_user');
