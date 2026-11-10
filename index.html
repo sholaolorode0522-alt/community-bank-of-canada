@@ -450,13 +450,13 @@
     <!-- JAVASCRIPT & FIREBASE CONFIGURATION -->
     <script>
         const firebaseConfig = {
-    apiKey: "AIzaSyBTuU6PN-FuQS7SNsOVl71_YvkqPTfVqzc",
-    authDomain: "community-bank-46084.firebaseapp.com",
-    projectId: "community-bank-46084",
-    storageBucket: "community-bank-46084.firebasestorage.app",
-    messagingSenderId: "259600131317",
-    appId: "1:259600131317:web:fdbdb45370f2f8bd6191bc"
-};
+            apiKey: "AIzaSyBTuU6PN-FuQS7SNsOVl71_YvkqPTfVqzc",
+            authDomain: "community-bank-46084.firebaseapp.com",
+            projectId: "community-bank-46084",
+            storageBucket: "community-bank-46084.firebasestorage.app",
+            messagingSenderId: "259600131317",
+            appId: "1:259600131317:web:fdbdb45370f2f8bd6191bc"
+        };
 
         // Initialize Firebase Compat
         firebase.initializeApp(firebaseConfig);
@@ -490,18 +490,17 @@
         }
 
         function switchView(viewName) {
-    document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
-    const target = document.getElementById(`section-${viewName}`);
-    if (target) {
-        target.classList.remove('hidden');
-        // Save the current view so refresh doesn't lose your place
-        sessionStorage.setItem('cb_current_view', viewName);
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.getElementById('mobile-menu')?.classList.add('hidden');
-    document.getElementById('mobile-menu-overlay')?.classList.add('hidden');
-    document.getElementById('profile-dropdown')?.classList.add('hidden');
-}
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById(`section-${viewName}`);
+            if (target) {
+                target.classList.remove('hidden');
+                sessionStorage.setItem('cb_current_view', viewName);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+            document.getElementById('mobile-menu-overlay')?.classList.add('hidden');
+            document.getElementById('profile-dropdown')?.classList.add('hidden');
+        }
 
         function updateUIWithUser(userData) {
             currentUserData = userData;
@@ -594,9 +593,8 @@
             });
         }
 
-      
-                switchView('landing');  // Firebase Auth State Listener (Syncs logins across phones/tablets/computers)
-       auth.onAuthStateChanged(async (user) => {
+        // Firebase Auth State Listener with Session Persistence
+        auth.onAuthStateChanged(async (user) => {
             if (user) {
                 try {
                     const docRef = db.collection('users').doc(user.uid);
@@ -608,7 +606,6 @@
                         updateUIWithUser(basicData);
                     }
                     
-                    // Keeps you on your active page when you refresh
                     const savedView = sessionStorage.getItem('cb_current_view') || 'dashboard';
                     switchView(savedView);
                 } catch (err) {
@@ -622,7 +619,6 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Password Visibility Toggles
             ['login-password', 'signup-password'].forEach(id => {
                 const input = document.getElementById(id);
                 const btn = document.getElementById(`toggle-${id}`);
@@ -635,13 +631,11 @@
                 }
             });
 
-            // Balance Eye Toggle Listener
             document.getElementById('toggle-balance-btn')?.addEventListener('click', () => {
                 isBalanceHidden = !isBalanceHidden;
                 updateBalanceDisplay();
             });
 
-            // Mobile Navigation Menu Toggle
             const mobMenuBtn = document.getElementById('mobile-menu-btn');
             const mobMenu = document.getElementById('mobile-menu');
             const mobOverlay = document.getElementById('mobile-menu-overlay');
@@ -656,7 +650,6 @@
                 });
             }
 
-            // Profile Dropdown Toggle
             const profBtn = document.getElementById('profile-menu-btn');
             const profDropdown = document.getElementById('profile-dropdown');
             if (profBtn && profDropdown) {
@@ -667,7 +660,6 @@
                 document.addEventListener('click', () => profDropdown.classList.add('hidden'));
             }
 
-            // Navigation Route Mapping
             const navMap = {
                 'nav-logo': 'landing', 'nav-btn-home': 'landing', 'mob-nav-home': 'landing',
                 'nav-btn-dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard', 'btn-dash-transfer': 'transfer',
@@ -688,7 +680,6 @@
                 });
             });
 
-            // Modal Open/Close Controls
             document.getElementById('btn-open-login')?.addEventListener('click', () => openModal('modal-login'));
             document.getElementById('btn-hero-login')?.addEventListener('click', () => openModal('modal-login'));
             document.getElementById('close-login')?.addEventListener('click', () => closeModal('modal-login'));
@@ -700,7 +691,6 @@
             document.getElementById('close-tx-modal')?.addEventListener('click', () => closeModal('modal-tx-detail'));
             document.getElementById('btn-close-tx')?.addEventListener('click', () => closeModal('modal-tx-detail'));
 
-            // Logout Action Handlers
             const handleLogout = async () => {
                 try {
                     await auth.signOut();
@@ -713,7 +703,6 @@
             document.getElementById('btn-logout')?.addEventListener('click', handleLogout);
             document.getElementById('btn-logout-profile')?.addEventListener('click', handleLogout);
 
-            // SIGN UP FORM SUBMISSION (Firebase Auth + Firestore Database)
             document.getElementById('form-signup')?.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const name = document.getElementById('signup-name').value.trim();
@@ -758,7 +747,6 @@
                 }
             });
 
-            // LOGIN FORM SUBMISSION (Firebase Auth Cross-Device Login)
             document.getElementById('form-login')?.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const email = document.getElementById('login-email').value.trim().toLowerCase();
@@ -782,7 +770,6 @@
                 }
             });
 
-            // Transfer Category Form Swapping
             document.getElementById('transfer-type')?.addEventListener('change', (e) => {
                 const val = e.target.value;
                 ['etransfer', 'internal', 'bill', 'wire'].forEach(type => {
@@ -790,7 +777,6 @@
                 });
             });
 
-            // Transfer Form Submission
             document.getElementById('transfer-form')?.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const type = document.getElementById('transfer-type').value;
@@ -847,7 +833,848 @@
                 }
             });
 
-            // Copy Banking Details Button
+            document.getElementById('btn-copy-info')?.addEventListener('click', () => {
+                navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
+                showToast('Banking details copied to clipboard!', 'success');
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Bank - Canada's Trusted Local Banking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Firebase SDKs (v10.14.1 Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe',
+                            500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+                            800: '#1e40af', 900: '#1e3a8a', 950: '#172554',
+                        }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blue-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%); }
+        .card-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+        body.modal-open { overflow: hidden; }
+        .tx-row { cursor: pointer; }
+        .tx-row:hover { background-color: #f8fafc; }
+    </style>
+</head>
+<body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
+
+    <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+    <header class="sticky top-0 z-[100] bg-brand-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto pl-3 pr-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
+            <div id="nav-logo" class="flex items-center space-x-2 sm:space-x-3 cursor-pointer min-w-0">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 bg-white text-brand-700 rounded-xl flex items-center justify-center font-extrabold text-xl sm:text-2xl shadow-inner flex-shrink-0">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="min-w-0">
+                    <span class="text-base sm:text-xl font-bold tracking-tight text-white block leading-none truncate">Community Bank</span>
+                    <span class="text-[10px] sm:text-xs text-brand-200 font-medium tracking-wide">CANADA</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <button id="nav-btn-home" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
+                <button id="nav-btn-dashboard" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
+                <button id="nav-btn-transfer" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
+                <button id="nav-btn-receive" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
+                <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
+            </nav>
+
+            <div class="flex items-center gap-1 sm:gap-3 flex-shrink-0">
+                <div id="nav-guest-actions" class="flex items-center gap-1">
+                    <button id="btn-open-login" class="text-xs sm:text-sm font-semibold hover:text-brand-200 px-1.5 sm:px-3 py-2 transition-colors cursor-pointer">Sign In</button>
+                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-2 sm:px-4 py-2 rounded-lg font-semibold text-[11px] sm:text-sm shadow-sm transition-all whitespace-nowrap cursor-pointer">Open Account</button>
+                </div>
+
+                <div id="nav-user-actions" class="hidden relative">
+                    <button id="profile-menu-btn" class="flex items-center space-x-2 bg-brand-800 hover:bg-brand-700 px-2 sm:px-3 py-1.5 rounded-full border border-brand-700 transition-colors cursor-pointer">
+                        <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">JD</div>
+                        <span class="text-xs font-semibold text-white hidden sm:inline" id="user-display-name">John Doe</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-brand-200"></i>
+                    </button>
+                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50">
+                        <div class="px-4 py-3 border-b border-slate-100">
+                            <p class="text-sm font-semibold text-slate-800 truncate" id="dropdown-name">John Doe</p>
+                            <p class="text-xs text-slate-500 truncate" id="dropdown-email">john@example.com</p>
+                        </div>
+                        <button id="btn-go-profile" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3 cursor-pointer">
+                            <i class="fa-solid fa-user text-brand-600 w-4"></i> Profile & Settings
+                        </button>
+                        <button id="btn-logout" class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 cursor-pointer">
+                            <i class="fa-solid fa-right-from-bracket w-4"></i> Log Out
+                        </button>
+                    </div>
+                </div>
+
+                <button id="mobile-menu-btn" class="hidden md:hidden text-white hover:text-brand-200 p-2 flex-shrink-0 cursor-pointer" aria-label="Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu-overlay" class="hidden fixed inset-0 z-[90] bg-slate-900/60 backdrop-blur-sm md:hidden"></div>
+    <div id="mobile-menu" class="hidden md:hidden fixed left-0 right-0 top-16 sm:top-20 z-[95] bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-1 shadow-xl">
+        <button id="mob-nav-home" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
+        <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
+        <button id="mob-nav-profile" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Profile & Settings</button>
+        <button id="mob-nav-transfer" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
+        <button id="mob-nav-receive" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
+        <button id="mob-nav-support" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
+    </div>
+
+    <main class="flex-grow">
+        <!-- LANDING SECTION -->
+        <section id="section-landing" class="view-section">
+            <div class="blue-gradient text-white py-20 lg:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center gap-2 bg-brand-800/80 border border-brand-500/40 px-3 py-1.5 rounded-full text-xs font-semibold text-brand-200">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Member CDIC • Serving Canadian Communities
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">Personal Banking Built for Your Local Community</h1>
+                        <p class="text-lg text-brand-100 max-w-xl font-light">Experience zero-fee everyday chequing, high-interest savings, and instant Interac e-Transfers—backed by 24/7 Canadian customer care.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all cursor-pointer">Open an Account Today</button>
+                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all cursor-pointer">Sign In to Online Banking</button>
+                        </div>
+                    </div>
+                    <div class="relative flex justify-center">
+                        <div class="w-full max-w-md card-gradient rounded-2xl p-6 text-white shadow-2xl border border-white/20 relative overflow-hidden">
+                            <div class="absolute top-3 right-3 bg-amber-400 text-amber-950 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Advertisement</div>
+                            <div class="flex justify-between items-center mb-6 mt-1">
+                                <span class="font-semibold text-xs tracking-wider text-slate-300">COMMUNITY PREMIER VISA</span>
+                                <i class="fa-brands fa-cc-visa text-3xl text-white"></i>
+                            </div>
+                            <div class="space-y-2 mb-6">
+                                <div class="text-xs text-slate-400">Example Balance (Demo)</div>
+                                <div class="text-3xl font-extrabold tracking-wide">$12,450.00 <span class="text-xs font-normal text-slate-300">CAD</span></div>
+                                <p class="text-[11px] text-slate-400 mt-1">This is a promotional example only — not a real account.</p>
+                            </div>
+                            <div class="flex justify-between items-end text-xs text-slate-300">
+                                <div>
+                                    <div class="text-[10px] uppercase text-slate-400">Card Holder</div>
+                                    <div class="font-medium text-white text-sm">ALEXANDER WALKER</div>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] uppercase text-slate-400">Expires</div>
+                                    <div class="font-medium text-white text-sm">08/28</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">Everything You Need to Manage Your Money</h2>
+                    <p class="mt-4 text-slate-600">Modern digital banking with a Canadian local touch.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-paper-plane"></i></div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Instant Transfers</h3>
+                        <p class="text-slate-600 text-sm">Send money instantly across Canada with Interac e-Transfer.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Canadian Protection</h3>
+                        <p class="text-slate-600 text-sm">Deposits protected under CDIC insurance up to $100,000.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div class="w-12 h-12 bg-brand-100 text-brand-700 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-headset"></i></div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">24/7 Local Support</h3>
+                        <p class="text-slate-600 text-sm">Canadian customer care across all time zones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD SECTION -->
+        <section id="section-dashboard" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+            <div class="blue-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="space-y-1">
+                        <div class="text-xs uppercase tracking-wider font-semibold text-brand-200">Online Banking Overview</div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold" id="dash-welcome-text">Welcome Back</h2>
+                        <p class="text-brand-100 text-sm">Account Status: <span class="bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-semibold border border-emerald-400/30">Active & Verified</span></p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 min-w-[220px]">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="text-xs text-brand-200 font-medium uppercase tracking-wider">Total Available Balance</div>
+                            <button id="toggle-balance-btn" class="text-brand-200 hover:text-white transition-colors cursor-pointer">
+                                <i class="fa-solid fa-eye text-sm" id="balance-eye-icon"></i>
+                            </button>
+                        </div>
+                        <div class="text-3xl font-extrabold tracking-tight mt-1" id="dash-main-balance">$0.00</div>
+                        <div class="text-xs text-brand-200 mt-1">CAD • Chequing + Savings</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 mt-6">
+                    <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
+                    </button>
+                    <button id="btn-dash-receive" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-qrcode"></i> Receive
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">Everyday Chequing</p>
+                            <p class="text-xs text-slate-400">Acc # •••• 4892</p>
+                        </div>
+                        <span class="w-10 h-10 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-wallet"></i></span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight" id="chequing-balance-display">$0.00</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">High-Interest Savings</p>
+                            <p class="text-xs text-slate-400">Acc # •••• 9104</p>
+                        </div>
+                        <span class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-piggy-bank"></i></span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight" id="savings-balance-display">$8,300.50</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">Rewards Visa Card</p>
+                            <p class="text-xs text-slate-400">Card # •••• 2011</p>
+                        </div>
+                        <span class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-credit-card"></i></span>
+                    </div>
+                    <div class="text-3xl font-extrabold text-slate-900 tracking-tight">$420.15</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
+                    <p class="text-xs text-slate-500">Tap any transaction to view full details</p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-100 text-xs font-semibold text-slate-400 uppercase">
+                                <th class="pb-3">Description</th>
+                                <th class="pb-3">Category</th>
+                                <th class="pb-3">Date</th>
+                                <th class="pb-3 text-right">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-list" class="divide-y divide-slate-100 text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE SECTION -->
+        <section id="section-profile" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6">
+            <button id="btn-back-from-profile" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-2 cursor-pointer">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </button>
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">Profile & Settings</h2>
+                        <p class="text-xs text-slate-500 mt-1">Your personal and account information</p>
+                    </div>
+                    <span class="bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-xs font-bold border border-brand-200">KYC Verified</span>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-6 pt-6">
+                    <div><label class="block text-xs font-semibold text-slate-400 uppercase">Full Legal Name</label><p class="text-base font-semibold text-slate-800 mt-1" id="profile-name">-</p></div>
+                    <div><label class="block text-xs font-semibold text-slate-400 uppercase">Email Address</label><p class="text-base font-semibold text-slate-800 mt-1" id="profile-email">-</p></div>
+                    <div><label class="block text-xs font-semibold text-slate-400 uppercase">Phone Number</label><p class="text-base font-semibold text-slate-800 mt-1" id="profile-phone">-</p></div>
+                    <div><label class="block text-xs font-semibold text-slate-400 uppercase">Social Insurance Number (SIN)</label><p class="text-base font-semibold text-slate-800 mt-1" id="profile-sin">-</p></div>
+                    <div class="sm:col-span-2"><label class="block text-xs font-semibold text-slate-400 uppercase">Residential Address</label><p class="text-base font-semibold text-slate-800 mt-1" id="profile-address">-</p></div>
+                    <div><label class="block text-xs font-semibold text-slate-400 uppercase">Initial Deposit</label><p class="text-base font-semibold text-emerald-600 mt-1" id="profile-deposit">-</p></div>
+                    <div><label class="block text-xs font-semibold text-slate-400 uppercase">Account Created</label><p class="text-base font-semibold text-slate-800 mt-1" id="profile-date">-</p></div>
+                </div>
+                <div class="mt-8 pt-6 border-t border-slate-100">
+                    <button id="btn-logout-profile" class="bg-red-50 hover:bg-red-100 text-red-600 font-semibold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-right-from-bracket"></i> Log Out of Online Banking
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRANSFER SECTION -->
+        <section id="section-transfer" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
+            <button id="btn-back-from-transfer" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4 cursor-pointer">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </button>
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Transfer & Payments</h2>
+                <p class="text-slate-600 text-sm mb-6">Choose how you want to send money.</p>
+                <div class="mb-6">
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Transfer Type</label>
+                    <select id="transfer-type" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm bg-white">
+                        <option value="etransfer">Interac e-Transfer</option>
+                        <option value="internal">Transfer Between My Accounts</option>
+                        <option value="bill">Bill Payment</option>
+                        <option value="wire">Wire Transfer</option>
+                    </select>
+                </div>
+                <form id="transfer-form" class="space-y-4">
+                    <div id="fields-etransfer" class="space-y-4">
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Recipient Name</label><input type="text" id="et-name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="Full name"></div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email or Mobile Number</label><input type="text" id="et-contact" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="email@example.com or phone"></div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label><input type="number" id="et-amount" step="0.01" min="1" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="0.00"></div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Security Question (Optional)</label><input type="text" id="et-question" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Security Answer (Optional)</label><input type="text" id="et-answer" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                    </div>
+                    <div id="fields-internal" class="space-y-4 hidden">
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">From Account</label>
+                            <select id="int-from" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm bg-white">
+                                <option value="chequing">Everyday Chequing (•••• 4892)</option>
+                                <option value="savings">High-Interest Savings (•••• 9104)</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">To Account</label>
+                            <select id="int-to" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm bg-white">
+                                <option value="savings">High-Interest Savings (•••• 9104)</option>
+                                <option value="chequing">Everyday Chequing (•••• 4892)</option>
+                            </select>
+                        </div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label><input type="number" id="int-amount" step="0.01" min="1" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="0.00"></div>
+                    </div>
+                    <div id="fields-bill" class="space-y-4 hidden">
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Payee / Company Name</label><input type="text" id="bill-payee" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="e.g. Toronto Hydro"></div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Account / Customer Number</label><input type="text" id="bill-account" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label><input type="number" id="bill-amount" step="0.01" min="1" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="0.00"></div>
+                    </div>
+                    <div id="fields-wire" class="space-y-4 hidden">
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Beneficiary Full Name</label><input type="text" id="wire-name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Bank Name</label><input type="text" id="wire-bank" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Institution #</label><input type="text" id="wire-institution" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="003"></div>
+                            <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Transit #</label><input type="text" id="wire-transit" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                        </div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Account Number</label><input type="text" id="wire-account" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label><input type="number" id="wire-amount" step="0.01" min="1" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="0.00"></div>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm mt-2 cursor-pointer">Send / Pay Now</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- RECEIVE SECTION -->
+        <section id="section-receive" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto text-center">
+            <button id="btn-back-from-receive" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4 cursor-pointer"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 space-y-6">
+                <h2 class="text-2xl font-bold text-slate-900">Receive Canadian Funds</h2>
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-left space-y-3 text-sm">
+                    <div class="flex justify-between"><span class="text-slate-500">Institution Number:</span><span class="font-bold">839</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Transit Number:</span><span class="font-bold">10294</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Account Number:</span><span class="font-bold">•••• 4892</span></div>
+                </div>
+                <button id="btn-copy-info" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl text-sm cursor-pointer"><i class="fa-solid fa-copy mr-2"></i> Copy Banking Details</button>
+            </div>
+        </section>
+
+        <!-- SUPPORT SECTION -->
+        <section id="section-support" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
+            <button id="btn-back-from-support" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4 cursor-pointer"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
+                <h2 class="text-2xl font-bold text-slate-900">Canadian Customer Care</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <i class="fa-solid fa-phone text-brand-600"></i>
+                        <div><div class="text-xs text-slate-400">Toll-Free</div><div class="font-bold text-sm">1-800-555-BANK (2265)</div></div>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <i class="fa-solid fa-envelope text-brand-600"></i>
+                        <div><div class="text-xs text-slate-400">Secure Email</div><div class="font-bold text-sm">support@communitybankcanada.ca</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-950 text-slate-400 py-12 px-4 sm:px-6 lg:px-8 mt-auto border-t border-brand-900">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 text-xs">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-brand-800 text-white rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-building-columns text-sm"></i></div>
+                <span class="font-semibold text-white">Community Bank of Canada</span>
+            </div>
+            <div>&copy; 2026 Community Bank of Canada. All rights reserved. Member CDIC.</div>
+        </div>
+    </footer>
+
+    <!-- MODAL: SIGN IN -->
+    <div id="modal-login" class="fixed inset-0 z-[150] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
+            <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
+            <form id="form-login" class="space-y-4">
+                <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label><input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com"></div>
+                <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                    <div class="relative">
+                        <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                        <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"><i class="fa-solid fa-eye text-sm"></i></button>
+                    </div>
+                </div>
+                <button type="submit" id="btn-login-submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm cursor-pointer">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: SIGN UP -->
+    <div id="modal-signup" class="fixed inset-0 z-[150] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
+            <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
+            <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
+            <form id="form-signup" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Legal Name</label><input type="text" id="signup-name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="John Doe"></div>
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label><input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com"></div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label><input type="tel" id="signup-phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="(416) 555-0192"></div>
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">SIN</label><input type="text" id="signup-sin" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123-456-789"></div>
+                </div>
+                <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Residential Address</label><input type="text" id="signup-address" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123 Bay St, Toronto, ON"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label><input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                            <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"><i class="fa-solid fa-eye text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="btn-signup-submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm mt-2 cursor-pointer">Create Account & Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: TRANSACTION DETAILS -->
+    <div id="modal-tx-detail" class="fixed inset-0 z-[150] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="close-tx-modal" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Transaction Details</h3>
+            <div class="space-y-4 text-sm" id="tx-modal-content"></div>
+            <button id="btn-close-tx" class="w-full mt-6 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 rounded-xl cursor-pointer">Close</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT & FIREBASE CONFIGURATION -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBTuU6PN-FuQS7SNsOVl71_YvkqPTfVqzc",
+            authDomain: "community-bank-46084.firebaseapp.com",
+            projectId: "community-bank-46084",
+            storageBucket: "community-bank-46084.firebasestorage.app",
+            messagingSenderId: "259600131317",
+            appId: "1:259600131317:web:fdbdb45370f2f8bd6191bc"
+        };
+
+        // Initialize Firebase Compat
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        let isBalanceHidden = false;
+        let currentUserData = null;
+
+        function showToast(message, type = 'error') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transition-all`;
+            toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        function openModal(id) {
+            document.getElementById(id)?.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+        function closeModal(id) {
+            document.getElementById(id)?.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById(`section-${viewName}`);
+            if (target) {
+                target.classList.remove('hidden');
+                sessionStorage.setItem('cb_current_view', viewName);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+            document.getElementById('mobile-menu-overlay')?.classList.add('hidden');
+            document.getElementById('profile-dropdown')?.classList.add('hidden');
+        }
+
+        function updateUIWithUser(userData) {
+            currentUserData = userData;
+            const guestActions = document.getElementById('nav-guest-actions');
+            const userActions = document.getElementById('nav-user-actions');
+            const mobProfileBtn = document.getElementById('mob-nav-profile');
+
+            if (userData) {
+                guestActions?.classList.add('hidden');
+                userActions?.classList.remove('hidden');
+                mobProfileBtn?.classList.remove('hidden');
+
+                const initials = userData.name ? userData.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'JD';
+                document.getElementById('user-avatar-initials').textContent = initials;
+                document.getElementById('user-display-name').textContent = userData.name;
+                document.getElementById('dropdown-name').textContent = userData.name;
+                document.getElementById('dropdown-email').textContent = userData.email;
+                document.getElementById('dash-welcome-text').textContent = `Welcome back, ${userData.name}!`;
+
+                // Profile Fields
+                document.getElementById('profile-name').textContent = userData.name;
+                document.getElementById('profile-email').textContent = userData.email;
+                document.getElementById('profile-phone').textContent = userData.phone || '-';
+                document.getElementById('profile-sin').textContent = userData.sin || '-';
+                document.getElementById('profile-address').textContent = userData.address || '-';
+                document.getElementById('profile-deposit').textContent = `$${parseFloat(userData.deposit || 500).toFixed(2)} CAD`;
+                document.getElementById('profile-date').textContent = userData.date || 'Today';
+
+                updateBalanceDisplay();
+                renderTransactions();
+            } else {
+                userActions?.classList.add('hidden');
+                guestActions?.classList.remove('hidden');
+                mobProfileBtn?.classList.add('hidden');
+            }
+        }
+
+        function updateBalanceDisplay() {
+            if (!currentUserData) return;
+            const deposit = parseFloat(currentUserData.deposit || 500);
+            const savings = 8300.50;
+            const total = deposit + savings;
+
+            const mainBalEl = document.getElementById('dash-main-balance');
+            const cheqEl = document.getElementById('chequing-balance-display');
+            const eyeIcon = document.getElementById('balance-eye-icon');
+
+            if (isBalanceHidden) {
+                if (mainBalEl) mainBalEl.textContent = '$•••••• CAD';
+                if (cheqEl) cheqEl.textContent = '$••••••';
+                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye-slash text-sm';
+            } else {
+                if (mainBalEl) mainBalEl.textContent = `$${total.toLocaleString('en-CA', {minimumFractionDigits: 2})} CAD`;
+                if (cheqEl) cheqEl.textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
+                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye text-sm';
+            }
+        }
+
+        function renderTransactions() {
+            const tbody = document.getElementById('transaction-list');
+            if (!tbody || !currentUserData) return;
+            const txs = currentUserData.transactions || [
+                { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(currentUserData.deposit || 500).toFixed(2)}`, ref: 'TRX-893201', status: 'Completed' },
+                { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45', ref: 'TRX-892114', status: 'Completed' },
+                { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20', ref: 'TRX-885419', status: 'Completed' }
+            ];
+
+            tbody.innerHTML = txs.map((t, idx) => `
+                <tr class="tx-row border-b border-slate-100" data-index="${idx}">
+                    <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
+                    <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
+                    <td class="py-3.5 text-slate-500">${t.date}</td>
+                    <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
+                </tr>
+            `).join('');
+
+            tbody.querySelectorAll('.tx-row').forEach(row => {
+                row.addEventListener('click', () => {
+                    const tx = txs[row.getAttribute('data-index')];
+                    document.getElementById('tx-modal-content').innerHTML = `
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Description</span><span class="font-bold">${tx.desc}</span></div>
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Category</span><span class="font-bold">${tx.cat}</span></div>
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Date</span><span class="font-bold">${tx.date}</span></div>
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Reference #</span><span class="font-bold">${tx.ref || 'TRX-994120'}</span></div>
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Status</span><span class="font-bold text-emerald-600">${tx.status || 'Completed'}</span></div>
+                        <div class="flex justify-between py-2"><span class="text-slate-500">Amount</span><span class="font-bold text-lg">${tx.amount} CAD</span></div>
+                    `;
+                    openModal('modal-tx-detail');
+                });
+            });
+        }
+
+        // Firebase Auth State Listener with Session Persistence
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const docRef = db.collection('users').doc(user.uid);
+                    const docSnap = await docRef.get();
+                    if (docSnap.exists) {
+                        updateUIWithUser(docSnap.data());
+                    } else {
+                        const basicData = { name: user.displayName || 'Client', email: user.email, deposit: 500, transactions: [] };
+                        updateUIWithUser(basicData);
+                    }
+                    
+                    const savedView = sessionStorage.getItem('cb_current_view') || 'dashboard';
+                    switchView(savedView);
+                } catch (err) {
+                    console.error("Error fetching user profile from Firestore:", err);
+                }
+            } else {
+                updateUIWithUser(null);
+                sessionStorage.removeItem('cb_current_view');
+                switchView('landing');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            ['login-password', 'signup-password'].forEach(id => {
+                const input = document.getElementById(id);
+                const btn = document.getElementById(`toggle-${id}`);
+                if (input && btn) {
+                    btn.addEventListener('click', () => {
+                        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                        input.setAttribute('type', type);
+                        btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
+                    });
+                }
+            });
+
+            document.getElementById('toggle-balance-btn')?.addEventListener('click', () => {
+                isBalanceHidden = !isBalanceHidden;
+                updateBalanceDisplay();
+            });
+
+            const mobMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobMenu = document.getElementById('mobile-menu');
+            const mobOverlay = document.getElementById('mobile-menu-overlay');
+            if (mobMenuBtn && mobMenu && mobOverlay) {
+                mobMenuBtn.addEventListener('click', () => {
+                    mobMenu.classList.toggle('hidden');
+                    mobOverlay.classList.toggle('hidden');
+                });
+                mobOverlay.addEventListener('click', () => {
+                    mobMenu.classList.add('hidden');
+                    mobOverlay.classList.add('hidden');
+                });
+            }
+
+            const profBtn = document.getElementById('profile-menu-btn');
+            const profDropdown = document.getElementById('profile-dropdown');
+            if (profBtn && profDropdown) {
+                profBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    profDropdown.classList.toggle('hidden');
+                });
+                document.addEventListener('click', () => profDropdown.classList.add('hidden'));
+            }
+
+            const navMap = {
+                'nav-logo': 'landing', 'nav-btn-home': 'landing', 'mob-nav-home': 'landing',
+                'nav-btn-dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard', 'btn-dash-transfer': 'transfer',
+                'nav-btn-transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-back-from-transfer': 'dashboard',
+                'nav-btn-receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive', 'btn-back-from-receive': 'dashboard',
+                'nav-btn-support': 'support', 'mob-nav-support': 'support', 'btn-back-from-support': 'landing',
+                'btn-go-profile': 'profile', 'mob-nav-profile': 'profile', 'btn-back-from-profile': 'dashboard'
+            };
+
+            Object.entries(navMap).forEach(([id, view]) => {
+                document.getElementById(id)?.addEventListener('click', () => {
+                    if (['dashboard', 'profile', 'transfer', 'receive'].includes(view) && !auth.currentUser) {
+                        showToast('Please sign in to access online banking.');
+                        openModal('modal-login');
+                        return;
+                    }
+                    switchView(view);
+                });
+            });
+
+            document.getElementById('btn-open-login')?.addEventListener('click', () => openModal('modal-login'));
+            document.getElementById('btn-hero-login')?.addEventListener('click', () => openModal('modal-login'));
+            document.getElementById('close-login')?.addEventListener('click', () => closeModal('modal-login'));
+
+            document.getElementById('btn-open-signup')?.addEventListener('click', () => openModal('modal-signup'));
+            document.getElementById('btn-hero-signup')?.addEventListener('click', () => openModal('modal-signup'));
+            document.getElementById('close-signup')?.addEventListener('click', () => closeModal('modal-signup'));
+
+            document.getElementById('close-tx-modal')?.addEventListener('click', () => closeModal('modal-tx-detail'));
+            document.getElementById('btn-close-tx')?.addEventListener('click', () => closeModal('modal-tx-detail'));
+
+            const handleLogout = async () => {
+                try {
+                    await auth.signOut();
+                    showToast('Successfully logged out.', 'success');
+                    switchView('landing');
+                } catch (e) {
+                    showToast(e.message);
+                }
+            };
+            document.getElementById('btn-logout')?.addEventListener('click', handleLogout);
+            document.getElementById('btn-logout-profile')?.addEventListener('click', handleLogout);
+
+            document.getElementById('form-signup')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value.trim();
+                const email = document.getElementById('signup-email').value.trim().toLowerCase();
+                const phone = document.getElementById('signup-phone').value.trim();
+                const sin = document.getElementById('signup-sin').value.trim();
+                const address = document.getElementById('signup-address').value.trim();
+                const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
+                const password = document.getElementById('signup-password').value;
+                const submitBtn = document.getElementById('btn-signup-submit');
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Creating Account...";
+
+                try {
+                    const userCred = await auth.createUserWithEmailAndPassword(email, password);
+                    const user = userCred.user;
+
+                    const userData = {
+                        uid: user.uid,
+                        name, email, phone, sin, address, deposit,
+                        date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                        transactions: [
+                            { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}`, ref: 'TRX-998120', status: 'Completed' },
+                            { desc: 'Welcome Bonus Offer', cat: 'Bonus', date: 'Today', amount: '+$250.00', ref: 'TRX-998121', status: 'Completed' }
+                        ]
+                    };
+
+                    await db.collection('users').doc(user.uid).set(userData);
+                    closeModal('modal-signup');
+                    showToast('Account successfully created!', 'success');
+                    switchView('dashboard');
+                } catch (error) {
+                    if (error.code === 'auth/email-already-in-use') {
+                        showToast('An account with this email already exists. Please sign in.');
+                    } else {
+                        showToast(error.message);
+                    }
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Create Account & Sign In";
+                }
+            });
+
+            document.getElementById('form-login')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value.trim().toLowerCase();
+                const password = document.getElementById('login-password').value;
+                const submitBtn = document.getElementById('btn-login-submit');
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Signing In...";
+
+                try {
+                    await auth.signInWithEmailAndPassword(email, password);
+                    closeModal('modal-login');
+                    showToast('Successfully signed in!', 'success');
+                    switchView('dashboard');
+                    document.getElementById('form-login').reset();
+                } catch (error) {
+                    showToast('Invalid email or password. Please check your credentials.');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Sign In";
+                }
+            });
+
+            document.getElementById('transfer-type')?.addEventListener('change', (e) => {
+                const val = e.target.value;
+                ['etransfer', 'internal', 'bill', 'wire'].forEach(type => {
+                    document.getElementById(`fields-${type}`)?.classList.toggle('hidden', type !== val);
+                });
+            });
+
+            document.getElementById('transfer-form')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const type = document.getElementById('transfer-type').value;
+                let amount = 0;
+                let desc = '';
+
+                if (type === 'etransfer') {
+                    amount = parseFloat(document.getElementById('et-amount').value) || 0;
+                    const recipient = document.getElementById('et-name').value || 'Recipient';
+                    desc = `e-Transfer to ${recipient}`;
+                } else if (type === 'internal') {
+                    amount = parseFloat(document.getElementById('int-amount').value) || 0;
+                    desc = `Internal Account Transfer`;
+                } else if (type === 'bill') {
+                    amount = parseFloat(document.getElementById('bill-amount').value) || 0;
+                    const payee = document.getElementById('bill-payee').value || 'Bill Payee';
+                    desc = `Bill Payment: ${payee}`;
+                } else if (type === 'wire') {
+                    amount = parseFloat(document.getElementById('wire-amount').value) || 0;
+                    const wireName = document.getElementById('wire-name').value || 'Beneficiary';
+                    desc = `Wire Transfer to ${wireName}`;
+                }
+
+                if (!currentUserData || currentUserData.deposit < amount) {
+                    showToast('Insufficient available balance for this transfer.');
+                    return;
+                }
+
+                currentUserData.deposit -= amount;
+                if (!currentUserData.transactions) currentUserData.transactions = [];
+                currentUserData.transactions.unshift({
+                    desc: desc,
+                    cat: 'Transfer',
+                    date: 'Today',
+                    amount: `-$${amount.toFixed(2)}`,
+                    ref: 'TRX-' + Math.floor(100000 + Math.random() * 900000),
+                    status: 'Completed'
+                });
+
+                try {
+                    const user = auth.currentUser;
+                    if (user) {
+                        await db.collection('users').doc(user.uid).update({
+                            deposit: currentUserData.deposit,
+                            transactions: currentUserData.transactions
+                        });
+                    }
+                    updateUIWithUser(currentUserData);
+                    switchView('dashboard');
+                    showToast(`Successfully transferred $${amount.toFixed(2)} CAD!`, 'success');
+                    e.target.reset();
+                } catch (err) {
+                    showToast('Error processing transfer.');
+                }
+            });
+
             document.getElementById('btn-copy-info')?.addEventListener('click', () => {
                 navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
                 showToast('Banking details copied to clipboard!', 'success');
