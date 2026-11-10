@@ -490,13 +490,18 @@
         }
 
         function switchView(viewName) {
-            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
-            document.getElementById(`section-${viewName}`)?.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.getElementById('mobile-menu')?.classList.add('hidden');
-            document.getElementById('mobile-menu-overlay')?.classList.add('hidden');
-            document.getElementById('profile-dropdown')?.classList.add('hidden');
-        }
+    document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+    const target = document.getElementById(`section-${viewName}`);
+    if (target) {
+        target.classList.remove('hidden');
+        // Save the current view so refresh doesn't lose your place
+        sessionStorage.setItem('cb_current_view', viewName);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('mobile-menu')?.classList.add('hidden');
+    document.getElementById('mobile-menu-overlay')?.classList.add('hidden');
+    document.getElementById('profile-dropdown')?.classList.add('hidden');
+}
 
         function updateUIWithUser(userData) {
             currentUserData = userData;
@@ -589,8 +594,9 @@
             });
         }
 
-        // Firebase Auth State Listener (Syncs logins across phones/tablets/computers)
-        auth.onAuthStateChanged(async (user) => {
+      
+                switchView('landing');  // Firebase Auth State Listener (Syncs logins across phones/tablets/computers)
+       auth.onAuthStateChanged(async (user) => {
             if (user) {
                 try {
                     const docRef = db.collection('users').doc(user.uid);
@@ -601,11 +607,16 @@
                         const basicData = { name: user.displayName || 'Client', email: user.email, deposit: 500, transactions: [] };
                         updateUIWithUser(basicData);
                     }
+                    
+                    // Keeps you on your active page when you refresh
+                    const savedView = sessionStorage.getItem('cb_current_view') || 'dashboard';
+                    switchView(savedView);
                 } catch (err) {
                     console.error("Error fetching user profile from Firestore:", err);
                 }
             } else {
                 updateUIWithUser(null);
+                sessionStorage.removeItem('cb_current_view');
                 switchView('landing');
             }
         });
