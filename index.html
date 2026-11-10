@@ -85,21 +85,26 @@
                     </div>
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-brand-200 p-2 mr-0.5 flex-shrink-0" aria-label="Menu">
-                    <span class="text-2xl leading-none block">☰</span>
+                <!-- ☰ only shown after login -->
+                <button id="mobile-menu-btn" class="hidden md:hidden text-white hover:text-brand-200 p-2 flex-shrink-0" aria-label="Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-1">
-            <button id="mob-nav-home" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
-            <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
-            <button id="mob-nav-profile" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800 hidden">Profile & Settings</button>
-            <button id="mob-nav-transfer" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
-            <button id="mob-nav-receive" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
-            <button id="mob-nav-support" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
-        </div>
     </header>
+
+    <!-- Mobile menu overlay (blurs/darkens background) -->
+    <div id="mobile-menu-overlay" class="hidden fixed inset-0 z-[90] bg-slate-900/60 backdrop-blur-sm md:hidden"></div>
+
+    <!-- Mobile menu panel -->
+    <div id="mobile-menu" class="hidden md:hidden fixed left-0 right-0 top-16 sm:top-20 z-[95] bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-1 shadow-xl">
+        <button id="mob-nav-home" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
+        <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
+        <button id="mob-nav-profile" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Profile & Settings</button>
+        <button id="mob-nav-transfer" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Transfer Funds</button>
+        <button id="mob-nav-receive" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Receive Money</button>
+        <button id="mob-nav-support" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Customer Care</button>
+    </div>
 
     <main class="flex-grow">
 
@@ -419,7 +424,7 @@
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
             <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-                <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><span class="text-xl leading-none">×</span></button>
+                <button type="button" id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
                 <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
                 <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
                 <form id="form-login" class="space-y-4">
@@ -431,7 +436,9 @@
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                         <div class="relative">
                             <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                            <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 text-sm font-bold px-1">👁</button>
+                            <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                                <i class="fa-solid fa-eye text-sm"></i>
+                            </button>
                         </div>
                     </div>
                     <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm">Sign In</button>
@@ -445,7 +452,7 @@
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
             <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
-                <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><span class="text-xl leading-none">×</span></button>
+                <button type="button" id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
                 <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
                 <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
                 <form id="form-signup" class="space-y-4">
@@ -482,7 +489,9 @@
                             <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                             <div class="relative">
                                 <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                                <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 text-sm font-bold px-1">👁</button>
+                                <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                                    <i class="fa-solid fa-eye text-sm"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -497,7 +506,7 @@
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
             <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-                <button id="close-tx-detail" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><span class="text-xl leading-none">×</span></button>
+                <button type="button" id="close-tx-detail" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
                 <h3 class="text-xl font-bold text-slate-900 mb-1">Transaction Details</h3>
                 <p class="text-xs text-slate-500 mb-6">Full information for this transaction</p>
                 <div class="space-y-4 text-sm">
@@ -568,13 +577,23 @@
             document.body.classList.remove('modal-open');
         }
 
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            document.getElementById('mobile-menu-overlay').classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+        function openMobileMenu() {
+            document.getElementById('mobile-menu').classList.remove('hidden');
+            document.getElementById('mobile-menu-overlay').classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
             const target = document.getElementById(`section-${viewName}`);
             if (target) target.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.getElementById('mobile-menu').classList.add('hidden');
-            document.body.classList.remove('modal-open');
+            closeMobileMenu();
             document.getElementById('profile-dropdown').classList.add('hidden');
         }
 
@@ -604,12 +623,13 @@
             const user = getCurrentUser();
             const guestActions = document.getElementById('nav-guest-actions');
             const userActions = document.getElementById('nav-user-actions');
-            const mobProfile = document.getElementById('mob-nav-profile');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
             if (user) {
                 guestActions.classList.add('hidden');
                 userActions.classList.remove('hidden');
-                if (mobProfile) mobProfile.classList.remove('hidden');
+                // Show ☰ only after login (mobile)
+                mobileMenuBtn.classList.remove('hidden');
 
                 const initials = user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
                 document.getElementById('user-avatar-initials').textContent = initials;
@@ -634,7 +654,9 @@
             } else {
                 guestActions.classList.remove('hidden');
                 userActions.classList.add('hidden');
-                if (mobProfile) mobProfile.classList.add('hidden');
+                // Hide ☰ before login
+                mobileMenuBtn.classList.add('hidden');
+                closeMobileMenu();
             }
         }
 
@@ -680,10 +702,14 @@
             const input = document.getElementById(inputId);
             const btn = document.getElementById(toggleBtnId);
             if (!input || !btn) return;
-            btn.addEventListener('click', () => {
-                const isPassword = input.getAttribute('type') === 'password';
-                input.setAttribute('type', isPassword ? 'text' : 'password');
-                btn.textContent = isPassword ? '🙈' : '👁';
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+                btn.innerHTML = type === 'password'
+                    ? '<i class="fa-solid fa-eye text-sm"></i>'
+                    : '<i class="fa-solid fa-eye-slash text-sm"></i>';
             });
         }
 
@@ -755,19 +781,23 @@
             document.getElementById('close-signup').addEventListener('click', () => closeModal(modalSignup));
             document.getElementById('close-tx-detail').addEventListener('click', () => closeModal(modalTx));
 
-            modalLogin.addEventListener('click', (e) => { if (e.target === modalLogin || e.target.classList.contains('absolute')) closeModal(modalLogin); });
-            modalSignup.addEventListener('click', (e) => { if (e.target === modalSignup || e.target.classList.contains('absolute')) closeModal(modalSignup); });
-            modalTx.addEventListener('click', (e) => { if (e.target === modalTx || e.target.classList.contains('absolute')) closeModal(modalTx); });
+            modalLogin.addEventListener('click', (e) => {
+                if (e.target === modalLogin || e.target === modalLogin.querySelector('.absolute')) closeModal(modalLogin);
+            });
+            modalSignup.addEventListener('click', (e) => {
+                if (e.target === modalSignup || e.target === modalSignup.querySelector('.absolute')) closeModal(modalSignup);
+            });
+            modalTx.addEventListener('click', (e) => {
+                if (e.target === modalTx || e.target === modalTx.querySelector('.absolute')) closeModal(modalTx);
+            });
 
+            // Mobile menu
             document.getElementById('mobile-menu-btn').addEventListener('click', () => {
                 const menu = document.getElementById('mobile-menu');
-                menu.classList.toggle('hidden');
-                if (menu.classList.contains('hidden')) {
-                    document.body.classList.remove('modal-open');
-                } else {
-                    document.body.classList.add('modal-open');
-                }
+                if (menu.classList.contains('hidden')) openMobileMenu();
+                else closeMobileMenu();
             });
+            document.getElementById('mobile-menu-overlay').addEventListener('click', closeMobileMenu);
 
             function doLogout() {
                 localStorage.removeItem('cb_current_user');
