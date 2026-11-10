@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Firebase SDKs (v10.14.1 Compat) -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -36,7 +37,7 @@
 </head>
 <body class="font-sans text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-2 max-w-sm pointer-events-none"></div>
 
     <header class="sticky top-0 z-[100] bg-brand-900 text-white shadow-md">
         <div class="max-w-7xl mx-auto pl-3 pr-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
@@ -51,40 +52,40 @@
             </div>
 
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <button id="nav-btn-home" class="hover:text-brand-200 transition-colors py-2">Home</button>
-                <button id="nav-btn-dashboard" class="hover:text-brand-200 transition-colors py-2">Dashboard</button>
-                <button id="nav-btn-transfer" class="hover:text-brand-200 transition-colors py-2">Transfer</button>
-                <button id="nav-btn-receive" class="hover:text-brand-200 transition-colors py-2">Receive</button>
-                <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2">Customer Care</button>
+                <button id="nav-btn-home" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Home</button>
+                <button id="nav-btn-dashboard" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Dashboard</button>
+                <button id="nav-btn-transfer" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Transfer</button>
+                <button id="nav-btn-receive" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Receive</button>
+                <button id="nav-btn-support" class="hover:text-brand-200 transition-colors py-2 cursor-pointer">Customer Care</button>
             </nav>
 
             <div class="flex items-center gap-1 sm:gap-3 flex-shrink-0">
                 <div id="nav-guest-actions" class="flex items-center gap-1">
-                    <button id="btn-open-login" class="text-xs sm:text-sm font-semibold hover:text-brand-200 px-1.5 sm:px-3 py-2 transition-colors">Sign In</button>
-                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-2 sm:px-4 py-2 rounded-lg font-semibold text-[11px] sm:text-sm shadow-sm transition-all whitespace-nowrap">Open Account</button>
+                    <button id="btn-open-login" class="text-xs sm:text-sm font-semibold hover:text-brand-200 px-1.5 sm:px-3 py-2 transition-colors cursor-pointer">Sign In</button>
+                    <button id="btn-open-signup" class="bg-brand-500 hover:bg-brand-600 text-white px-2 sm:px-4 py-2 rounded-lg font-semibold text-[11px] sm:text-sm shadow-sm transition-all whitespace-nowrap cursor-pointer">Open Account</button>
                 </div>
 
                 <div id="nav-user-actions" class="hidden relative">
-                    <button id="profile-menu-btn" class="flex items-center space-x-2 bg-brand-800 hover:bg-brand-700 px-2 sm:px-3 py-1.5 rounded-full border border-brand-700 transition-colors">
+                    <button id="profile-menu-btn" class="flex items-center space-x-2 bg-brand-800 hover:bg-brand-700 px-2 sm:px-3 py-1.5 rounded-full border border-brand-700 transition-colors cursor-pointer">
                         <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white font-bold text-sm" id="user-avatar-initials">JD</div>
                         <span class="text-xs font-semibold text-white hidden sm:inline" id="user-display-name">John Doe</span>
                         <i class="fa-solid fa-chevron-down text-xs text-brand-200"></i>
                     </button>
                     <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50">
                         <div class="px-4 py-3 border-b border-slate-100">
-                            <p class="text-sm font-semibold text-slate-800" id="dropdown-name">John Doe</p>
-                            <p class="text-xs text-slate-500" id="dropdown-email">john@example.com</p>
+                            <p class="text-sm font-semibold text-slate-800 truncate" id="dropdown-name">John Doe</p>
+                            <p class="text-xs text-slate-500 truncate" id="dropdown-email">john@example.com</p>
                         </div>
-                        <button id="btn-go-profile" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3">
+                        <button id="btn-go-profile" class="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3 cursor-pointer">
                             <i class="fa-solid fa-user text-brand-600 w-4"></i> Profile & Settings
                         </button>
-                        <button id="btn-logout" class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3">
+                        <button id="btn-logout" class="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 cursor-pointer">
                             <i class="fa-solid fa-right-from-bracket w-4"></i> Log Out
                         </button>
                     </div>
                 </div>
 
-                <button id="mobile-menu-btn" class="hidden md:hidden text-white hover:text-brand-200 p-2 flex-shrink-0" aria-label="Menu">
+                <button id="mobile-menu-btn" class="hidden md:hidden text-white hover:text-brand-200 p-2 flex-shrink-0 cursor-pointer" aria-label="Menu">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
@@ -102,6 +103,7 @@
     </div>
 
     <main class="flex-grow">
+        <!-- LANDING SECTION -->
         <section id="section-landing" class="view-section">
             <div class="blue-gradient text-white py-20 lg:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
                 <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
@@ -113,8 +115,8 @@
                         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">Personal Banking Built for Your Local Community</h1>
                         <p class="text-lg text-brand-100 max-w-xl font-light">Experience zero-fee everyday chequing, high-interest savings, and instant Interac e-Transfers—backed by 24/7 Canadian customer care.</p>
                         <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all">Open an Account Today</button>
-                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all">Sign In to Online Banking</button>
+                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all cursor-pointer">Open an Account Today</button>
+                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all cursor-pointer">Sign In to Online Banking</button>
                         </div>
                     </div>
                     <div class="relative flex justify-center">
@@ -168,6 +170,7 @@
             </div>
         </section>
 
+        <!-- DASHBOARD SECTION -->
         <section id="section-dashboard" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
             <div class="blue-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -179,7 +182,7 @@
                     <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-4 min-w-[220px]">
                         <div class="flex items-center justify-between gap-3">
                             <div class="text-xs text-brand-200 font-medium uppercase tracking-wider">Total Available Balance</div>
-                            <button id="toggle-balance-btn" class="text-brand-200 hover:text-white transition-colors">
+                            <button id="toggle-balance-btn" class="text-brand-200 hover:text-white transition-colors cursor-pointer">
                                 <i class="fa-solid fa-eye text-sm" id="balance-eye-icon"></i>
                             </button>
                         </div>
@@ -188,10 +191,10 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-3 mt-6">
-                    <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow flex items-center justify-center gap-2">
+                    <button id="btn-dash-transfer" class="flex-1 md:flex-none bg-white text-brand-900 hover:bg-brand-50 px-5 py-2.5 rounded-xl font-bold text-sm shadow flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Send Money
                     </button>
-                    <button id="btn-dash-receive" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm border border-brand-600 flex items-center justify-center gap-2">
+                    <button id="btn-dash-receive" class="flex-1 md:flex-none bg-brand-800 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm border border-brand-600 flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-qrcode"></i> Receive
                     </button>
                 </div>
@@ -251,8 +254,9 @@
             </div>
         </section>
 
+        <!-- PROFILE SECTION -->
         <section id="section-profile" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6">
-            <button id="btn-back-from-profile" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-2">
+            <button id="btn-back-from-profile" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-2 cursor-pointer">
                 <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
             </button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
@@ -273,15 +277,16 @@
                     <div><label class="block text-xs font-semibold text-slate-400 uppercase">Account Created</label><p class="text-base font-semibold text-slate-800 mt-1" id="profile-date">-</p></div>
                 </div>
                 <div class="mt-8 pt-6 border-t border-slate-100">
-                    <button id="btn-logout-profile" class="bg-red-50 hover:bg-red-100 text-red-600 font-semibold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+                    <button id="btn-logout-profile" class="bg-red-50 hover:bg-red-100 text-red-600 font-semibold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-right-from-bracket"></i> Log Out of Online Banking
                     </button>
                 </div>
             </div>
         </section>
 
+        <!-- TRANSFER SECTION -->
         <section id="section-transfer" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
-            <button id="btn-back-from-transfer" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4">
+            <button id="btn-back-from-transfer" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4 cursor-pointer">
                 <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
             </button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
@@ -334,13 +339,14 @@
                         <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Account Number</label><input type="text" id="wire-account" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
                         <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label><input type="number" id="wire-amount" step="0.01" min="1" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="0.00"></div>
                     </div>
-                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm mt-2">Send / Pay Now</button>
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm mt-2 cursor-pointer">Send / Pay Now</button>
                 </form>
             </div>
         </section>
 
+        <!-- RECEIVE SECTION -->
         <section id="section-receive" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto text-center">
-            <button id="btn-back-from-receive" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <button id="btn-back-from-receive" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4 cursor-pointer"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 space-y-6">
                 <h2 class="text-2xl font-bold text-slate-900">Receive Canadian Funds</h2>
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-left space-y-3 text-sm">
@@ -348,12 +354,13 @@
                     <div class="flex justify-between"><span class="text-slate-500">Transit Number:</span><span class="font-bold">10294</span></div>
                     <div class="flex justify-between"><span class="text-slate-500">Account Number:</span><span class="font-bold">•••• 4892</span></div>
                 </div>
-                <button id="btn-copy-info" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl text-sm"><i class="fa-solid fa-copy mr-2"></i> Copy Banking Details</button>
+                <button id="btn-copy-info" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold py-3 rounded-xl text-sm cursor-pointer"><i class="fa-solid fa-copy mr-2"></i> Copy Banking Details</button>
             </div>
         </section>
 
+        <!-- SUPPORT SECTION -->
         <section id="section-support" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
-            <button id="btn-back-from-support" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button id="btn-back-from-support" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4 cursor-pointer"><i class="fa-solid fa-arrow-left"></i> Back</button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
                 <h2 class="text-2xl font-bold text-slate-900">Canadian Customer Care</h2>
                 <div class="space-y-3">
@@ -363,495 +370,476 @@
                     </div>
                     <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
                         <i class="fa-solid fa-envelope text-brand-600"></i>
-                        <div><div class="text-xs text-slate-400">Email</div><div class="font-bold text-sm">support@communitybankcanada.ca</div></div>
+                        <div><div class="text-xs text-slate-400">Secure Email</div><div class="font-bold text-sm">support@communitybankcanada.ca</div></div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-brand-950 text-slate-400 py-10 px-4 mt-auto border-t border-brand-900">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-            <span class="font-semibold text-white">Community Bank of Canada</span>
-            <div>&copy; 2026 Community Bank of Canada. Member CDIC.</div>
+    <!-- FOOTER -->
+    <footer class="bg-brand-950 text-slate-400 py-12 px-4 sm:px-6 lg:px-8 mt-auto border-t border-brand-900">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 text-xs">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-brand-800 text-white rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-building-columns text-sm"></i></div>
+                <span class="font-semibold text-white">Community Bank of Canada</span>
+            </div>
+            <div>&copy; 2026 Community Bank of Canada. All rights reserved. Member CDIC.</div>
         </div>
     </footer>
 
-    <!-- LOGIN -->
-    <div id="modal-login" class="fixed inset-0 z-[200] hidden">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-        <div class="relative flex min-h-full items-center justify-center p-4">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-                <button type="button" id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-                <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
-                <p class="text-xs text-slate-500 mb-6">Works on all your devices</p>
-                <form id="form-login" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
-                        <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+    <!-- MODAL: SIGN IN -->
+    <div id="modal-login" class="fixed inset-0 z-[150] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="close-login" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-2xl font-bold text-slate-900 mb-1">Sign In</h3>
+            <p class="text-xs text-slate-500 mb-6">Access your online banking dashboard.</p>
+            <form id="form-login" class="space-y-4">
+                <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label><input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com"></div>
+                <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                    <div class="relative">
+                        <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                        <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"><i class="fa-solid fa-eye text-sm"></i></button>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
-                        <div class="relative">
-                            <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10">
-                            <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-eye text-sm"></i></button>
-                        </div>
-                    </div>
-                    <button type="submit" id="btn-login-submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm">Sign In</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- SIGNUP -->
-    <div id="modal-signup" class="fixed inset-0 z-[200] hidden overflow-y-auto">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-        <div class="relative flex min-h-full items-center justify-center p-4">
-            <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
-                <button type="button" id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-                <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
-                <p class="text-xs text-slate-500 mb-6">Create once — use on any device</p>
-                <form id="form-signup" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Legal Name</label><input type="text" id="signup-name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
-                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label><input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label><input type="tel" id="signup-phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
-                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">SIN</label><input type="text" id="signup-sin" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
-                    </div>
-                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Residential Address</label><input type="text" id="signup-address" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label><input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password (min 6)</label>
-                            <div class="relative">
-                                <input type="password" id="signup-password" required minlength="6" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10">
-                                <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-eye text-sm"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" id="btn-signup-submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm mt-2">Create Account & Sign In</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-tx-detail" class="fixed inset-0 z-[200] hidden">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-        <div class="relative flex min-h-full items-center justify-center p-4">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
-                <button type="button" id="close-tx-detail" class="absolute top-5 right-5 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
-                <h3 class="text-xl font-bold text-slate-900 mb-4">Transaction Details</h3>
-                <div class="space-y-3 text-sm">
-                    <div class="flex justify-between border-b pb-2"><span class="text-slate-500">Transaction ID</span><span class="font-semibold" id="tx-detail-id">-</span></div>
-                    <div class="flex justify-between border-b pb-2"><span class="text-slate-500">Description</span><span class="font-semibold text-right" id="tx-detail-desc">-</span></div>
-                    <div class="flex justify-between border-b pb-2"><span class="text-slate-500">Category</span><span class="font-semibold" id="tx-detail-cat">-</span></div>
-                    <div class="flex justify-between border-b pb-2"><span class="text-slate-500">Date & Time</span><span class="font-semibold" id="tx-detail-datetime">-</span></div>
-                    <div class="flex justify-between border-b pb-2"><span class="text-slate-500">From</span><span class="font-semibold text-right" id="tx-detail-sender">-</span></div>
-                    <div class="flex justify-between border-b pb-2"><span class="text-slate-500">To</span><span class="font-semibold text-right" id="tx-detail-receiver">-</span></div>
-                    <div class="flex justify-between pt-1"><span class="text-slate-500">Amount</span><span class="font-bold text-lg" id="tx-detail-amount">-</span></div>
                 </div>
-            </div>
+                <button type="submit" id="btn-login-submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm cursor-pointer">Sign In</button>
+            </form>
         </div>
     </div>
 
+    <!-- MODAL: SIGN UP -->
+    <div id="modal-signup" class="fixed inset-0 z-[150] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative my-8">
+            <button id="close-signup" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-2xl font-bold text-slate-900 mb-1">Open an Account</h3>
+            <p class="text-xs text-slate-500 mb-6">Join Community Bank of Canada in under 2 minutes.</p>
+            <form id="form-signup" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Full Legal Name</label><input type="text" id="signup-name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="John Doe"></div>
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label><input type="email" id="signup-email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="john@example.com"></div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label><input type="tel" id="signup-phone" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="(416) 555-0192"></div>
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">SIN</label><input type="text" id="signup-sin" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123-456-789"></div>
+                </div>
+                <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Residential Address</label><input type="text" id="signup-address" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm" placeholder="123 Bay St, Toronto, ON"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Deposit (CAD)</label><input type="number" id="signup-deposit" min="50" value="500" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></div>
+                    <div><label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
+                        <div class="relative">
+                            <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
+                            <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"><i class="fa-solid fa-eye text-sm"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="btn-signup-submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl text-sm mt-2 cursor-pointer">Create Account & Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: TRANSACTION DETAILS -->
+    <div id="modal-tx-detail" class="fixed inset-0 z-[150] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+            <button id="close-tx-modal" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Transaction Details</h3>
+            <div class="space-y-4 text-sm" id="tx-modal-content"></div>
+            <button id="btn-close-tx" class="w-full mt-6 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 rounded-xl cursor-pointer">Close</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT & FIREBASE CONFIGURATION -->
     <script>
         const firebaseConfig = {
-            apiKey: "AIzaSyBTuU6PN-FuQS7SNsOVl71_YvkqPTfVqzc",
-            authDomain: "community-bank-46084.firebaseapp.com",
-            projectId: "community-bank-46084",
-            storageBucket: "community-bank-46084.firebasestorage.app",
-            messagingSenderId: "259600131317",
-            appId: "1:259600131317:web:fdbdb45370f2f8bd6191bc"
-        };
+    apiKey: "AIzaSyBTuU6PN-FuQS7SNsOVl71_YvkqPTfVqzc",
+    authDomain: "community-bank-46084.firebaseapp.com",
+    projectId: "community-bank-46084",
+    storageBucket: "community-bank-46084.firebasestorage.app",
+    messagingSenderId: "259600131317",
+    appId: "1:259600131317:web:fdbdb45370f2f8bd6191bc"
+};
+
+        // Initialize Firebase Compat
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        let isBalanceHidden = false;
         let currentUserData = null;
-        let balanceVisible = true;
-        let currentChequing = 0;
-        const currentSavings = 8300.50;
-        let currentTotalBalance = 0;
 
         function showToast(message, type = 'error') {
             const container = document.getElementById('toast-container');
+            if (!container) return;
             const toast = document.createElement('div');
-            toast.className = `${type === 'success' ? 'bg-emerald-600' : 'bg-red-600'} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300`;
-            toast.innerHTML = `<span>${message}</span>`;
+            const bgClass = type === 'success' ? 'bg-emerald-600' : 'bg-red-600';
+            toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center justify-between pointer-events-auto transition-all`;
+            toast.innerHTML = `<span>${message}</span><i class="fa-solid fa-circle-exclamation ml-2"></i>`;
             container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
-            setTimeout(() => { toast.classList.add('translate-y-2', 'opacity-0'); setTimeout(() => toast.remove(), 300); }, 4000);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
         }
 
-        function openModal(modal) { modal.classList.remove('hidden'); document.body.classList.add('modal-open'); }
-        function closeModal(modal) { modal.classList.add('hidden'); document.body.classList.remove('modal-open'); }
-        function closeMobileMenu() {
-            document.getElementById('mobile-menu').classList.add('hidden');
-            document.getElementById('mobile-menu-overlay').classList.add('hidden');
-            document.body.classList.remove('modal-open');
-        }
-        function openMobileMenu() {
-            document.getElementById('mobile-menu').classList.remove('hidden');
-            document.getElementById('mobile-menu-overlay').classList.remove('hidden');
+        function openModal(id) {
+            document.getElementById(id)?.classList.remove('hidden');
             document.body.classList.add('modal-open');
         }
+        function closeModal(id) {
+            document.getElementById(id)?.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
         function switchView(viewName) {
             document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
-            const target = document.getElementById(`section-${viewName}`);
-            if (target) target.classList.remove('hidden');
+            document.getElementById(`section-${viewName}`)?.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            closeMobileMenu();
-            document.getElementById('profile-dropdown').classList.add('hidden');
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+            document.getElementById('mobile-menu-overlay')?.classList.add('hidden');
+            document.getElementById('profile-dropdown')?.classList.add('hidden');
         }
-        function updateBalanceDisplay() {
-            const mainEl = document.getElementById('dash-main-balance');
-            const chequingEl = document.getElementById('chequing-balance-display');
-            const savingsEl = document.getElementById('savings-balance-display');
-            const eyeIcon = document.getElementById('balance-eye-icon');
-            if (balanceVisible) {
-                mainEl.textContent = `$${currentTotalBalance.toLocaleString('en-CA', { minimumFractionDigits: 2 })}`;
-                if (chequingEl) chequingEl.textContent = `$${currentChequing.toLocaleString('en-CA', { minimumFractionDigits: 2 })}`;
-                if (savingsEl) savingsEl.textContent = `$${currentSavings.toLocaleString('en-CA', { minimumFractionDigits: 2 })}`;
-                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye text-sm';
+
+        function updateUIWithUser(userData) {
+            currentUserData = userData;
+            const guestActions = document.getElementById('nav-guest-actions');
+            const userActions = document.getElementById('nav-user-actions');
+            const mobProfileBtn = document.getElementById('mob-nav-profile');
+
+            if (userData) {
+                guestActions?.classList.add('hidden');
+                userActions?.classList.remove('hidden');
+                mobProfileBtn?.classList.remove('hidden');
+
+                const initials = userData.name ? userData.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'JD';
+                document.getElementById('user-avatar-initials').textContent = initials;
+                document.getElementById('user-display-name').textContent = userData.name;
+                document.getElementById('dropdown-name').textContent = userData.name;
+                document.getElementById('dropdown-email').textContent = userData.email;
+                document.getElementById('dash-welcome-text').textContent = `Welcome back, ${userData.name}!`;
+
+                // Profile Fields
+                document.getElementById('profile-name').textContent = userData.name;
+                document.getElementById('profile-email').textContent = userData.email;
+                document.getElementById('profile-phone').textContent = userData.phone || '-';
+                document.getElementById('profile-sin').textContent = userData.sin || '-';
+                document.getElementById('profile-address').textContent = userData.address || '-';
+                document.getElementById('profile-deposit').textContent = `$${parseFloat(userData.deposit || 500).toFixed(2)} CAD`;
+                document.getElementById('profile-date').textContent = userData.date || 'Today';
+
+                updateBalanceDisplay();
+                renderTransactions();
             } else {
-                mainEl.textContent = '••••••';
-                if (chequingEl) chequingEl.textContent = '••••••';
-                if (savingsEl) savingsEl.textContent = '••••••';
-                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye-slash text-sm';
+                userActions?.classList.add('hidden');
+                guestActions?.classList.remove('hidden');
+                mobProfileBtn?.classList.add('hidden');
             }
         }
-        function generateTxId() {
-            return 'TX' + Date.now().toString().slice(-8) + Math.floor(Math.random() * 90 + 10);
+
+        function updateBalanceDisplay() {
+            if (!currentUserData) return;
+            const deposit = parseFloat(currentUserData.deposit || 500);
+            const savings = 8300.50;
+            const total = deposit + savings;
+
+            const mainBalEl = document.getElementById('dash-main-balance');
+            const cheqEl = document.getElementById('chequing-balance-display');
+            const eyeIcon = document.getElementById('balance-eye-icon');
+
+            if (isBalanceHidden) {
+                if (mainBalEl) mainBalEl.textContent = '$•••••• CAD';
+                if (cheqEl) cheqEl.textContent = '$••••••';
+                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye-slash text-sm';
+            } else {
+                if (mainBalEl) mainBalEl.textContent = `$${total.toLocaleString('en-CA', {minimumFractionDigits: 2})} CAD`;
+                if (cheqEl) cheqEl.textContent = `$${deposit.toLocaleString('en-CA', {minimumFractionDigits: 2})}`;
+                if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye text-sm';
+            }
         }
 
-        async function loadUserProfile(uid) {
-            const doc = await db.collection('users').doc(uid).get();
-            if (!doc.exists) return null;
-            return { id: uid, ...doc.data() };
-        }
-
-        function applyUserToUI(user) {
-            currentUserData = user;
-            document.getElementById('nav-guest-actions').classList.add('hidden');
-            document.getElementById('nav-user-actions').classList.remove('hidden');
-            document.getElementById('mobile-menu-btn').classList.remove('hidden');
-
-            const initials = (user.name || 'U').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-            document.getElementById('user-avatar-initials').textContent = initials;
-            document.getElementById('user-display-name').textContent = user.name;
-            document.getElementById('dropdown-name').textContent = user.name;
-            document.getElementById('dropdown-email').textContent = user.email;
-            document.getElementById('dash-welcome-text').textContent = `Welcome back, ${user.name}!`;
-
-            currentChequing = parseFloat(user.deposit || 0);
-            currentTotalBalance = currentChequing + currentSavings;
-            updateBalanceDisplay();
-
-            document.getElementById('profile-name').textContent = user.name || '-';
-            document.getElementById('profile-email').textContent = user.email || '-';
-            document.getElementById('profile-phone').textContent = user.phone || '-';
-            document.getElementById('profile-sin').textContent = user.sin || '-';
-            document.getElementById('profile-address').textContent = user.address || '-';
-            document.getElementById('profile-deposit').textContent = `$${currentChequing.toFixed(2)} CAD`;
-            document.getElementById('profile-date').textContent = user.date || '-';
-            renderTransactions(user);
-        }
-
-        function clearUserUI() {
-            currentUserData = null;
-            document.getElementById('nav-guest-actions').classList.remove('hidden');
-            document.getElementById('nav-user-actions').classList.add('hidden');
-            document.getElementById('mobile-menu-btn').classList.add('hidden');
-            closeMobileMenu();
-        }
-
-        function renderTransactions(user) {
+        function renderTransactions() {
             const tbody = document.getElementById('transaction-list');
-            const txs = user.transactions || [];
-            tbody.innerHTML = txs.map((t, index) => `
-                <tr class="tx-row" data-index="${index}">
+            if (!tbody || !currentUserData) return;
+            const txs = currentUserData.transactions || [
+                { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${parseFloat(currentUserData.deposit || 500).toFixed(2)}`, ref: 'TRX-893201', status: 'Completed' },
+                { desc: 'Tim Hortons Toronto', cat: 'Dining', date: 'Yesterday', amount: '-$6.45', ref: 'TRX-892114', status: 'Completed' },
+                { desc: 'Metro Grocery Toronto', cat: 'Groceries', date: '3 days ago', amount: '-$84.20', ref: 'TRX-885419', status: 'Completed' }
+            ];
+
+            tbody.innerHTML = txs.map((t, idx) => `
+                <tr class="tx-row border-b border-slate-100" data-index="${idx}">
                     <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
                     <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
                     <td class="py-3.5 text-slate-500">${t.date}</td>
-                    <td class="py-3.5 text-right font-bold ${String(t.amount).startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
+                    <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
                 </tr>
             `).join('');
+
             tbody.querySelectorAll('.tx-row').forEach(row => {
                 row.addEventListener('click', () => {
-                    const tx = txs[parseInt(row.getAttribute('data-index'))];
-                    document.getElementById('tx-detail-id').textContent = tx.id || '-';
-                    document.getElementById('tx-detail-desc').textContent = tx.desc || '-';
-                    document.getElementById('tx-detail-cat').textContent = tx.cat || '-';
-                    document.getElementById('tx-detail-datetime').textContent = `${tx.date || '-'} • ${tx.time || '—'}`;
-                    document.getElementById('tx-detail-sender').textContent = tx.sender || '-';
-                    document.getElementById('tx-detail-receiver').textContent = tx.receiver || '-';
-                    const amountEl = document.getElementById('tx-detail-amount');
-                    amountEl.textContent = `${tx.amount} CAD`;
-                    amountEl.className = `font-bold text-lg ${String(tx.amount).startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}`;
-                    openModal(document.getElementById('modal-tx-detail'));
+                    const tx = txs[row.getAttribute('data-index')];
+                    document.getElementById('tx-modal-content').innerHTML = `
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Description</span><span class="font-bold">${tx.desc}</span></div>
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Category</span><span class="font-bold">${tx.cat}</span></div>
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Date</span><span class="font-bold">${tx.date}</span></div>
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Reference #</span><span class="font-bold">${tx.ref || 'TRX-994120'}</span></div>
+                        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Status</span><span class="font-bold text-emerald-600">${tx.status || 'Completed'}</span></div>
+                        <div class="flex justify-between py-2"><span class="text-slate-500">Amount</span><span class="font-bold text-lg">${tx.amount} CAD</span></div>
+                    `;
+                    openModal('modal-tx-detail');
                 });
             });
         }
 
-        function setupPasswordToggle(inputId, toggleBtnId) {
-            const input = document.getElementById(inputId);
-            const btn = document.getElementById(toggleBtnId);
-            if (!input || !btn) return;
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                input.setAttribute('type', type);
-                btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
-            });
-        }
+        // Firebase Auth State Listener (Syncs logins across phones/tablets/computers)
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const docRef = db.collection('users').doc(user.uid);
+                    const docSnap = await docRef.get();
+                    if (docSnap.exists) {
+                        updateUIWithUser(docSnap.data());
+                    } else {
+                        const basicData = { name: user.displayName || 'Client', email: user.email, deposit: 500, transactions: [] };
+                        updateUIWithUser(basicData);
+                    }
+                } catch (err) {
+                    console.error("Error fetching user profile from Firestore:", err);
+                }
+            } else {
+                updateUIWithUser(null);
+                switchView('landing');
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
-            setupPasswordToggle('login-password', 'toggle-login-password');
-            setupPasswordToggle('signup-password', 'toggle-signup-password');
-
-            auth.onAuthStateChanged(async (firebaseUser) => {
-                if (firebaseUser) {
-                    try {
-                        const profile = await loadUserProfile(firebaseUser.uid);
-                        if (profile) {
-                            applyUserToUI(profile);
-                            switchView('dashboard');
-                        } else {
-                            clearUserUI();
-                            switchView('landing');
-                        }
-                    } catch (err) {
-                        console.error(err);
-                        showToast('Could not load account. Check Firebase setup.');
-                        clearUserUI();
-                        switchView('landing');
-                    }
-                } else {
-                    clearUserUI();
-                    switchView('landing');
+            // Password Visibility Toggles
+            ['login-password', 'signup-password'].forEach(id => {
+                const input = document.getElementById(id);
+                const btn = document.getElementById(`toggle-${id}`);
+                if (input && btn) {
+                    btn.addEventListener('click', () => {
+                        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                        input.setAttribute('type', type);
+                        btn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye text-sm"></i>' : '<i class="fa-solid fa-eye-slash text-sm"></i>';
+                    });
                 }
             });
 
-            document.getElementById('toggle-balance-btn').addEventListener('click', () => {
-                balanceVisible = !balanceVisible;
+            // Balance Eye Toggle Listener
+            document.getElementById('toggle-balance-btn')?.addEventListener('click', () => {
+                isBalanceHidden = !isBalanceHidden;
                 updateBalanceDisplay();
             });
 
-            const profileBtn = document.getElementById('profile-menu-btn');
-            const profileDropdown = document.getElementById('profile-dropdown');
-            profileBtn.addEventListener('click', (e) => { e.stopPropagation(); profileDropdown.classList.toggle('hidden'); });
-            document.addEventListener('click', () => profileDropdown.classList.add('hidden'));
-            document.getElementById('btn-go-profile').addEventListener('click', () => { switchView('profile'); profileDropdown.classList.add('hidden'); });
+            // Mobile Navigation Menu Toggle
+            const mobMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobMenu = document.getElementById('mobile-menu');
+            const mobOverlay = document.getElementById('mobile-menu-overlay');
+            if (mobMenuBtn && mobMenu && mobOverlay) {
+                mobMenuBtn.addEventListener('click', () => {
+                    mobMenu.classList.toggle('hidden');
+                    mobOverlay.classList.toggle('hidden');
+                });
+                mobOverlay.addEventListener('click', () => {
+                    mobMenu.classList.add('hidden');
+                    mobOverlay.classList.add('hidden');
+                });
+            }
 
+            // Profile Dropdown Toggle
+            const profBtn = document.getElementById('profile-menu-btn');
+            const profDropdown = document.getElementById('profile-dropdown');
+            if (profBtn && profDropdown) {
+                profBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    profDropdown.classList.toggle('hidden');
+                });
+                document.addEventListener('click', () => profDropdown.classList.add('hidden'));
+            }
+
+            // Navigation Route Mapping
             const navMap = {
-                'nav-btn-home': 'landing', 'mob-nav-home': 'landing', 'nav-logo': 'landing',
-                'nav-btn-dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard',
-                'nav-btn-transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-dash-transfer': 'transfer',
-                'nav-btn-receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive',
-                'nav-btn-support': 'support', 'mob-nav-support': 'support',
-                'mob-nav-profile': 'profile'
+                'nav-logo': 'landing', 'nav-btn-home': 'landing', 'mob-nav-home': 'landing',
+                'nav-btn-dashboard': 'dashboard', 'mob-nav-dashboard': 'dashboard', 'btn-dash-transfer': 'transfer',
+                'nav-btn-transfer': 'transfer', 'mob-nav-transfer': 'transfer', 'btn-back-from-transfer': 'dashboard',
+                'nav-btn-receive': 'receive', 'mob-nav-receive': 'receive', 'btn-dash-receive': 'receive', 'btn-back-from-receive': 'dashboard',
+                'nav-btn-support': 'support', 'mob-nav-support': 'support', 'btn-back-from-support': 'landing',
+                'btn-go-profile': 'profile', 'mob-nav-profile': 'profile', 'btn-back-from-profile': 'dashboard'
             };
-            Object.keys(navMap).forEach(id => {
-                const el = document.getElementById(id);
-                if (!el) return;
-                el.addEventListener('click', () => {
-                    const view = navMap[id];
+
+            Object.entries(navMap).forEach(([id, view]) => {
+                document.getElementById(id)?.addEventListener('click', () => {
                     if (['dashboard', 'profile', 'transfer', 'receive'].includes(view) && !auth.currentUser) {
-                        showToast('Please sign in or open an account first.');
-                        openModal(document.getElementById('modal-login'));
+                        showToast('Please sign in to access online banking.');
+                        openModal('modal-login');
                         return;
                     }
                     switchView(view);
                 });
             });
 
-            document.getElementById('btn-back-from-profile').addEventListener('click', () => switchView('dashboard'));
-            document.getElementById('btn-back-from-transfer').addEventListener('click', () => switchView('dashboard'));
-            document.getElementById('btn-back-from-receive').addEventListener('click', () => switchView('dashboard'));
-            document.getElementById('btn-back-from-support').addEventListener('click', () => switchView(auth.currentUser ? 'dashboard' : 'landing'));
+            // Modal Open/Close Controls
+            document.getElementById('btn-open-login')?.addEventListener('click', () => openModal('modal-login'));
+            document.getElementById('btn-hero-login')?.addEventListener('click', () => openModal('modal-login'));
+            document.getElementById('close-login')?.addEventListener('click', () => closeModal('modal-login'));
 
-            const modalLogin = document.getElementById('modal-login');
-            const modalSignup = document.getElementById('modal-signup');
-            const modalTx = document.getElementById('modal-tx-detail');
+            document.getElementById('btn-open-signup')?.addEventListener('click', () => openModal('modal-signup'));
+            document.getElementById('btn-hero-signup')?.addEventListener('click', () => openModal('modal-signup'));
+            document.getElementById('close-signup')?.addEventListener('click', () => closeModal('modal-signup'));
 
-            document.getElementById('btn-open-login').addEventListener('click', () => openModal(modalLogin));
-            document.getElementById('btn-hero-login').addEventListener('click', () => openModal(modalLogin));
-            document.getElementById('close-login').addEventListener('click', () => closeModal(modalLogin));
-            document.getElementById('btn-open-signup').addEventListener('click', () => openModal(modalSignup));
-            document.getElementById('btn-hero-signup').addEventListener('click', () => openModal(modalSignup));
-            document.getElementById('close-signup').addEventListener('click', () => closeModal(modalSignup));
-            document.getElementById('close-tx-detail').addEventListener('click', () => closeModal(modalTx));
+            document.getElementById('close-tx-modal')?.addEventListener('click', () => closeModal('modal-tx-detail'));
+            document.getElementById('btn-close-tx')?.addEventListener('click', () => closeModal('modal-tx-detail'));
 
-            modalLogin.addEventListener('click', (e) => { if (e.target === modalLogin || e.target === modalLogin.querySelector('.absolute')) closeModal(modalLogin); });
-            modalSignup.addEventListener('click', (e) => { if (e.target === modalSignup || e.target === modalSignup.querySelector('.absolute')) closeModal(modalSignup); });
-            modalTx.addEventListener('click', (e) => { if (e.target === modalTx || e.target === modalTx.querySelector('.absolute')) closeModal(modalTx); });
-
-            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-                const menu = document.getElementById('mobile-menu');
-                if (menu.classList.contains('hidden')) openMobileMenu();
-                else closeMobileMenu();
-            });
-            document.getElementById('mobile-menu-overlay').addEventListener('click', closeMobileMenu);
-
-            async function doLogout() {
-                await auth.signOut();
-                clearUserUI();
-                switchView('landing');
-                showToast('Successfully logged out.', 'success');
-            }
-            document.getElementById('btn-logout').addEventListener('click', doLogout);
-            document.getElementById('btn-logout-profile').addEventListener('click', doLogout);
-
-            // LOGIN with Firebase
-            document.getElementById('form-login').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('login-email').value.trim();
-                const password = document.getElementById('login-password').value;
-                const btn = document.getElementById('btn-login-submit');
-                btn.disabled = true;
-                btn.textContent = 'Signing in...';
+            // Logout Action Handlers
+            const handleLogout = async () => {
                 try {
-                    await auth.signInWithEmailAndPassword(email, password);
-                    closeModal(modalLogin);
-                    showToast('Welcome back!', 'success');
-                } catch (err) {
-                    if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential') {
-                        showToast('Invalid email or password.');
-                    } else {
-                        showToast(err.message || 'Sign in failed.');
-                    }
-                } finally {
-                    btn.disabled = false;
-                    btn.textContent = 'Sign In';
+                    await auth.signOut();
+                    showToast('Successfully logged out.', 'success');
+                    switchView('landing');
+                } catch (e) {
+                    showToast(e.message);
                 }
-            });
+            };
+            document.getElementById('btn-logout')?.addEventListener('click', handleLogout);
+            document.getElementById('btn-logout-profile')?.addEventListener('click', handleLogout);
 
-            // SIGNUP with Firebase
-            document.getElementById('form-signup').addEventListener('submit', async (e) => {
+            // SIGN UP FORM SUBMISSION (Firebase Auth + Firestore Database)
+            document.getElementById('form-signup')?.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const name = document.getElementById('signup-name').value.trim();
-                const email = document.getElementById('signup-email').value.trim();
+                const email = document.getElementById('signup-email').value.trim().toLowerCase();
                 const phone = document.getElementById('signup-phone').value.trim();
                 const sin = document.getElementById('signup-sin').value.trim();
                 const address = document.getElementById('signup-address').value.trim();
                 const deposit = parseFloat(document.getElementById('signup-deposit').value) || 500;
                 const password = document.getElementById('signup-password').value;
-                const btn = document.getElementById('btn-signup-submit');
-                btn.disabled = true;
-                btn.textContent = 'Creating account...';
+                const submitBtn = document.getElementById('btn-signup-submit');
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Creating Account...";
+
                 try {
-                    const cred = await auth.createUserWithEmailAndPassword(email, password);
-                    const now = new Date();
-                    const profile = {
+                    const userCred = await auth.createUserWithEmailAndPassword(email, password);
+                    const user = userCred.user;
+
+                    const userData = {
+                        uid: user.uid,
                         name, email, phone, sin, address, deposit,
-                        date: now.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                        date: new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' }),
                         transactions: [
-                            { id: generateTxId(), desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', time: now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }), amount: `+$${deposit.toFixed(2)}`, sender: 'Community Bank Funding', receiver: name },
-                            { id: generateTxId(), desc: 'Welcome Bonus Reward', cat: 'Bonus', date: 'Today', time: now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }), amount: '+$25.00', sender: 'Community Bank', receiver: name }
+                            { desc: 'Initial Account Deposit', cat: 'Deposit', date: 'Today', amount: `+$${deposit.toFixed(2)}`, ref: 'TRX-998120', status: 'Completed' },
+                            { desc: 'Welcome Bonus Offer', cat: 'Bonus', date: 'Today', amount: '+$250.00', ref: 'TRX-998121', status: 'Completed' }
                         ]
                     };
-                    await db.collection('users').doc(cred.user.uid).set(profile);
-                    closeModal(modalSignup);
-                    showToast('Account created! You can sign in on any device.', 'success');
-                } catch (err) {
-                    if (err.code === 'auth/email-already-in-use') {
+
+                    await db.collection('users').doc(user.uid).set(userData);
+                    closeModal('modal-signup');
+                    showToast('Account successfully created!', 'success');
+                    switchView('dashboard');
+                } catch (error) {
+                    if (error.code === 'auth/email-already-in-use') {
                         showToast('An account with this email already exists. Please sign in.');
-                    } else if (err.code === 'auth/weak-password') {
-                        showToast('Password should be at least 6 characters.');
                     } else {
-                        showToast(err.message || 'Could not create account.');
+                        showToast(error.message);
                     }
                 } finally {
-                    btn.disabled = false;
-                    btn.textContent = 'Create Account & Sign In';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Create Account & Sign In";
                 }
             });
 
-            // Transfer type panels
-            const transferType = document.getElementById('transfer-type');
-            const fieldPanels = {
-                etransfer: document.getElementById('fields-etransfer'),
-                internal: document.getElementById('fields-internal'),
-                bill: document.getElementById('fields-bill'),
-                wire: document.getElementById('fields-wire')
-            };
-            transferType.addEventListener('change', () => {
-                Object.values(fieldPanels).forEach(p => p.classList.add('hidden'));
-                fieldPanels[transferType.value].classList.remove('hidden');
-            });
-
-            document.getElementById('transfer-form').addEventListener('submit', async (e) => {
+            // LOGIN FORM SUBMISSION (Firebase Auth Cross-Device Login)
+            document.getElementById('form-login')?.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                if (!auth.currentUser || !currentUserData) {
-                    showToast('Please sign in first.');
-                    return;
+                const email = document.getElementById('login-email').value.trim().toLowerCase();
+                const password = document.getElementById('login-password').value;
+                const submitBtn = document.getElementById('btn-login-submit');
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Signing In...";
+
+                try {
+                    await auth.signInWithEmailAndPassword(email, password);
+                    closeModal('modal-login');
+                    showToast('Successfully signed in!', 'success');
+                    switchView('dashboard');
+                    document.getElementById('form-login').reset();
+                } catch (error) {
+                    showToast('Invalid email or password. Please check your credentials.');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Sign In";
                 }
-                const type = transferType.value;
-                let amount = 0, desc = '', receiver = '', cat = 'Transfer';
+            });
+
+            // Transfer Category Form Swapping
+            document.getElementById('transfer-type')?.addEventListener('change', (e) => {
+                const val = e.target.value;
+                ['etransfer', 'internal', 'bill', 'wire'].forEach(type => {
+                    document.getElementById(`fields-${type}`)?.classList.toggle('hidden', type !== val);
+                });
+            });
+
+            // Transfer Form Submission
+            document.getElementById('transfer-form')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const type = document.getElementById('transfer-type').value;
+                let amount = 0;
+                let desc = '';
 
                 if (type === 'etransfer') {
-                    amount = parseFloat(document.getElementById('et-amount').value);
-                    const name = document.getElementById('et-name').value.trim();
-                    const contact = document.getElementById('et-contact').value.trim();
-                    if (!name || !contact || !amount) { showToast('Fill recipient name, contact, and amount.'); return; }
-                    desc = `e-Transfer to ${name}`; receiver = contact;
+                    amount = parseFloat(document.getElementById('et-amount').value) || 0;
+                    const recipient = document.getElementById('et-name').value || 'Recipient';
+                    desc = `e-Transfer to ${recipient}`;
                 } else if (type === 'internal') {
-                    amount = parseFloat(document.getElementById('int-amount').value);
-                    const from = document.getElementById('int-from').value;
-                    const to = document.getElementById('int-to').value;
-                    if (from === to) { showToast('Choose two different accounts.'); return; }
-                    if (!amount) { showToast('Enter an amount.'); return; }
-                    desc = `Transfer from ${from} to ${to}`; receiver = to;
+                    amount = parseFloat(document.getElementById('int-amount').value) || 0;
+                    desc = `Internal Account Transfer`;
                 } else if (type === 'bill') {
-                    amount = parseFloat(document.getElementById('bill-amount').value);
-                    const payee = document.getElementById('bill-payee').value.trim();
-                    const acct = document.getElementById('bill-account').value.trim();
-                    if (!payee || !acct || !amount) { showToast('Fill payee, account number, and amount.'); return; }
-                    desc = `Bill payment to ${payee}`; receiver = payee; cat = 'Bill Pay';
+                    amount = parseFloat(document.getElementById('bill-amount').value) || 0;
+                    const payee = document.getElementById('bill-payee').value || 'Bill Payee';
+                    desc = `Bill Payment: ${payee}`;
                 } else if (type === 'wire') {
-                    amount = parseFloat(document.getElementById('wire-amount').value);
-                    const name = document.getElementById('wire-name').value.trim();
-                    const bank = document.getElementById('wire-bank').value.trim();
-                    const inst = document.getElementById('wire-institution').value.trim();
-                    const transit = document.getElementById('wire-transit').value.trim();
-                    const acct = document.getElementById('wire-account').value.trim();
-                    if (!name || !bank || !inst || !transit || !acct || !amount) { showToast('Fill all required wire details.'); return; }
-                    desc = `Wire to ${name} (${bank})`; receiver = name; cat = 'Wire';
+                    amount = parseFloat(document.getElementById('wire-amount').value) || 0;
+                    const wireName = document.getElementById('wire-name').value || 'Beneficiary';
+                    desc = `Wire Transfer to ${wireName}`;
                 }
 
-                if (!amount || amount <= 0) { showToast('Enter a valid amount.'); return; }
-                if (currentUserData.deposit < amount) { showToast('Insufficient available balance.'); return; }
+                if (!currentUserData || currentUserData.deposit < amount) {
+                    showToast('Insufficient available balance for this transfer.');
+                    return;
+                }
 
-                const now = new Date();
-                const newDeposit = currentUserData.deposit - amount;
-                const newTx = {
-                    id: generateTxId(), desc, cat, date: 'Today',
-                    time: now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }),
-                    amount: `-$${amount.toFixed(2)}`, sender: currentUserData.name, receiver
-                };
-                const transactions = [newTx, ...(currentUserData.transactions || [])];
+                currentUserData.deposit -= amount;
+                if (!currentUserData.transactions) currentUserData.transactions = [];
+                currentUserData.transactions.unshift({
+                    desc: desc,
+                    cat: 'Transfer',
+                    date: 'Today',
+                    amount: `-$${amount.toFixed(2)}`,
+                    ref: 'TRX-' + Math.floor(100000 + Math.random() * 900000),
+                    status: 'Completed'
+                });
+
                 try {
-                    await db.collection('users').doc(auth.currentUser.uid).update({ deposit: newDeposit, transactions });
-                    currentUserData.deposit = newDeposit;
-                    currentUserData.transactions = transactions;
-                    applyUserToUI(currentUserData);
+                    const user = auth.currentUser;
+                    if (user) {
+                        await db.collection('users').doc(user.uid).update({
+                            deposit: currentUserData.deposit,
+                            transactions: currentUserData.transactions
+                        });
+                    }
+                    updateUIWithUser(currentUserData);
                     switchView('dashboard');
-                    showToast(`Payment of $${amount.toFixed(2)} CAD completed.`, 'success');
-                    document.getElementById('transfer-form').reset();
-                    transferType.value = 'etransfer';
-                    Object.values(fieldPanels).forEach(p => p.classList.add('hidden'));
-                    fieldPanels.etransfer.classList.remove('hidden');
+                    showToast(`Successfully transferred $${amount.toFixed(2)} CAD!`, 'success');
+                    e.target.reset();
                 } catch (err) {
-                    showToast('Transfer failed. Try again.');
+                    showToast('Error processing transfer.');
                 }
             });
 
-            document.getElementById('btn-copy-info').addEventListener('click', () => {
+            // Copy Banking Details Button
+            document.getElementById('btn-copy-info')?.addEventListener('click', () => {
                 navigator.clipboard.writeText('Institution: 839, Transit: 10294, Account: 4892');
-                showToast('Banking details copied!', 'success');
+                showToast('Banking details copied to clipboard!', 'success');
             });
         });
     </script>
