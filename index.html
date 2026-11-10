@@ -38,7 +38,6 @@
 
     <div id="toast-container" class="fixed top-5 right-5 z-[9999] flex flex-col gap-2 max-w-sm pointer-events-none"></div>
 
-    <!-- NAVBAR -->
     <header class="sticky top-0 z-[100] bg-brand-900 text-white shadow-md">
         <div class="max-w-7xl mx-auto pl-3 pr-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
             <div id="nav-logo" class="flex items-center space-x-2 sm:space-x-3 cursor-pointer min-w-0">
@@ -85,7 +84,6 @@
                     </div>
                 </div>
 
-                <!-- ☰ only shown after login -->
                 <button id="mobile-menu-btn" class="hidden md:hidden text-white hover:text-brand-200 p-2 flex-shrink-0" aria-label="Menu">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
@@ -93,10 +91,8 @@
         </div>
     </header>
 
-    <!-- Mobile menu overlay (blurs/darkens background) -->
     <div id="mobile-menu-overlay" class="hidden fixed inset-0 z-[90] bg-slate-900/60 backdrop-blur-sm md:hidden"></div>
 
-    <!-- Mobile menu panel -->
     <div id="mobile-menu" class="hidden md:hidden fixed left-0 right-0 top-16 sm:top-20 z-[95] bg-brand-950 border-t border-brand-800 px-4 pt-2 pb-4 space-y-1 shadow-xl">
         <button id="mob-nav-home" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Home</button>
         <button id="mob-nav-dashboard" class="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-white hover:bg-brand-800">Dashboard</button>
@@ -108,7 +104,6 @@
 
     <main class="flex-grow">
 
-        <!-- LANDING -->
         <section id="section-landing" class="view-section">
             <div class="blue-gradient text-white py-20 lg:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
                 <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
@@ -124,15 +119,10 @@
                             Experience zero-fee everyday chequing, high-interest savings, and instant Interac e-Transfers—backed by 24/7 Canadian customer care.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all">
-                                Open an Account Today
-                            </button>
-                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all">
-                                Sign In to Online Banking
-                            </button>
+                            <button id="btn-hero-signup" class="bg-white text-brand-900 hover:bg-brand-50 px-8 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all">Open an Account Today</button>
+                            <button id="btn-hero-login" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-xl font-semibold text-base transition-all">Sign In to Online Banking</button>
                         </div>
                     </div>
-
                     <div class="relative flex justify-center">
                         <div class="w-full max-w-md card-gradient rounded-2xl p-6 text-white shadow-2xl border border-white/20 transform rotate-1 hover:rotate-0 transition-transform duration-300 relative overflow-hidden">
                             <div class="absolute top-3 right-3 bg-amber-400 text-amber-950 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">Advertisement</div>
@@ -159,7 +149,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">Everything You Need to Manage Your Money</h2>
@@ -185,7 +174,6 @@
             </div>
         </section>
 
-        <!-- DASHBOARD -->
         <section id="section-dashboard" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
             <div class="blue-gradient rounded-3xl p-6 sm:p-8 text-white shadow-xl">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -261,11 +249,9 @@
             </div>
 
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-                <div class="flex items-center justify-between mb-6">
-                    <div>
-                        <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
-                        <p class="text-xs text-slate-500">Tap any transaction to view full details</p>
-                    </div>
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold text-slate-900">Recent Transactions</h3>
+                    <p class="text-xs text-slate-500">Tap any transaction to view full details</p>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -283,7 +269,6 @@
             </div>
         </section>
 
-        <!-- PROFILE -->
         <section id="section-profile" class="view-section hidden py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-6">
             <button id="btn-back-from-profile" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-2">
                 <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
@@ -334,33 +319,138 @@
             </div>
         </section>
 
-        <!-- TRANSFER -->
+        <!-- TRANSFER (multi-type) -->
         <section id="section-transfer" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
             <button id="btn-back-from-transfer" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4">
                 <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
             </button>
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">Interac e-Transfer</h2>
-                <p class="text-slate-600 text-sm mb-6">Send funds securely to any Canadian bank account or email address.</p>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Transfer & Payments</h2>
+                <p class="text-slate-600 text-sm mb-6">Choose how you want to send money.</p>
+
+                <div class="mb-6">
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Transfer Type</label>
+                    <select id="transfer-type" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm bg-white">
+                        <option value="etransfer">Interac e-Transfer</option>
+                        <option value="internal">Transfer Between My Accounts</option>
+                        <option value="bill">Bill Payment</option>
+                        <option value="wire">Wire Transfer</option>
+                    </select>
+                </div>
+
                 <form id="transfer-form" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Recipient Name or Email</label>
-                        <input type="text" id="transfer-recipient" required placeholder="e.g. recipient@bank.ca" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                    <div id="fields-etransfer" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Recipient Name</label>
+                            <input type="text" id="et-name" placeholder="Full name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email or Mobile Number</label>
+                            <input type="text" id="et-contact" placeholder="email@example.com or (416) 555-0192" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label>
+                            <input type="number" id="et-amount" step="0.01" min="1" placeholder="0.00" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Security Question (Optional)</label>
+                            <input type="text" id="et-question" placeholder="e.g. What city did we meet in?" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Security Answer (Optional)</label>
+                            <input type="text" id="et-answer" placeholder="Answer" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Message (Optional)</label>
+                            <input type="text" id="et-message" placeholder="What's this for?" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label>
-                        <input type="number" id="transfer-amount" step="0.01" min="1" required placeholder="0.00" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+
+                    <div id="fields-internal" class="space-y-4 hidden">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">From Account</label>
+                            <select id="int-from" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm bg-white">
+                                <option value="chequing">Everyday Chequing (•••• 4892)</option>
+                                <option value="savings">High-Interest Savings (•••• 9104)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">To Account</label>
+                            <select id="int-to" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm bg-white">
+                                <option value="savings">High-Interest Savings (•••• 9104)</option>
+                                <option value="chequing">Everyday Chequing (•••• 4892)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label>
+                            <input type="number" id="int-amount" step="0.01" min="1" placeholder="0.00" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Security Question (Optional)</label>
-                        <input type="text" id="transfer-security" placeholder="e.g. What city are we in?" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+
+                    <div id="fields-bill" class="space-y-4 hidden">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Payee / Company Name</label>
+                            <input type="text" id="bill-payee" placeholder="e.g. Toronto Hydro, Rogers, CRA" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Account / Customer Number</label>
+                            <input type="text" id="bill-account" placeholder="Your account number with the payee" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label>
+                            <input type="number" id="bill-amount" step="0.01" min="1" placeholder="0.00" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">From Account</label>
+                            <select id="bill-from" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm bg-white">
+                                <option value="chequing">Everyday Chequing (•••• 4892)</option>
+                                <option value="savings">High-Interest Savings (•••• 9104)</option>
+                            </select>
+                        </div>
                     </div>
-                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">Send Funds Instantly</button>
+
+                    <div id="fields-wire" class="space-y-4 hidden">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Beneficiary Full Name</label>
+                            <input type="text" id="wire-name" placeholder="Recipient legal name" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Bank Name</label>
+                            <input type="text" id="wire-bank" placeholder="e.g. Royal Bank of Canada" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Institution Number</label>
+                                <input type="text" id="wire-institution" placeholder="3 digits (e.g. 003)" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Transit Number</label>
+                                <input type="text" id="wire-transit" placeholder="5 digits" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Account Number</label>
+                            <input type="text" id="wire-account" placeholder="Recipient account number" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">SWIFT / BIC (for international)</label>
+                            <input type="text" id="wire-swift" placeholder="Optional for Canada" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Amount (CAD)</label>
+                            <input type="number" id="wire-amount" step="0.01" min="1" placeholder="0.00" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Reference / Memo (Optional)</label>
+                            <input type="text" id="wire-ref" placeholder="Payment reference" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm mt-2">Send / Pay Now</button>
                 </form>
             </div>
         </section>
 
-        <!-- RECEIVE -->
         <section id="section-receive" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto text-center">
             <button id="btn-back-from-receive" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4">
                 <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
@@ -379,7 +469,6 @@
             </div>
         </section>
 
-        <!-- SUPPORT -->
         <section id="section-support" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-xl mx-auto">
             <button id="btn-back-from-support" class="text-brand-600 hover:text-brand-800 flex items-center gap-2 text-sm font-semibold mb-4">
                 <i class="fa-solid fa-arrow-left"></i> Back
@@ -419,7 +508,6 @@
         </div>
     </footer>
 
-    <!-- LOGIN MODAL -->
     <div id="modal-login" class="fixed inset-0 z-[200] hidden">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
@@ -436,9 +524,7 @@
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                         <div class="relative">
                             <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                            <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                                <i class="fa-solid fa-eye text-sm"></i>
-                            </button>
+                            <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-eye text-sm"></i></button>
                         </div>
                     </div>
                     <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm">Sign In</button>
@@ -447,7 +533,6 @@
         </div>
     </div>
 
-    <!-- SIGNUP MODAL -->
     <div id="modal-signup" class="fixed inset-0 z-[200] hidden overflow-y-auto">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
@@ -489,9 +574,7 @@
                             <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Password</label>
                             <div class="relative">
                                 <input type="password" id="signup-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm pr-10" placeholder="••••••••">
-                                <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
-                                    <i class="fa-solid fa-eye text-sm"></i>
-                                </button>
+                                <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-eye text-sm"></i></button>
                             </div>
                         </div>
                     </div>
@@ -501,7 +584,6 @@
         </div>
     </div>
 
-    <!-- TRANSACTION DETAIL MODAL -->
     <div id="modal-tx-detail" class="fixed inset-0 z-[200] hidden">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
         <div class="relative flex min-h-full items-center justify-center p-4">
@@ -510,34 +592,13 @@
                 <h3 class="text-xl font-bold text-slate-900 mb-1">Transaction Details</h3>
                 <p class="text-xs text-slate-500 mb-6">Full information for this transaction</p>
                 <div class="space-y-4 text-sm">
-                    <div class="flex justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">Transaction ID</span>
-                        <span class="font-semibold text-slate-800" id="tx-detail-id">-</span>
-                    </div>
-                    <div class="flex justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">Description</span>
-                        <span class="font-semibold text-slate-800 text-right" id="tx-detail-desc">-</span>
-                    </div>
-                    <div class="flex justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">Category</span>
-                        <span class="font-semibold text-slate-800" id="tx-detail-cat">-</span>
-                    </div>
-                    <div class="flex justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">Date & Time</span>
-                        <span class="font-semibold text-slate-800" id="tx-detail-datetime">-</span>
-                    </div>
-                    <div class="flex justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">From (Sender)</span>
-                        <span class="font-semibold text-slate-800 text-right" id="tx-detail-sender">-</span>
-                    </div>
-                    <div class="flex justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">To (Receiver)</span>
-                        <span class="font-semibold text-slate-800 text-right" id="tx-detail-receiver">-</span>
-                    </div>
-                    <div class="flex justify-between pt-1">
-                        <span class="text-slate-500">Amount</span>
-                        <span class="font-bold text-lg" id="tx-detail-amount">-</span>
-                    </div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3"><span class="text-slate-500">Transaction ID</span><span class="font-semibold text-slate-800" id="tx-detail-id">-</span></div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3"><span class="text-slate-500">Description</span><span class="font-semibold text-slate-800 text-right" id="tx-detail-desc">-</span></div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3"><span class="text-slate-500">Category</span><span class="font-semibold text-slate-800" id="tx-detail-cat">-</span></div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3"><span class="text-slate-500">Date & Time</span><span class="font-semibold text-slate-800" id="tx-detail-datetime">-</span></div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3"><span class="text-slate-500">From (Sender)</span><span class="font-semibold text-slate-800 text-right" id="tx-detail-sender">-</span></div>
+                    <div class="flex justify-between border-b border-slate-100 pb-3"><span class="text-slate-500">To (Receiver)</span><span class="font-semibold text-slate-800 text-right" id="tx-detail-receiver">-</span></div>
+                    <div class="flex justify-between pt-1"><span class="text-slate-500">Amount</span><span class="font-bold text-lg" id="tx-detail-amount">-</span></div>
                 </div>
             </div>
         </div>
@@ -628,7 +689,6 @@
             if (user) {
                 guestActions.classList.add('hidden');
                 userActions.classList.remove('hidden');
-                // Show ☰ only after login (mobile)
                 mobileMenuBtn.classList.remove('hidden');
 
                 const initials = user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
@@ -654,7 +714,6 @@
             } else {
                 guestActions.classList.remove('hidden');
                 userActions.classList.add('hidden');
-                // Hide ☰ before login
                 mobileMenuBtn.classList.add('hidden');
                 closeMobileMenu();
             }
@@ -667,8 +726,8 @@
                 if (!t.id) {
                     t.id = generateTxId();
                     t.time = t.time || '10:24 AM';
-                    t.sender = t.sender || (t.amount.startsWith('+') ? 'External / Deposit' : user.name);
-                    t.receiver = t.receiver || (t.amount.startsWith('+') ? user.name : (t.desc.includes('to ') ? t.desc.split('to ')[1] : 'Unknown'));
+                    t.sender = t.sender || (String(t.amount).startsWith('+') ? 'External / Deposit' : user.name);
+                    t.receiver = t.receiver || (String(t.amount).startsWith('+') ? user.name : (t.desc.includes('to ') ? t.desc.split('to ')[1] : 'Unknown'));
                 }
                 return t;
             });
@@ -677,13 +736,12 @@
                     <td class="py-3.5 font-medium text-slate-800">${t.desc}</td>
                     <td class="py-3.5 text-slate-500"><span class="bg-slate-100 px-2.5 py-1 rounded-md text-xs">${t.cat}</span></td>
                     <td class="py-3.5 text-slate-500">${t.date}</td>
-                    <td class="py-3.5 text-right font-bold ${t.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
+                    <td class="py-3.5 text-right font-bold ${String(t.amount).startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}">${t.amount} CAD</td>
                 </tr>
             `).join('');
             tbody.querySelectorAll('.tx-row').forEach(row => {
                 row.addEventListener('click', () => {
-                    const idx = parseInt(row.getAttribute('data-index'));
-                    const tx = txs[idx];
+                    const tx = txs[parseInt(row.getAttribute('data-index'))];
                     document.getElementById('tx-detail-id').textContent = tx.id || '-';
                     document.getElementById('tx-detail-desc').textContent = tx.desc || '-';
                     document.getElementById('tx-detail-cat').textContent = tx.cat || '-';
@@ -692,7 +750,7 @@
                     document.getElementById('tx-detail-receiver').textContent = tx.receiver || '-';
                     const amountEl = document.getElementById('tx-detail-amount');
                     amountEl.textContent = `${tx.amount} CAD`;
-                    amountEl.className = `font-bold text-lg ${tx.amount.startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}`;
+                    amountEl.className = `font-bold text-lg ${String(tx.amount).startsWith('+') ? 'text-emerald-600' : 'text-slate-900'}`;
                     openModal(document.getElementById('modal-tx-detail'));
                 });
             });
@@ -791,7 +849,6 @@
                 if (e.target === modalTx || e.target === modalTx.querySelector('.absolute')) closeModal(modalTx);
             });
 
-            // Mobile menu
             document.getElementById('mobile-menu-btn').addEventListener('click', () => {
                 const menu = document.getElementById('mobile-menu');
                 if (menu.classList.contains('hidden')) openMobileMenu();
@@ -860,34 +917,117 @@
                 showToast('Account successfully created!', 'success');
             });
 
+            // Transfer type panels
+            const transferType = document.getElementById('transfer-type');
+            const fieldPanels = {
+                etransfer: document.getElementById('fields-etransfer'),
+                internal: document.getElementById('fields-internal'),
+                bill: document.getElementById('fields-bill'),
+                wire: document.getElementById('fields-wire')
+            };
+            transferType.addEventListener('change', () => {
+                Object.values(fieldPanels).forEach(p => p.classList.add('hidden'));
+                fieldPanels[transferType.value].classList.remove('hidden');
+            });
+
             document.getElementById('transfer-form').addEventListener('submit', (e) => {
                 e.preventDefault();
-                const recipient = document.getElementById('transfer-recipient').value.trim();
-                const amount = parseFloat(document.getElementById('transfer-amount').value);
                 const user = getCurrentUser();
-                if (!user || user.deposit < amount) {
+                if (!user) {
+                    showToast('Please sign in first.');
+                    return;
+                }
+
+                const type = transferType.value;
+                let amount = 0;
+                let desc = '';
+                let receiver = '';
+                let cat = 'Transfer';
+
+                if (type === 'etransfer') {
+                    amount = parseFloat(document.getElementById('et-amount').value);
+                    const name = document.getElementById('et-name').value.trim();
+                    const contact = document.getElementById('et-contact').value.trim();
+                    if (!name || !contact || !amount) {
+                        showToast('Please fill recipient name, contact, and amount.');
+                        return;
+                    }
+                    desc = `e-Transfer to ${name}`;
+                    receiver = contact;
+                    cat = 'Transfer';
+                } else if (type === 'internal') {
+                    amount = parseFloat(document.getElementById('int-amount').value);
+                    const from = document.getElementById('int-from').value;
+                    const to = document.getElementById('int-to').value;
+                    if (from === to) {
+                        showToast('Choose two different accounts.');
+                        return;
+                    }
+                    if (!amount) {
+                        showToast('Enter an amount.');
+                        return;
+                    }
+                    desc = `Transfer from ${from} to ${to}`;
+                    receiver = to;
+                    cat = 'Transfer';
+                } else if (type === 'bill') {
+                    amount = parseFloat(document.getElementById('bill-amount').value);
+                    const payee = document.getElementById('bill-payee').value.trim();
+                    const acct = document.getElementById('bill-account').value.trim();
+                    if (!payee || !acct || !amount) {
+                        showToast('Please fill payee, account number, and amount.');
+                        return;
+                    }
+                    desc = `Bill payment to ${payee}`;
+                    receiver = payee;
+                    cat = 'Bill Pay';
+                } else if (type === 'wire') {
+                    amount = parseFloat(document.getElementById('wire-amount').value);
+                    const name = document.getElementById('wire-name').value.trim();
+                    const bank = document.getElementById('wire-bank').value.trim();
+                    const inst = document.getElementById('wire-institution').value.trim();
+                    const transit = document.getElementById('wire-transit').value.trim();
+                    const acct = document.getElementById('wire-account').value.trim();
+                    if (!name || !bank || !inst || !transit || !acct || !amount) {
+                        showToast('Please fill all required wire details.');
+                        return;
+                    }
+                    desc = `Wire to ${name} (${bank})`;
+                    receiver = name;
+                    cat = 'Wire';
+                }
+
+                if (!amount || amount <= 0) {
+                    showToast('Enter a valid amount.');
+                    return;
+                }
+                if (user.deposit < amount) {
                     showToast('Insufficient available balance.');
                     return;
                 }
+
                 const now = new Date();
                 user.deposit -= amount;
                 user.transactions.unshift({
                     id: generateTxId(),
-                    desc: `e-Transfer to ${recipient}`,
-                    cat: 'Transfer',
+                    desc,
+                    cat,
                     date: 'Today',
                     time: now.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' }),
                     amount: `-$${amount.toFixed(2)}`,
                     sender: user.name,
-                    receiver: recipient
+                    receiver
                 });
                 setCurrentUser(user);
                 let users = getUsers().map(u => u.email === user.email ? user : u);
                 saveUsers(users);
                 updateNavAuthUI();
                 switchView('dashboard');
-                showToast(`Transferred $${amount.toFixed(2)} CAD to ${recipient}!`, 'success');
+                showToast(`Payment of $${amount.toFixed(2)} CAD completed.`, 'success');
                 document.getElementById('transfer-form').reset();
+                transferType.value = 'etransfer';
+                Object.values(fieldPanels).forEach(p => p.classList.add('hidden'));
+                fieldPanels.etransfer.classList.remove('hidden');
             });
 
             document.getElementById('btn-copy-info').addEventListener('click', () => {
